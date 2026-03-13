@@ -45,12 +45,12 @@ const catAssetByStatus: Record<
   { folder: string; fileName: (index: string) => string }
 > = {
   idle: { folder: 'SleepingCat', fileName: (index) => `${index}_Sleep.png` },
-  planning: { folder: 'Cat', fileName: (index) => `${index}.png` },
+  planning: { folder: 'WinkCat', fileName: (index) => `${index}_Wink.png` },
   researching: { folder: 'WinkCat', fileName: (index) => `${index}_Wink.png` },
   building: { folder: 'MoveCat', fileName: (index) => `${index}.png` },
-  verifying: { folder: 'HandCat', fileName: (index) => `${index}_Hand.png` },
-  blocked: { folder: 'BallCat', fileName: (index) => `${index}.png` },
-  syncing: { folder: 'BackCat', fileName: (index) => `${index}_Back.png` },
+  verifying: { folder: 'Cat', fileName: (index) => `${index}.png` },
+  blocked: { folder: 'Cat', fileName: (index) => `${index}.png` },
+  syncing: { folder: 'MoveCat', fileName: (index) => `${index}.png` },
 }
 
 export function AgentSprite({ agent, selected, onClick }: AgentSpriteProps) {

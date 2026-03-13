@@ -110,12 +110,12 @@ powershell -ExecutionPolicy Bypass -File .\sync-catrush-cat-assets.ps1
 이 스크립트는 상태별 폴더에서 중복되지 않는 인덱스 `01`, `04`, `07`, `10`, `13`, `16`을 골라 `public\catrush-cats`로 복사합니다.
 
 - `idle` → `SleepingCat`
-- `planning` → `Cat`
+- `planning` → `WinkCat`
 - `researching` → `WinkCat`
 - `building` → `MoveCat`
-- `verifying` → `HandCat`
-- `blocked` → `BallCat`
-- `syncing` → `BackCat`
+- `verifying` → `Cat`
+- `blocked` → `Cat`
+- `syncing` → `MoveCat`
 
 동기화 후에는 다시 `push-to-agent-office.ps1`를 실행하거나, 위의 `publish-agent-office.ps1`를 사용하면 됩니다.
 

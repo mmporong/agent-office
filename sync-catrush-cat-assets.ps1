@@ -14,12 +14,12 @@ $indexByCharacterKey = @{
 
 $assetByStatus = @{
   idle = @{ Folder = 'SleepingCat'; FileName = { param($index) "$index`_Sleep.png" } }
-  planning = @{ Folder = 'Cat'; FileName = { param($index) "$index.png" } }
+  planning = @{ Folder = 'WinkCat'; FileName = { param($index) "$index`_Wink.png" } }
   researching = @{ Folder = 'WinkCat'; FileName = { param($index) "$index`_Wink.png" } }
   building = @{ Folder = 'MoveCat'; FileName = { param($index) "$index.png" } }
-  verifying = @{ Folder = 'HandCat'; FileName = { param($index) "$index`_Hand.png" } }
-  blocked = @{ Folder = 'BallCat'; FileName = { param($index) "$index.png" } }
-  syncing = @{ Folder = 'BackCat'; FileName = { param($index) "$index`_Back.png" } }
+  verifying = @{ Folder = 'Cat'; FileName = { param($index) "$index.png" } }
+  blocked = @{ Folder = 'Cat'; FileName = { param($index) "$index.png" } }
+  syncing = @{ Folder = 'MoveCat'; FileName = { param($index) "$index.png" } }
 }
 
 if (-not (Test-Path $sourceRoot)) {
