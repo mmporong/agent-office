@@ -41,6 +41,17 @@ npm run build
 
 기본적으로 `npm run dev` 후 브라우저에서 로컬호스트 주소를 열면 바로 장면을 볼 수 있습니다.
 
+## pwsh 설치
+
+현재 자동 스크립트와 제 로컬 실행 흐름은 `pwsh`가 있으면 가장 안정적으로 동작합니다.
+
+아래 배치 파일을 실행하면 `winget`으로 PowerShell 7 설치를 시도하고, 실패하면 공식 MSI 설치 링크를 엽니다.
+
+```cmd
+cd C:\Users\LIMMM\unity-webgl-wrapper
+install-pwsh.cmd
+```
+
 ## GitHub 업로드 빠른 시작
 
 현재 환경처럼 제가 직접 `git push`를 실행할 수 없는 경우를 위해, 아래 PowerShell 스크립트를 함께 넣어 두었습니다.
@@ -69,6 +80,23 @@ powershell -ExecutionPolicy Bypass -File .\publish-agent-office.ps1
 - CatRush 고양이 이미지 동기화
 - git add / commit / push
 - push 후 GitHub Pages 자동 배포 트리거
+
+웹 관련 파일이 바뀔 때마다 자동 배포까지 이어가려면 아래 감시기를 켜 두면 됩니다.
+
+```powershell
+cd C:\Users\LIMMM\unity-webgl-wrapper
+powershell -ExecutionPolicy Bypass -File .\watch-agent-office.ps1
+```
+
+또는 파일 탐색기에서 `start-agent-office-auto-deploy.cmd`를 실행해도 됩니다.
+
+이 감시기는 아래 변경을 감지하면 자동으로 `publish-agent-office.ps1`를 실행합니다.
+
+- `src`
+- `public\unity`
+- `.github\workflows`
+- `README.md`, `vite.config.ts`, `package.json`, `index.html`
+- `C:\CatRush\Assets\Resources\Sprites\Cats`
 
 ## CatRush 고양이 이미지 동기화
 

@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish:auto": "powershell -ExecutionPolicy Bypass -File .\\publish-agent-office.ps1",
+    "watch:publish": "powershell -ExecutionPolicy Bypass -File .\\watch-agent-office.ps1"
   },
   "dependencies": {
     "react": "^19.1.1",
