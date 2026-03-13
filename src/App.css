@@ -389,12 +389,10 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 32px;
-  height: 32px;
-  transform: scale(1.8);
-  transform-origin: top left;
+  width: 100%;
+  height: 100%;
   z-index: 1;
-  background-repeat: no-repeat;
+  object-fit: contain;
   image-rendering: pixelated;
 }
 

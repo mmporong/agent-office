@@ -57,6 +57,40 @@ powershell -ExecutionPolicy Bypass -File .\push-to-agent-office.ps1
 - 파일 add / commit
 - `main` 브랜치로 push
 
+`mmporong/agent-office` 저장소는 `main` 브랜치 push 시 GitHub Pages가 자동 배포되므로, 실제 운영용으로는 아래 단일 스크립트를 쓰는 편이 가장 간단합니다.
+
+```powershell
+cd C:\Users\LIMMM\unity-webgl-wrapper
+powershell -ExecutionPolicy Bypass -File .\publish-agent-office.ps1
+```
+
+이 스크립트는 아래를 한 번에 처리합니다.
+
+- CatRush 고양이 이미지 동기화
+- git add / commit / push
+- push 후 GitHub Pages 자동 배포 트리거
+
+## CatRush 고양이 이미지 동기화
+
+`C:\CatRush\Assets\Resources\Sprites\Cats` 폴더의 고양이 스프라이트를 웹 프로젝트에 반영하려면 아래 스크립트를 먼저 실행합니다.
+
+```powershell
+cd C:\Users\LIMMM\unity-webgl-wrapper
+powershell -ExecutionPolicy Bypass -File .\sync-catrush-cat-assets.ps1
+```
+
+이 스크립트는 상태별 폴더에서 중복되지 않는 인덱스 `01`, `04`, `07`, `10`, `13`, `16`을 골라 `public\catrush-cats`로 복사합니다.
+
+- `idle` → `SleepingCat`
+- `planning` → `Cat`
+- `researching` → `WinkCat`
+- `building` → `MoveCat`
+- `verifying` → `HandCat`
+- `blocked` → `BallCat`
+- `syncing` → `BackCat`
+
+동기화 후에는 다시 `push-to-agent-office.ps1`를 실행하거나, 위의 `publish-agent-office.ps1`를 사용하면 됩니다.
+
 ## GitHub Pages 배포
 
 현재 프로젝트는 **`mmporong/agent-office` 저장소를 GitHub Pages로 배포해 `https://mmporong.github.io/agent-office/`로 여는 방식** 기준으로 정리해 두었습니다.
@@ -83,7 +117,7 @@ powershell -ExecutionPolicy Bypass -File .\push-to-agent-office.ps1
 - `Build and deployment`
 - `Source`를 **GitHub Actions**로 설정
 
-그 후 `main`에 push 하거나 `Actions > Deploy GitHub Pages > Run workflow`를 누르면 됩니다.
+기본 운영 흐름은 `main`에 push하면 자동 배포되는 방식입니다. 필요할 때만 `Actions > Deploy GitHub Pages > Run workflow`를 수동 실행하면 됩니다.
 
 워크플로는 내부적으로 `npm ci` → `npm run build` → `dist/` 업로드 → GitHub Pages 배포 순서로 실행됩니다.
 

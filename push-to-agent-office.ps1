@@ -58,4 +58,4 @@ git push -u origin main
 
 Write-Host ''
 Write-Host 'Push complete.'
-Write-Host 'Next: add PAGES_PUBLISH_TOKEN to the source repo and run Deploy Pages Mirror.'
+Write-Host 'GitHub Pages will auto-deploy from the main branch push.'

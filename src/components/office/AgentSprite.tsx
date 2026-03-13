@@ -1,4 +1,6 @@
+import { useEffect, useMemo, useState } from 'react'
 import { officeStatusLabels, type OfficeAgent } from '../../types/office'
+import { withBasePath } from '../../utils/publicPath'
 
 interface AgentSpriteProps {
   agent: OfficeAgent
@@ -29,7 +31,41 @@ const characterTitleByKey: Record<OfficeAgent['characterKey'], string> = {
 
 const clawCatSpriteUrl = `${assetBaseUrl}/guest_anim_1.webp`
 
+const spriteIndexByCharacterKey: Record<OfficeAgent['characterKey'], string> = {
+  ember: '01',
+  leaf: '04',
+  bloom: '07',
+  spark: '10',
+  wave: '13',
+  moon: '16',
+}
+
+const catAssetByStatus: Record<
+  OfficeAgent['status'],
+  { folder: string; fileName: (index: string) => string }
+> = {
+  idle: { folder: 'SleepingCat', fileName: (index) => `${index}_Sleep.png` },
+  planning: { folder: 'Cat', fileName: (index) => `${index}.png` },
+  researching: { folder: 'WinkCat', fileName: (index) => `${index}_Wink.png` },
+  building: { folder: 'MoveCat', fileName: (index) => `${index}.png` },
+  verifying: { folder: 'HandCat', fileName: (index) => `${index}_Hand.png` },
+  blocked: { folder: 'BallCat', fileName: (index) => `${index}.png` },
+  syncing: { folder: 'BackCat', fileName: (index) => `${index}_Back.png` },
+}
+
 export function AgentSprite({ agent, selected, onClick }: AgentSpriteProps) {
+  const spriteUrl = useMemo(() => {
+    const spriteIndex = spriteIndexByCharacterKey[agent.characterKey]
+    const asset = catAssetByStatus[agent.status]
+    return withBasePath(`catrush-cats/${asset.folder}/${asset.fileName(spriteIndex)}`)
+  }, [agent.characterKey, agent.status])
+
+  const [imageSrc, setImageSrc] = useState(spriteUrl)
+
+  useEffect(() => {
+    setImageSrc(spriteUrl)
+  }, [spriteUrl])
+
   return (
     <button
       type="button"
@@ -46,12 +82,11 @@ export function AgentSprite({ agent, selected, onClick }: AgentSpriteProps) {
           aria-label={agent.name}
           role="img"
         >
-          <span
+          <img
             className="agent-sprite__image"
-            style={{
-              backgroundImage: `url(${clawCatSpriteUrl})`,
-              backgroundPosition: '0 0',
-            }}
+            src={imageSrc}
+            alt={agent.name}
+            onError={() => setImageSrc(clawCatSpriteUrl)}
           />
         </span>
         <span className="agent-sprite__badge">
