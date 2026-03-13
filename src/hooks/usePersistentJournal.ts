@@ -5,14 +5,16 @@ import {
   type JournalEntry,
 } from '../data/operationsJournal'
 
-function normalizeEntry(entry: JournalEntry | (Omit<JournalEntry, 'id'> & { id?: string })) {
+type JournalEntryLike = JournalEntry | (Omit<JournalEntry, 'id'> & { id?: string })
+
+function normalizeEntry(entry: JournalEntryLike): JournalEntry {
   return {
     ...entry,
     id: entry.id ?? `${entry.date}-${entry.meetingTitle}`,
   }
 }
 
-function mergeJournalEntries(storedEntries: JournalEntry[], seedEntries: JournalEntry[]) {
+function mergeJournalEntries(storedEntries: JournalEntryLike[], seedEntries: JournalEntryLike[]) {
   const entryMap = new Map<string, JournalEntry>()
 
   for (const entry of seedEntries) {
@@ -28,7 +30,7 @@ function mergeJournalEntries(storedEntries: JournalEntry[], seedEntries: Journal
   return [...entryMap.values()].sort((a, b) => b.id.localeCompare(a.id))
 }
 
-function readStoredJournal() {
+function readStoredJournal(): JournalEntry[] {
   if (typeof window === 'undefined') {
     return seedJournalEntries
   }
@@ -39,7 +41,7 @@ function readStoredJournal() {
   }
 
   try {
-    const parsed = JSON.parse(raw) as Array<JournalEntry | (Omit<JournalEntry, 'id'> & { id?: string })>
+    const parsed = JSON.parse(raw) as JournalEntryLike[]
     return mergeJournalEntries(parsed, seedJournalEntries)
   } catch {
     return seedJournalEntries

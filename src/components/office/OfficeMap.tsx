@@ -11,7 +11,24 @@ interface OfficeMapProps {
 const assetBaseUrl =
   'https://raw.githubusercontent.com/ringhyacinth/Star-Office-UI/f29c107e9728a72f2635f10b4e8203b29b37221d/frontend'
 
-const decorativeAssets = [
+type ImageAsset = {
+  className: string
+  kind: 'image'
+  src: string
+  alt: string
+}
+
+type FrameAsset = {
+  className: string
+  kind: 'frame'
+  src: string
+  frameWidth: number
+  frameHeight: number
+  scale: number
+  alt: string
+}
+
+const decorativeAssets: Array<ImageAsset | FrameAsset> = [
   {
     className: 'office-room__asset office-room__asset--sofa',
     kind: 'image',
