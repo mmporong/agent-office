@@ -1,0 +1,12 @@
+{
+  "productName": "Cat Merge Cafe",
+  "companyName": "LIM Studio",
+  "buildVersion": "wrapper-prototype",
+  "platform": "appintoos-web",
+  "canvasId": "unity-canvas",
+  "loaderUrl": "",
+  "dataUrl": "",
+  "frameworkUrl": "",
+  "codeUrl": "",
+  "streamingAssetsUrl": "StreamingAssets"
+}

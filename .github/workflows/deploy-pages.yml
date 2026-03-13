@@ -1,0 +1,83 @@
+name: Deploy Pages Mirror
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      pages_repository:
+        description: External GitHub Pages repository (owner/repo)
+        required: false
+        default: mmporong/agent-office
+        type: string
+      pages_base_path:
+        description: Base path for the published site (use / for root, /repo/ for project Pages)
+        required: false
+        default: /agent-office/
+        type: string
+      pages_target_folder:
+        description: Target folder inside the Pages repository (leave empty to publish to repository root)
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      TARGET_PAGES_REPOSITORY: ${{ inputs.pages_repository || vars.PAGES_REPOSITORY || 'mmporong/agent-office' }}
+      TARGET_PAGES_BASE_PATH: ${{ inputs.pages_base_path || vars.PAGES_BASE_PATH || '/agent-office/' }}
+      TARGET_PAGES_FOLDER: ${{ inputs.pages_target_folder || vars.PAGES_TARGET_FOLDER || '' }}
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Validate deployment settings
+        shell: bash
+        run: |
+          if [ -z "${TARGET_PAGES_REPOSITORY}" ]; then
+            echo "Missing Pages repository target."
+            echo "Set repository variable PAGES_REPOSITORY or provide workflow_dispatch input pages_repository."
+            exit 1
+          fi
+
+          if [ -z "${{ secrets.PAGES_PUBLISH_TOKEN }}" ]; then
+            echo "Missing secret PAGES_PUBLISH_TOKEN."
+            exit 1
+          fi
+
+          echo "Deploy target: ${TARGET_PAGES_REPOSITORY}"
+          echo "Base path: ${TARGET_PAGES_BASE_PATH}"
+          echo "Target folder: ${TARGET_PAGES_FOLDER:-<repository-root>}"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+        env:
+          VITE_BASE_PATH: ${{ env.TARGET_PAGES_BASE_PATH }}
+
+      - name: Deploy dist to external Pages repository
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: main
+          clean: true
+          folder: dist
+          repository-name: ${{ env.TARGET_PAGES_REPOSITORY }}
+          target-folder: ${{ env.TARGET_PAGES_FOLDER }}
+          single-commit: true
+          token: ${{ secrets.PAGES_PUBLISH_TOKEN }}
+
