@@ -13,13 +13,8 @@ if (Test-Path '.git') {
   git init
 }
 
-$hasOrigin = $false
-try {
-  git remote get-url origin | Out-Null
-  $hasOrigin = $true
-} catch {
-  $hasOrigin = $false
-}
+$remoteNames = @(git remote)
+$hasOrigin = $remoteNames -contains 'origin'
 
 if ($hasOrigin) {
   $currentOrigin = git remote get-url origin
