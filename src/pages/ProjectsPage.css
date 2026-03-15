@@ -1,209 +1,82 @@
 @layer pages {
   .projects {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: var(--space-xl) var(--space-lg);
-    display: grid;
-    gap: var(--space-2xl);
-  }
-
-  .projects__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent-primary);
-    margin-bottom: var(--space-sm);
+    padding: 0 24px;
   }
 
   /* 히어로 */
   .projects__hero {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: var(--space-xl);
-    padding: var(--space-2xl) var(--space-xl);
-    border: 1px solid #e5e8eb;
-    border-radius: 12px;
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
+    padding: 64px 0 48px;
+    border-bottom: 1px solid #f1f3f5;
+  }
+
+  .projects__hero h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #191f28;
   }
 
   .projects__tagline {
-    color: var(--color-text-secondary);
-    margin-top: var(--space-sm);
-    font-size: 1.05rem;
+    color: #4e5968;
+    font-size: 16px;
+    margin-top: 8px;
   }
 
   .projects__tech {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-    text-align: right;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: var(--color-text-muted);
-  }
-
-  /* 기술 스택 */
-  .projects__stack {
-    & > h2 {
-      margin-bottom: var(--space-md);
-    }
-  }
-
-  .projects__stack-list {
-    display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm);
+    gap: 8px;
+    margin-top: 20px;
   }
 
-  .projects__stack-item {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid #e5e8eb;
+  .projects__tech-pill {
+    display: inline-block;
+    padding: 6px 14px;
     border-radius: 999px;
-    background: #f8f9fa;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    transition: border-color 0.15s;
-
-    &:hover {
-      border-color: #3182f6;
-    }
+    background: #f1f3f5;
+    font-size: 13px;
+    color: #4e5968;
   }
 
-  .projects__stack-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #3182f6;
-    color: #ffffff;
-    font-size: 0.72rem;
-    font-weight: 800;
-    flex-shrink: 0;
+  /* 섹션 공통 */
+  .projects__section {
+    margin-top: 64px;
   }
 
-  /* 2-column grid */
-  .projects__grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: var(--space-xl);
+  .projects__section > h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #191f28;
+    margin-bottom: 24px;
   }
 
   /* 마일스톤 */
-  .projects__milestones,
-  .projects__roadmap {
-    & > h2 {
-      margin-bottom: var(--space-md);
-    }
-  }
-
   .projects__milestone-list {
     display: grid;
-    gap: var(--space-md);
+    gap: 0;
   }
 
-  .projects__milestone-card {
-    padding: var(--space-lg);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
-    overflow-wrap: break-word;
-    transition: box-shadow 0.2s ease;
+  .projects__milestone-item {
+    padding: 24px 0;
+    border-bottom: 1px solid #f1f3f5;
+  }
 
-    &:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
+  .projects__milestone-item:first-child {
+    padding-top: 0;
+  }
 
-    & p {
-      color: var(--color-text-secondary);
-      margin-top: var(--space-sm);
-    }
+  .projects__milestone-item:hover h3 {
+    text-decoration: underline;
   }
 
   .projects__milestone-header {
     display: flex;
-    gap: var(--space-sm);
+    gap: 12px;
     align-items: center;
   }
 
-  .projects__milestone-index {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    border: none;
-    background: #3182f6;
-    color: #ffffff;
-    font-weight: 800;
-    font-family: var(--font-mono);
-  }
-
-  .projects__deliverables {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-top: var(--space-md);
-
-    & li {
-      padding: var(--space-xs) var(--space-sm);
-      border: 1px solid #e5e8eb;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--color-accent-secondary);
-      background: #f8f9fa;
-    }
-  }
-
-  /* 로드맵 */
-  .projects__roadmap-list {
-    display: grid;
-    gap: var(--space-sm);
-  }
-
-  .projects__roadmap-item {
-    display: flex;
-    gap: var(--space-md);
-    padding: var(--space-md);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    transition: box-shadow 0.2s ease;
-    overflow-wrap: break-word;
-
-    &:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
-
-    & strong {
-      display: block;
-      margin-bottom: var(--space-xs);
-    }
-
-    & p {
-      color: var(--color-text-secondary);
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-  }
-
-  .projects__roadmap-item--active {
-    border-color: #3182f6;
-  }
-
-  .projects__roadmap-index {
+  .projects__milestone-num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -211,173 +84,226 @@
     height: 28px;
     flex-shrink: 0;
     border-radius: 50%;
-    border: none;
     background: #3182f6;
-    color: #ffffff;
+    color: #fff;
     font-weight: 800;
-    font-family: var(--font-mono);
+    font-size: 13px;
   }
 
-  /* 킥 5선 */
-  .projects__kicks {
-    & > h2 {
-      margin-bottom: var(--space-md);
-    }
+  .projects__milestone-item p {
+    color: #4e5968;
+    font-size: 14px;
+    margin-top: 8px;
+    line-height: 1.6;
   }
 
+  .projects__deliverables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .projects__deliverable {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #f1f3f5;
+    font-size: 12px;
+    color: #4e5968;
+  }
+
+  /* 로드맵 */
+  .projects__roadmap-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .projects__roadmap-item {
+    display: flex;
+    gap: 12px;
+    padding: 20px 0;
+    border-bottom: 1px solid #f1f3f5;
+    overflow-wrap: break-word;
+  }
+
+  .projects__roadmap-item:first-child {
+    padding-top: 0;
+  }
+
+  .projects__roadmap-item--active {
+    border-bottom-color: #3182f6;
+  }
+
+  .projects__roadmap-item strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .projects__roadmap-item p {
+    color: #4e5968;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .projects__roadmap-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #3182f6;
+    color: #fff;
+    font-weight: 800;
+    font-size: 12px;
+  }
+
+  /* 킥 3열 그리드 */
   .projects__kick-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-md);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 
   .projects__kick-card {
-    padding: var(--space-lg);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
-    transition: box-shadow 0.2s ease;
-
-    &:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
-
-    & p {
-      color: var(--color-text-secondary);
-      margin-top: var(--space-sm);
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
+    padding: 24px;
+    background: #f8f9fa;
+    border-radius: 12px;
   }
 
-  /* 이벤트 시스템 */
-  .projects__events {
-    & > h2 {
-      margin-bottom: var(--space-md);
-    }
+  .projects__kick-card:hover h3 {
+    text-decoration: underline;
   }
 
+  .projects__kick-card p {
+    color: #4e5968;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* 이벤트 2열 그리드 */
   .projects__event-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-md);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
 
   .projects__event-card {
-    padding: var(--space-lg);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
+    padding: 24px;
+    background: #f8f9fa;
+    border-radius: 12px;
     overflow-wrap: break-word;
-    transition: box-shadow 0.2s ease;
+  }
 
-    &:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
+  .projects__event-card:hover h3 {
+    text-decoration: underline;
+  }
 
-    & h3 { margin-top: var(--space-sm); }
+  .projects__event-card h3 {
+    margin-top: 8px;
+  }
 
-    & code {
-      display: block;
-      margin-top: var(--space-sm);
-      padding: var(--space-xs) var(--space-sm);
-      border-radius: var(--radius-sm);
-      background: #f1f3f5;
-      font-size: 0.78rem;
-      color: #3182f6;
-      overflow-wrap: break-word;
-      word-break: break-all;
-    }
+  .projects__event-card code {
+    display: block;
+    margin-top: 8px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: #e8f3ff;
+    font-size: 12px;
+    color: #3182f6;
+    word-break: break-all;
+  }
 
-    & p {
-      color: var(--color-text-secondary);
-      margin-top: var(--space-sm);
-      font-size: 0.88rem;
-    }
+  .projects__event-card p {
+    color: #4e5968;
+    margin-top: 8px;
+    font-size: 14px;
   }
 
   .projects__event-dir {
     display: inline-block;
-    padding: var(--space-xs) var(--space-sm);
+    padding: 3px 8px;
     border-radius: 999px;
-    font-size: 0.72rem;
-    font-family: var(--font-mono);
-    border: 1px solid #e5e8eb;
-    background: #f8f9fa;
-    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    background: #f1f3f5;
+    color: #8b95a1;
+    letter-spacing: 0.04em;
   }
 
-  /* 수집 */
-  .projects__collection {
-    & > h2 {
-      margin-bottom: var(--space-md);
-    }
-  }
-
+  /* 수집 4열 그리드 */
   .projects__collection-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--space-md);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
 
   .projects__collection-card {
-    padding: var(--space-lg);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
-    transition: box-shadow 0.2s ease;
+    padding: 24px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    text-align: center;
+  }
 
-    &:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
+  .projects__collection-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 15px;
+  }
 
-    & strong {
-      display: block;
-      margin-top: var(--space-xs);
-    }
-
-    & p {
-      color: var(--color-text-secondary);
-      margin-top: var(--space-xs);
-      font-size: 0.88rem;
-    }
+  .projects__collection-card p {
+    color: #4e5968;
+    margin-top: 4px;
+    font-size: 13px;
   }
 
   .projects__collection-tier {
     display: inline-block;
-    padding: 2px var(--space-sm);
+    padding: 2px 10px;
     border-radius: 999px;
-    border: 1px solid #e5e8eb;
-    background: #f8f9fa;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    background: #e8f3ff;
+    font-size: 12px;
+    font-weight: 600;
     color: #3182f6;
   }
 
   /* 반응형 */
-  @media (max-width: 1200px) {
-    .projects__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
   @media (max-width: 768px) {
     .projects {
-      padding: var(--space-md);
+      padding: 0 16px;
     }
 
     .projects__hero {
-      flex-direction: column;
-      padding: var(--space-lg) var(--space-md);
+      padding: 40px 0 32px;
     }
 
-    .projects__tech {
-      text-align: left;
-      flex-direction: row;
-      gap: var(--space-sm);
+    .projects__section {
+      margin-top: 40px;
+    }
+
+    .projects__kick-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects__event-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects__collection-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .projects__kick-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .projects__collection-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }

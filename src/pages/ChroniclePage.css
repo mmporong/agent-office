@@ -1,224 +1,207 @@
 @layer pages {
   .chronicle {
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.6fr);
-    gap: var(--space-xl);
-    max-width: 1400px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: var(--space-xl) var(--space-lg);
+    padding: 0 24px;
   }
 
-  .chronicle__main {
-    display: grid;
-    gap: var(--space-xl);
-    align-content: start;
-  }
-
-  .chronicle__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent-primary);
-    margin-bottom: var(--space-xs);
-  }
-
-  /* 헤더+필터 */
+  /* 헤더 */
   .chronicle__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: var(--space-md);
-    padding: var(--space-lg);
-    border: 1px solid #e5e8eb;
-    border-radius: 12px;
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
+    padding: 64px 0 32px;
+    border-bottom: 1px solid #f1f3f5;
   }
 
+  .chronicle__header h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #191f28;
+  }
+
+  .chronicle__subtitle {
+    font-size: 16px;
+    color: #4e5968;
+    margin-top: 8px;
+  }
+
+  /* 필터 */
   .chronicle__filters {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    align-items: end;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 0;
+    border-bottom: 1px solid #f1f3f5;
   }
 
   .chronicle__select {
-    padding: var(--space-xs) var(--space-sm);
+    padding: 6px 12px;
     border: 1px solid #e5e8eb;
-    border-radius: var(--radius-sm);
-    background: #f8f9fa;
-    color: var(--color-text-primary);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
+    border-radius: 4px;
+    background: #fff;
+    color: #191f28;
+    font-size: 14px;
   }
 
   .chronicle__tags {
     display: flex;
-    gap: var(--space-xs);
+    gap: 4px;
   }
 
   .chronicle__tag {
-    padding: var(--space-xs) var(--space-md);
-    border: 1px solid #e5e8eb;
+    padding: 6px 16px;
+    border: none;
     border-radius: 999px;
-    font-size: 0.82rem;
-    font-family: var(--font-mono);
-    color: var(--color-text-secondary);
-    background: #ffffff;
-    transition: color 0.15s, background 0.15s;
+    font-size: 14px;
+    color: #4e5968;
+    background: transparent;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
 
-    &:hover {
-      background: #f1f3f5;
-    }
+  .chronicle__tag:hover {
+    color: #191f28;
   }
 
   .chronicle__tag--active {
-    background: #3182f6;
-    color: #ffffff;
-    border-color: #3182f6;
+    color: #3182f6;
+    font-weight: 600;
+  }
+
+  /* 섹션 공통 */
+  .chronicle__section {
+    margin-top: 64px;
+  }
+
+  .chronicle__section > h2 {
+    font-size: 22px;
     font-weight: 700;
+    color: #191f28;
+    margin-bottom: 24px;
   }
 
-  /* 페이즈 카드 */
-  .chronicle__phases {
-    & > h2 {
-      margin-bottom: var(--space-md);
-    }
-  }
-
-  .chronicle__phase-grid {
+  /* 페이즈 리스트 */
+  .chronicle__phase-list {
     display: grid;
-    gap: var(--space-md);
+    gap: 0;
   }
 
-  .chronicle__phase-card {
-    padding: var(--space-lg);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
-    overflow-wrap: break-word;
-    transition: box-shadow 0.2s ease;
+  .chronicle__phase-item {
+    padding: 32px 0;
+    border-bottom: 1px solid #f1f3f5;
+  }
 
-    &:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
+  .chronicle__phase-item:first-child {
+    padding-top: 0;
+  }
 
-    & > p {
-      color: var(--color-text-secondary);
-      margin-top: var(--space-sm);
-    }
+  .chronicle__phase-item > p {
+    color: #4e5968;
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .chronicle__phase-item:hover h3 {
+    text-decoration: underline;
   }
 
   .chronicle__phase-detail {
-    margin-top: var(--space-md);
-    padding: var(--space-md);
-    border-radius: var(--radius-sm);
-    border: 1px solid #e5e8eb;
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 8px;
     background: #f8f9fa;
+  }
 
-    & strong {
-      display: block;
-      color: var(--color-accent-secondary);
-      font-size: 0.82rem;
-      margin-bottom: var(--space-xs);
-    }
+  .chronicle__phase-detail strong {
+    display: block;
+    color: #4e5968;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
 
-    & p {
-      color: var(--color-text-secondary);
-      line-height: 1.6;
-    }
+  .chronicle__phase-detail p {
+    color: #4e5968;
+    font-size: 14px;
+    line-height: 1.6;
   }
 
   .chronicle__outcomes {
     display: grid;
-    gap: var(--space-sm);
-    margin-top: var(--space-md);
-    padding-left: var(--space-md);
+    gap: 8px;
+    margin-top: 16px;
+    padding-left: 16px;
+  }
 
-    & li {
-      list-style: disc;
-      color: var(--color-text-primary);
+  .chronicle__outcomes li {
+    list-style: disc;
+    color: #191f28;
+  }
 
-      & p {
-        color: var(--color-text-secondary);
-        margin-top: 2px;
-        line-height: 1.5;
-      }
-    }
+  .chronicle__outcomes li p {
+    color: #4e5968;
+    font-size: 14px;
+    margin-top: 2px;
+    line-height: 1.5;
   }
 
   /* 저널 엔트리 */
-  .chronicle__entries {
-    display: grid;
-    gap: var(--space-md);
-  }
-
   .chronicle__entry {
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-    transition: box-shadow 0.2s ease;
-
-    &:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
+    border-bottom: 1px solid #f1f3f5;
   }
 
   .chronicle__entry-header {
     display: flex;
     justify-content: space-between;
     align-items: start;
-    gap: var(--space-md);
+    gap: 16px;
     width: 100%;
-    padding: var(--space-md) var(--space-lg);
+    padding: 24px 0;
     text-align: left;
-    background: #f8f9fa;
-    border-bottom: 1px solid #e5e8eb;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     transition: background 0.15s;
+  }
 
-    &:hover {
-      background: #f1f3f5;
-    }
+  .chronicle__entry-header:hover {
+    background: transparent;
+  }
 
-    & h2 {
-      margin-top: var(--space-xs);
-    }
+  .chronicle__entry-header:hover .chronicle__entry-title {
+    text-decoration: underline;
+  }
 
-    & h3 {
-      color: var(--color-text-secondary);
-      font-weight: 400;
-      font-size: 0.9rem;
-      margin-top: var(--space-xs);
-      overflow-wrap: break-word;
-    }
+  .chronicle__date {
+    font-size: 13px;
+    color: #8b95a1;
+  }
+
+  .chronicle__entry-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #191f28;
+    margin-top: 4px;
   }
 
   .chronicle__entry-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
+    gap: 8px;
     flex-shrink: 0;
+    padding-top: 4px;
   }
 
   .chronicle__badge {
-    flex-shrink: 0;
-    padding: var(--space-xs) var(--space-sm);
-    border: 1px solid #e5e8eb;
+    padding: 4px 10px;
     border-radius: 999px;
     background: #f1f3f5;
-    font-size: 0.78rem;
-    font-family: var(--font-mono);
-    color: var(--color-text-secondary);
+    font-size: 12px;
+    color: #4e5968;
   }
 
   .chronicle__expand-icon {
     display: inline-block;
-    font-size: 0.7rem;
-    color: var(--color-text-muted);
+    font-size: 11px;
+    color: #8b95a1;
     transition: transform 0.3s ease;
   }
 
@@ -227,106 +210,91 @@
   }
 
   .chronicle__entry-body {
-    padding: var(--space-lg);
+    padding: 0 0 32px;
     display: grid;
-    gap: var(--space-lg);
+    gap: 24px;
   }
 
-  .chronicle__section {
-    & h3 {
-      margin-bottom: var(--space-sm);
-    }
+  .chronicle__detail h3 {
+    margin-bottom: 8px;
+  }
 
-    & > p {
-      color: var(--color-text-secondary);
-      line-height: 1.6;
-    }
+  .chronicle__detail > p {
+    color: #4e5968;
+    font-size: 14px;
+    line-height: 1.6;
   }
 
   .chronicle__items {
     display: grid;
-    gap: var(--space-sm);
-    margin-top: var(--space-md);
-
-    & li {
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-sm);
-      border: 1px solid #e5e8eb;
-      background: #f8f9fa;
-      overflow-wrap: break-word;
-
-      & p {
-        color: var(--color-text-secondary);
-        margin-top: 2px;
-        line-height: 1.5;
-      }
-    }
+    gap: 8px;
+    margin-top: 16px;
   }
 
-  /* 사이드바 */
-  .chronicle__sidebar {
-    align-self: start;
-    position: sticky;
-    top: calc(var(--space-lg) + 60px);
+  .chronicle__items li {
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    overflow-wrap: break-word;
   }
 
-  .chronicle__sidebar-panel {
-    padding: var(--space-lg);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
+  .chronicle__items li p {
+    color: #4e5968;
+    font-size: 14px;
+    margin-top: 2px;
+    line-height: 1.5;
+  }
 
-    & > h2 {
-      margin-bottom: var(--space-md);
-    }
+  /* 데이터 보존 원칙 (구 사이드바) */
+  .chronicle__rules-section {
+    padding: 48px 0 0;
+    border-top: 1px solid #f1f3f5;
   }
 
   .chronicle__rules {
     display: grid;
-    gap: var(--space-md);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
 
-    & li {
-      & strong {
-        display: block;
-        margin-bottom: 2px;
-      }
+  .chronicle__rules li strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
 
-      & p {
-        color: var(--color-text-secondary);
-        font-size: 0.88rem;
-        line-height: 1.5;
-      }
-    }
+  .chronicle__rules li p {
+    color: #4e5968;
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   /* 반응형 */
-  @media (max-width: 1200px) {
-    .chronicle {
-      grid-template-columns: 1fr;
-    }
-
-    .chronicle__sidebar {
-      position: static;
-    }
-  }
-
   @media (max-width: 768px) {
     .chronicle {
-      padding: var(--space-md);
+      padding: 0 16px;
     }
 
     .chronicle__header {
-      flex-direction: column;
+      padding: 40px 0 24px;
     }
 
     .chronicle__filters {
+      flex-direction: column;
       align-items: start;
-      width: 100%;
     }
 
     .chronicle__tags {
       flex-wrap: wrap;
+    }
+
+    .chronicle__rules {
+      grid-template-columns: 1fr;
+    }
+
+    .chronicle__entry-header {
+      flex-direction: column;
+      gap: 8px;
     }
   }
 }

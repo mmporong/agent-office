@@ -17,11 +17,11 @@ const kicks = [
 ]
 
 const techStack = [
-  { label: 'Unity C#', icon: 'U' },
-  { label: 'React + TypeScript', icon: 'R' },
-  { label: 'Python', icon: 'P' },
-  { label: 'AI Pipeline (Suno)', icon: 'A' },
-  { label: 'WebGL Wrapper', icon: 'W' },
+  { label: 'Unity C#' },
+  { label: 'React + TypeScript' },
+  { label: 'Python' },
+  { label: 'AI Pipeline (Suno)' },
+  { label: 'WebGL Wrapper' },
 ]
 
 export function ProjectsPage() {
@@ -30,79 +30,64 @@ export function ProjectsPage() {
   return (
     <div className="projects page-enter" ref={containerRef}>
       {/* 히어로 */}
-      <section className="projects__hero">
-        <div>
-          <p className="projects__eyebrow">{projectSummary.platform}</p>
-          <h1>{projectSummary.name}</h1>
-          <p className="projects__tagline">{projectSummary.tagline}</p>
-        </div>
+      <header className="projects__hero">
+        <h1>{projectSummary.name}</h1>
+        <p className="projects__tagline">{projectSummary.tagline}</p>
         <div className="projects__tech">
-          <span>{projectSummary.build}</span>
-          <span>{projectSummary.focus}</span>
-        </div>
-      </section>
-
-      {/* 기술 스택 */}
-      <section className="projects__stack scroll-reveal">
-        <h2>기술 스택</h2>
-        <div className="projects__stack-list">
           {techStack.map((tech) => (
-            <span key={tech.label} className="projects__stack-item">
-              <span className="projects__stack-icon">{tech.icon}</span>
+            <span key={tech.label} className="projects__tech-pill">
               {tech.label}
             </span>
           ))}
         </div>
+      </header>
+
+      {/* 마일스톤 */}
+      <section className="projects__section scroll-reveal">
+        <h2>스프린트 진행</h2>
+        <div className="projects__milestone-list">
+          {milestones.map((ms, i) => (
+            <article key={ms.title} className="projects__milestone-item">
+              <div className="projects__milestone-header">
+                <span className="projects__milestone-num">{i + 1}</span>
+                <h3>{ms.title}</h3>
+              </div>
+              <p>{ms.summary}</p>
+              <div className="projects__deliverables">
+                {ms.deliverables.map((d) => (
+                  <span key={d} className="projects__deliverable">{d}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <div className="projects__grid">
-        {/* 스프린트 진행 */}
-        <section className="projects__milestones scroll-reveal">
-          <h2>스프린트 진행</h2>
-          <div className="projects__milestone-list">
-            {milestones.map((ms, i) => (
-              <article key={ms.title} className="projects__milestone-card card-hover">
-                <div className="projects__milestone-header">
-                  <span className="projects__milestone-index">{i + 1}</span>
-                  <h3>{ms.title}</h3>
-                </div>
-                <p>{ms.summary}</p>
-                <ul className="projects__deliverables">
-                  {ms.deliverables.map((d) => (
-                    <li key={d}>{d}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* 개발 로드맵 */}
-        <section className="projects__roadmap scroll-reveal">
-          <h2>개발 로드맵</h2>
-          <div className="projects__roadmap-list">
-            {shellStages.map((stage, i) => (
-              <div
-                key={stage.id}
-                className={`projects__roadmap-item ${stage.id === 'loading' ? 'projects__roadmap-item--active' : ''}`}
-              >
-                <span className="projects__roadmap-index">{i + 1}</span>
-                <div>
-                  <strong>{stage.label} — {stage.headline}</strong>
-                  <p>{stage.description}</p>
-                </div>
+      {/* 로드맵 */}
+      <section className="projects__section scroll-reveal">
+        <h2>개발 로드맵</h2>
+        <div className="projects__roadmap-list">
+          {shellStages.map((stage, i) => (
+            <div
+              key={stage.id}
+              className={`projects__roadmap-item ${stage.id === 'loading' ? 'projects__roadmap-item--active' : ''}`}
+            >
+              <span className="projects__roadmap-num">{i + 1}</span>
+              <div>
+                <strong>{stage.label} — {stage.headline}</strong>
+                <p>{stage.description}</p>
               </div>
-            ))}
-          </div>
-        </section>
-      </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* 킥 5선 */}
-      <section className="projects__kicks scroll-reveal">
+      <section className="projects__section scroll-reveal">
         <h2>차별화 킥 5선</h2>
         <div className="projects__kick-grid">
           {kicks.map((kick) => (
-            <article key={kick.name} className="projects__kick-card card-hover">
+            <article key={kick.name} className="projects__kick-card">
               <h3>{kick.name}</h3>
               <p>{kick.desc}</p>
             </article>
@@ -111,11 +96,11 @@ export function ProjectsPage() {
       </section>
 
       {/* 이벤트 시스템 */}
-      <section className="projects__events scroll-reveal">
+      <section className="projects__section scroll-reveal">
         <h2>이벤트 시스템 (Bridge Contracts)</h2>
         <div className="projects__event-grid">
           {bridgeContracts.map((c) => (
-            <article key={c.name} className="projects__event-card card-hover">
+            <article key={c.name} className="projects__event-card">
               <span className="projects__event-dir">{c.direction}</span>
               <h3>{c.name}</h3>
               <code>{c.payload}</code>
@@ -126,11 +111,11 @@ export function ProjectsPage() {
       </section>
 
       {/* 수집 미리보기 */}
-      <section className="projects__collection scroll-reveal">
+      <section className="projects__section scroll-reveal">
         <h2>고양이 수집</h2>
         <div className="projects__collection-grid">
           {collectionPreview.map((cat) => (
-            <article key={cat.tier} className="projects__collection-card card-hover">
+            <article key={cat.tier} className="projects__collection-card">
               <span className="projects__collection-tier">{cat.tier}</span>
               <strong>{cat.name}</strong>
               <p>{cat.mood}</p>

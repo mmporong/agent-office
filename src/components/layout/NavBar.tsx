@@ -11,26 +11,33 @@ const navItems = [
 export function NavBar() {
   return (
     <nav className="navbar" aria-label="Main navigation">
-      <div className="navbar__brand">
-        <span className="navbar__logo">LIM</span>
-        <span className="navbar__studio">Studio</span>
-      </div>
-      <ul className="navbar__links">
-        {navItems.map((item) => (
-          <li key={item.to}>
+      <div className="navbar__inner">
+        <NavLink to="/" className="navbar__logo">
+          <span className="navbar__logo-text">LIM Studio</span>
+        </NavLink>
+        <div className="navbar__links">
+          {navItems.map((item) => (
             <NavLink
+              key={item.to}
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
                 `navbar__link ${isActive ? 'navbar__link--active' : ''}`
               }
-              aria-current={undefined}
             >
               {item.label}
             </NavLink>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+        <a
+          className="navbar__github"
+          href="https://github.com/mmporong"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub ↗
+        </a>
+      </div>
     </nav>
   )
 }

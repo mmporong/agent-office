@@ -15,56 +15,54 @@
     display: flex;
     justify-content: space-between;
     align-items: end;
-    gap: var(--space-md);
-    margin-bottom: var(--space-lg);
-    padding: var(--space-lg);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-card);
-    background: #f8f9fa;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 24px;
+    border-radius: 8px;
+    border-bottom: 1px solid #f1f3f5;
+    background: #fff;
   }
 
   .phase-header h1 {
     margin: 0;
+    font-size: 22px;
+    font-weight: 700;
   }
 
   .phase-header__eyebrow {
-    margin: 0 0 var(--space-xs);
-    color: var(--color-accent-primary);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
+    margin: 0 0 4px;
+    color: #3182f6;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 
   .phase-header__chips {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm);
+    gap: 8px;
     justify-content: end;
   }
 
   .phase-chip {
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-recessed);
-    color: var(--color-text-secondary);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 4px;
+    background: #f8f9fa;
+    color: #4e5968;
+    font-size: 13px;
   }
 
   .phase-chip--risk {
-    border-color: var(--color-status-blocked);
     color: var(--color-status-blocked);
   }
 
   /* ── OfficeMap ── */
   .office-map {
-    padding: var(--space-lg);
-    border-radius: var(--radius-md);
-    background: var(--color-bg-recessed);
-    border: 1px solid var(--color-border);
+    padding: 24px;
+    border-radius: 8px;
+    background: #f8f9fa;
+    border: 1px solid #f1f3f5;
   }
 
   .office-room {
@@ -72,8 +70,8 @@
     aspect-ratio: 16 / 9;
     min-height: 620px;
     overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    border: 1px solid #e5e8eb;
+    border-radius: 8px;
     background:
       url('https://raw.githubusercontent.com/ringhyacinth/Star-Office-UI/f29c107e9728a72f2635f10b4e8203b29b37221d/frontend/office_bg_small.webp')
         center center / cover no-repeat,
@@ -120,15 +118,15 @@
     top: 14px;
     display: grid;
     gap: 1px;
-    padding: var(--space-xs) var(--space-sm);
-    border: 1px solid var(--color-border);
+    padding: 4px 8px;
+    border: 1px solid #e5e8eb;
     background: rgba(255, 255, 255, 0.92);
     color: #191f28;
-    border-radius: var(--radius-sm);
-
-    & strong { font-size: 0.72rem; }
-    & span { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); }
+    border-radius: 4px;
   }
+
+  .office-room__plaque strong { font-size: 12px; }
+  .office-room__plaque span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #4e5968; }
 
   /* ── Office Zone Areas ── */
   .office-area {
@@ -139,20 +137,20 @@
   .office-area__label {
     display: inline-grid;
     gap: 2px;
-    padding: var(--space-xs) var(--space-sm);
-    border: 1px solid var(--color-border);
+    padding: 4px 8px;
+    border: 1px solid #e5e8eb;
     background: rgba(255, 255, 255, 0.92);
     color: #191f28;
-    border-radius: var(--radius-sm);
-
-    & strong { font-size: 0.78rem; }
-    & span { color: var(--color-text-secondary); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    border-radius: 4px;
   }
+
+  .office-area__label strong { font-size: 13px; }
+  .office-area__label span { color: #4e5968; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
 
   .office-area__agents {
     position: relative;
     min-height: 96px;
-    margin-top: var(--space-sm);
+    margin-top: 8px;
   }
 
   .office-area--lounge .office-area__agents {
@@ -178,11 +176,11 @@
     justify-content: center;
     min-width: 68px;
     min-height: 32px;
-    border: 1px dashed var(--color-border);
-    background: rgba(255, 255, 255, 0.02);
-    color: var(--color-text-muted);
-    font-size: 0.72rem;
-    border-radius: var(--radius-sm);
+    border: 1px dashed #e5e8eb;
+    background: transparent;
+    color: #8b95a1;
+    font-size: 12px;
+    border-radius: 4px;
   }
 
   /* ── AgentSprite ── */
@@ -190,7 +188,7 @@
     position: relative;
     display: grid;
     justify-items: center;
-    gap: var(--space-xs);
+    gap: 4px;
     width: 74px;
     padding: 0;
     border: 0;
@@ -201,7 +199,7 @@
 
   .agent-sprite--running { animation: agent-sprite-run 0.7s ease-in-out infinite; }
   .agent-sprite:hover { animation-play-state: paused; transform: translateY(-2px); }
-  .agent-sprite--selected .agent-sprite__portrait { box-shadow: 0 0 0 4px var(--color-accent-pop); }
+  .agent-sprite--selected .agent-sprite__portrait { box-shadow: 0 0 0 4px #3182f6; }
 
   .agent-sprite__bubble {
     position: absolute;
@@ -209,12 +207,12 @@
     top: -22px;
     transform: translateX(-50%);
     padding: 2px 6px;
-    border: 1px solid var(--color-border);
-    color: #ffffff;
-    font-size: 0.6rem;
+    border: 1px solid #e5e8eb;
+    color: #fff;
+    font-size: 10px;
     font-weight: 800;
     white-space: nowrap;
-    border-radius: var(--radius-sm);
+    border-radius: 4px;
   }
 
   .agent-sprite__portrait {
@@ -222,7 +220,7 @@
     position: relative;
     width: 58px;
     height: 66px;
-    margin-top: var(--space-sm);
+    margin-top: 8px;
     background: transparent;
   }
 
@@ -260,14 +258,14 @@
     bottom: -10px;
     transform: translateX(-50%);
     padding: 1px 4px;
-    border: 1px solid var(--color-border);
+    border: 1px solid #e5e8eb;
     background: #191f28;
-    color: #ffffff;
-    border-radius: var(--radius-sm);
+    color: #fff;
+    border-radius: 4px;
   }
 
   .agent-sprite__sigil {
-    font-size: 0.46rem;
+    font-size: 8px;
     font-weight: 900;
     letter-spacing: 0.08em;
   }
@@ -275,23 +273,23 @@
   .agent-sprite__nameplate {
     display: grid;
     gap: 1px;
-    margin-top: var(--space-xs);
+    margin-top: 4px;
     padding: 3px 6px;
-    border: 1px solid var(--color-border);
+    border: 1px solid #e5e8eb;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: var(--radius-sm);
+    border-radius: 4px;
   }
 
   .agent-sprite__name {
-    font-size: 0.65rem;
+    font-size: 11px;
     font-weight: 900;
     line-height: 1.1;
     color: #191f28;
   }
 
   .agent-sprite__title {
-    color: var(--color-text-secondary);
-    font-size: 0.55rem;
+    color: #4e5968;
+    font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
@@ -314,7 +312,7 @@
 
   /* ── AgentStatusCard ── */
   .status-card {
-    padding: var(--space-lg);
+    padding: 24px;
   }
 
   .status-card h3 { margin: 0; }
@@ -322,85 +320,81 @@
   .status-card__header {
     display: flex;
     justify-content: space-between;
-    gap: var(--space-md);
+    gap: 16px;
     align-items: start;
-    margin-bottom: var(--space-lg);
+    margin-bottom: 24px;
   }
 
   .status-card__role {
-    margin: 0 0 var(--space-xs);
-    color: var(--color-accent-secondary);
-    font-size: 0.9rem;
+    margin: 0 0 4px;
+    color: #4e5968;
+    font-size: 14px;
   }
 
   .status-badge {
-    padding: var(--space-sm) var(--space-sm);
+    padding: 6px 10px;
     border-radius: 999px;
-    border: 1px solid var(--color-border);
-    color: #ffffff;
+    color: #fff;
     font-weight: 800;
-    font-size: 0.78rem;
+    font-size: 12px;
   }
 
   .status-card__meta {
     display: grid;
-    gap: var(--space-md);
+    gap: 12px;
     margin: 0;
-
-    & div {
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-sm);
-      background: var(--color-bg-recessed);
-      border: 1px solid var(--color-border);
-    }
-
-    & dt {
-      margin-bottom: var(--space-xs);
-      color: var(--color-accent-secondary);
-      font-size: 0.82rem;
-      font-family: var(--font-mono);
-    }
-
-    & dd { margin: 0; }
   }
 
+  .status-card__meta div {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: #f8f9fa;
+  }
+
+  .status-card__meta dt {
+    margin-bottom: 4px;
+    color: #4e5968;
+    font-size: 13px;
+  }
+
+  .status-card__meta dd { margin: 0; }
+
   .status-card__energy {
-    margin-top: var(--space-lg);
+    margin-top: 24px;
   }
 
   .status-card__energy-bar {
     height: 18px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border);
-    background: var(--color-bg-recessed);
+    border-radius: 4px;
+    background: #f1f3f5;
     overflow: hidden;
+  }
 
-    & div {
-      height: 100%;
-      background: linear-gradient(90deg, var(--color-status-researching), var(--color-accent-pop));
-      border-radius: inherit;
-    }
+  .status-card__energy-bar div {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-status-researching), #3182f6);
+    border-radius: inherit;
   }
 
   /* ── TaskTicker ── */
   .task-ticker {
     display: grid;
-    gap: var(--space-sm);
-    padding: var(--space-md);
+    gap: 8px;
+    padding: 16px;
+  }
 
-    & li {
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--color-border);
-      background: var(--color-bg-elevated);
+  .task-ticker li {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: #f8f9fa;
+    font-size: 14px;
+  }
 
-      &::before {
-        content: '#';
-        margin-right: var(--space-sm);
-        color: var(--color-accent-secondary);
-        font-family: var(--font-mono);
-      }
-    }
+  .task-ticker li::before {
+    content: '#';
+    margin-right: 8px;
+    color: #4e5968;
+    font-family: var(--font-mono);
   }
 
   /* ── Responsive ── */

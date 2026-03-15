@@ -2,98 +2,98 @@
   .office {
     max-width: 1600px;
     margin: 0 auto;
-    padding: var(--space-lg);
+    padding: 24px;
     display: grid;
-    gap: var(--space-lg);
+    gap: 24px;
   }
 
   .office__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.12em;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--color-accent-primary);
-    margin-bottom: var(--space-xs);
+    color: #3182f6;
+    margin-bottom: 4px;
   }
 
   .office__layout {
     display: grid;
     grid-template-columns: minmax(0, 1.55fr) minmax(340px, 0.95fr);
-    gap: var(--space-lg);
+    gap: 24px;
   }
 
   .office__sidebar {
     display: grid;
-    gap: var(--space-lg);
+    gap: 24px;
     align-content: start;
   }
 
   /* 맵 패널 */
   .office__map-panel {
     border: 1px solid #e5e8eb;
-    border-radius: var(--radius-lg);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
+    border-radius: 12px;
+    background: #fff;
     overflow: hidden;
-    padding-bottom: var(--space-lg);
+    padding-bottom: 24px;
   }
 
   .office__map-header {
     display: flex;
     justify-content: space-between;
     align-items: start;
-    gap: var(--space-md);
-    padding: var(--space-lg);
-    border-bottom: 1px solid #e5e8eb;
-    background: #f8f9fa;
+    gap: 16px;
+    padding: 24px;
+    border-bottom: 1px solid #f1f3f5;
+  }
+
+  .office__map-header h1 {
+    font-size: 22px;
   }
 
   .office__project-chip {
     display: grid;
-    gap: var(--space-xs);
-    padding: var(--space-md);
+    gap: 4px;
+    padding: 12px 16px;
     min-width: 230px;
-    border-radius: var(--radius-md);
-    border: 1px solid #e5e8eb;
-    background: #f1f3f5;
+    border-radius: 8px;
+    background: #f8f9fa;
     text-align: right;
-    font-size: 0.84rem;
+    font-size: 14px;
+  }
 
-    & small {
-      color: var(--color-text-secondary);
-      font-size: 0.72rem;
-    }
+  .office__project-chip small {
+    color: #8b95a1;
+    font-size: 12px;
   }
 
   .office__scene {
-    padding: var(--space-lg);
+    padding: 24px;
   }
 
   .office__toolbar {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-top: var(--space-md);
+    gap: 8px;
+    margin-top: 16px;
   }
 
   .office__btn {
-    padding: var(--space-sm) var(--space-md);
+    padding: 8px 16px;
     border-radius: 8px;
     border: 1px solid #e5e8eb;
-    background: #ffffff;
-    color: var(--color-text-primary);
-    font-size: 0.85rem;
-    transition: color 0.15s, background 0.15s;
+    background: #f8f9fa;
+    color: #191f28;
+    font-size: 14px;
+    transition: background 0.15s;
+  }
 
-    &:hover:not(:disabled) {
-      background: #f1f3f5;
-      color: #3182f6;
-    }
+  .office__btn:hover:not(:disabled) {
+    background: #f1f3f5;
+  }
 
-    &:disabled {
-      opacity: 0.48;
-      cursor: not-allowed;
-    }
+  .office__btn:disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
   }
 
   .office__btn--warn {
@@ -102,24 +102,23 @@
   }
 
   .office__btn--small {
-    padding: var(--space-xs) var(--space-sm);
+    padding: 4px 8px;
     border-radius: 8px;
-    font-size: 0.82rem;
+    font-size: 13px;
   }
 
   /* 하단 패널 */
   .office__footer-panels {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-lg);
-    margin: var(--space-lg) var(--space-lg) 0;
+    gap: 24px;
+    margin: 24px 24px 0;
   }
 
   .office__briefing {
     border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
+    border-radius: 8px;
+    background: #fff;
     overflow: hidden;
   }
 
@@ -127,50 +126,65 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-md);
-    padding: var(--space-md) var(--space-lg);
-    background: #f8f9fa;
-    border-bottom: 1px solid #e5e8eb;
+    gap: 16px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #f1f3f5;
+  }
+
+  .office__briefing-header h2 {
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .office__contract-grid,
   .office__milestone-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg) var(--space-lg);
+    gap: 8px;
+    padding: 16px 24px 24px;
   }
 
   .office__contract-card,
   .office__milestone-card,
   .office__collection-card {
-    padding: var(--space-md);
-    border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    overflow: hidden;
+    padding: 16px;
+    border: 1px solid #f1f3f5;
+    border-radius: 8px;
+    background: #fff;
     overflow-wrap: break-word;
     word-break: keep-all;
+  }
 
-    & h4 { margin: 0; overflow-wrap: break-word; }
-    & p { margin-top: var(--space-xs); color: var(--color-text-secondary); font-size: 0.88rem; overflow-wrap: break-word; }
+  .office__contract-card h4,
+  .office__milestone-card h4,
+  .office__collection-card h4 {
+    margin: 0;
+    font-size: 14px;
+    overflow-wrap: break-word;
+  }
+
+  .office__contract-card p,
+  .office__milestone-card p,
+  .office__collection-card p {
+    margin-top: 4px;
+    color: #4e5968;
+    font-size: 13px;
+    overflow-wrap: break-word;
   }
 
   .office__contract-dir {
     display: inline-block;
-    margin-bottom: var(--space-sm);
-    padding: var(--space-xs) var(--space-sm);
+    margin-bottom: 8px;
+    padding: 3px 8px;
     border-radius: 999px;
-    font-size: 0.72rem;
-    font-family: var(--font-mono);
-    border: 1px solid #e5e8eb;
+    font-size: 12px;
     background: #f1f3f5;
-    color: var(--color-text-secondary);
+    color: #8b95a1;
   }
 
   .office__milestone-header {
     display: flex;
-    gap: var(--space-sm);
+    gap: 8px;
     align-items: center;
   }
 
@@ -178,23 +192,21 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-sm);
-    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
     background: #3182f6;
-    color: #ffffff;
+    color: #fff;
     font-weight: 800;
-    font-family: var(--font-mono);
+    font-size: 12px;
     flex-shrink: 0;
   }
 
   /* 사이드바 패널 */
   .office__panel {
     border: 1px solid #e5e8eb;
-    border-radius: var(--radius-md);
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
+    border-radius: 8px;
+    background: #fff;
     overflow: hidden;
   }
 
@@ -202,51 +214,55 @@
     display: flex;
     justify-content: space-between;
     align-items: start;
-    gap: var(--space-md);
-    padding: var(--space-md) var(--space-lg);
-    border-bottom: 1px solid #e5e8eb;
-    background: #f8f9fa;
+    gap: 16px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #f1f3f5;
+  }
+
+  .office__panel-header h2 {
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .office__checklist {
     display: grid;
-    gap: var(--space-sm);
-    padding: var(--space-md);
+    gap: 8px;
+    padding: 16px;
+  }
 
-    & li {
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-sm);
-      border: 1px solid #e5e8eb;
-      background: #ffffff;
+  .office__checklist li {
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: #f8f9fa;
+    font-size: 14px;
+  }
 
-      &::before {
-        content: '>';
-        margin-right: var(--space-sm);
-        color: #3182f6;
-        font-family: var(--font-mono);
-      }
-    }
+  .office__checklist li::before {
+    content: '>';
+    margin-right: 8px;
+    color: #3182f6;
+    font-family: var(--font-mono);
   }
 
   .office__collection-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-sm);
-    padding: var(--space-md);
+    gap: 8px;
+    padding: 16px;
   }
 
   .office__blocker-list {
     display: grid;
-    gap: var(--space-sm);
-    padding: var(--space-md);
+    gap: 8px;
+    padding: 16px;
+  }
 
-    & li {
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-sm);
-      border: 1px solid #e5e8eb;
-      border-left: 3px solid var(--color-status-blocked);
-      background: #ffffff;
-    }
+  .office__blocker-list li {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border-left: 3px solid var(--color-status-blocked);
+    background: #f8f9fa;
+    font-size: 14px;
   }
 
   /* 반응형 */
@@ -261,7 +277,7 @@
 
   @media (max-width: 768px) {
     .office {
-      padding: var(--space-md);
+      padding: 16px;
     }
 
     .office__map-header {
