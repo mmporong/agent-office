@@ -116,23 +116,23 @@ const decorativeAssets: Array<ImageAsset | FrameAsset> = [
 ]
 
 const zoneAnchorById: Record<OfficeZoneId, { left: number; top: number; area: string }> = {
-  lounge: { left: 52, top: 20, area: 'breakroom' },
-  'pm-desk': { left: 17, top: 49, area: 'writing' },
-  'research-lab': { left: 18, top: 35, area: 'researching' },
-  'dev-desk': { left: 16, top: 63, area: 'executing' },
-  'qa-zone': { left: 30, top: 63, area: 'checking' },
-  'debug-corner': { left: 81, top: 21, area: 'error' },
-  'briefing-board': { left: 81, top: 76, area: 'syncing' },
+  lounge: { left: 48, top: 6, area: 'breakroom' },
+  'pm-desk': { left: 5, top: 42, area: 'writing' },
+  'research-lab': { left: 30, top: 28, area: 'researching' },
+  'dev-desk': { left: 5, top: 72, area: 'executing' },
+  'qa-zone': { left: 42, top: 72, area: 'checking' },
+  'debug-corner': { left: 78, top: 18, area: 'error' },
+  'briefing-board': { left: 72, top: 68, area: 'syncing' },
 }
 
 const loungeSlotOffsets = [
-  { left: 0, top: 10, behavior: 'rest' },
-  { left: 88, top: 6, behavior: 'roam', variant: 'a' },
-  { left: 176, top: 14, behavior: 'rest' },
-  { left: 264, top: 8, behavior: 'roam', variant: 'b' },
-  { left: 44, top: 116, behavior: 'roam', variant: 'c' },
-  { left: 132, top: 120, behavior: 'rest' },
-  { left: 220, top: 112, behavior: 'roam', variant: 'a' },
+  { left: 0, top: 6, behavior: 'rest' },
+  { left: 60, top: 2, behavior: 'roam', variant: 'a' },
+  { left: 120, top: 8, behavior: 'rest' },
+  { left: 180, top: 4, behavior: 'roam', variant: 'b' },
+  { left: 30, top: 70, behavior: 'roam', variant: 'c' },
+  { left: 90, top: 74, behavior: 'rest' },
+  { left: 150, top: 68, behavior: 'roam', variant: 'a' },
 ] as const
 
 export function OfficeMap({
@@ -191,8 +191,8 @@ export function OfficeMap({
                     const loungeSlot = loungeSlotOffsets[index % loungeSlotOffsets.length]
                     const isLoungeAgent = zone.id === 'lounge' && agent.status === 'idle'
                     const isRoaming = isLoungeAgent && loungeSlot.behavior === 'roam'
-                    const left = isLoungeAgent ? loungeSlot.left : (index % 2) * 88
-                    const top = isLoungeAgent ? loungeSlot.top : Math.floor(index / 2) * 112
+                    const left = isLoungeAgent ? loungeSlot.left : (index % 2) * 58
+                    const top = isLoungeAgent ? loungeSlot.top : Math.floor(index / 2) * 72
 
                     return (
                       <div

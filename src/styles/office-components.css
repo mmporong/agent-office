@@ -154,8 +154,8 @@
   }
 
   .office-area--lounge .office-area__agents {
-    min-width: 340px;
-    min-height: 230px;
+    min-width: 220px;
+    min-height: 140px;
   }
 
   .office-area__agent-slot {
@@ -188,8 +188,8 @@
     position: relative;
     display: grid;
     justify-items: center;
-    gap: 4px;
-    width: 74px;
+    gap: 2px;
+    width: 52px;
     padding: 0;
     border: 0;
     background: transparent;
@@ -204,32 +204,32 @@
   .agent-sprite__bubble {
     position: absolute;
     left: 50%;
-    top: -22px;
+    top: -16px;
     transform: translateX(-50%);
-    padding: 2px 6px;
+    padding: 1px 4px;
     border: 1px solid #e5e8eb;
     color: #fff;
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 800;
     white-space: nowrap;
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
   .agent-sprite__portrait {
     display: block;
     position: relative;
-    width: 58px;
-    height: 66px;
-    margin-top: 8px;
+    width: 32px;
+    height: 36px;
+    margin-top: 4px;
     background: transparent;
   }
 
   .agent-sprite__shadow {
     position: absolute;
-    left: 9px;
-    right: 9px;
-    bottom: -9px;
-    height: 7px;
+    left: 5px;
+    right: 5px;
+    bottom: -5px;
+    height: 5px;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
   }
@@ -247,41 +247,41 @@
     position: relative;
     display: block;
     z-index: 1;
-    width: 58px;
-    height: 58px;
+    width: 32px;
+    height: 32px;
     overflow: hidden;
   }
 
   .agent-sprite__badge {
     position: absolute;
     left: 50%;
-    bottom: -10px;
+    bottom: -6px;
     transform: translateX(-50%);
-    padding: 1px 4px;
+    padding: 0 3px;
     border: 1px solid #e5e8eb;
     background: #191f28;
     color: #fff;
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
   .agent-sprite__sigil {
-    font-size: 8px;
+    font-size: 7px;
     font-weight: 900;
     letter-spacing: 0.08em;
   }
 
   .agent-sprite__nameplate {
     display: grid;
-    gap: 1px;
-    margin-top: 4px;
-    padding: 3px 6px;
+    gap: 0;
+    margin-top: 2px;
+    padding: 2px 4px;
     border: 1px solid #e5e8eb;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 4px;
+    border-radius: 3px;
   }
 
   .agent-sprite__name {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 900;
     line-height: 1.1;
     color: #191f28;
@@ -289,7 +289,7 @@
 
   .agent-sprite__title {
     color: #4e5968;
-    font-size: 9px;
+    font-size: 7px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
