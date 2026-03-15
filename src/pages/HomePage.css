@@ -1,0 +1,299 @@
+@layer pages {
+  .home {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg);
+    display: grid;
+    gap: var(--space-2xl);
+  }
+
+  .home__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* 인트로 */
+  .home__intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--space-xl);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  .home__title {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .home__tagline {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+
+  .home__stack {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .home__github {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent-secondary);
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      color: var(--color-accent-primary);
+      border-color: var(--color-accent-primary);
+    }
+  }
+
+  .home__intro-mascot {
+    flex-shrink: 0;
+  }
+
+  .home__cat-sprite {
+    width: 120px;
+    image-rendering: pixelated;
+  }
+
+  /* 프로젝트 카드 */
+  .home__project {
+    padding: var(--space-xl);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-card);
+    container-type: inline-size;
+  }
+
+  .home__project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .home__project-tagline {
+    color: var(--color-text-secondary);
+    margin-top: var(--space-xs);
+  }
+
+  .home__project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    text-align: right;
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+  }
+
+  /* 스텝 표시 */
+  .home__stages {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .home__stage {
+    display: flex;
+    align-items: start;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-elevated);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-accent-primary);
+    }
+  }
+
+  .home__stage--active {
+    border-color: var(--color-accent-pop);
+    background: var(--color-bg-surface);
+  }
+
+  .home__stage-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--color-border);
+    background: var(--color-bg-recessed);
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: var(--color-accent-primary);
+  }
+
+  .home__stage-body {
+    display: grid;
+    gap: 2px;
+
+    & strong {
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+    }
+  }
+
+  .home__stage-headline {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+  }
+
+  @container (max-width: 600px) {
+    .home__stages {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* 타임라인 */
+  .home__timeline {
+    & > h2 {
+      margin-bottom: var(--space-lg);
+    }
+  }
+
+  .home__timeline-list {
+    display: grid;
+    gap: 0;
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--space-lg);
+  }
+
+  .home__timeline-item {
+    position: relative;
+    padding-bottom: var(--space-xl);
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+  .home__timeline-dot {
+    position: absolute;
+    left: calc(-1 * var(--space-lg) - 5px);
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent-primary);
+    border: 2px solid var(--color-bg-base);
+  }
+
+  .home__timeline-date {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .home__timeline-content {
+    & h3 {
+      margin-bottom: var(--space-xs);
+    }
+
+    & p {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+  }
+
+  /* 미니맵 */
+  .home__minimap {
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+
+  .home__minimap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-xl);
+    border-bottom: 2px solid var(--color-border);
+    background: var(--color-bg-elevated);
+  }
+
+  .home__minimap-link {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent-primary);
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-color: var(--color-accent-primary);
+    }
+  }
+
+  .home__minimap-viewport {
+    padding: var(--space-md);
+    max-height: 420px;
+    overflow: hidden;
+  }
+
+  /* 반응형 */
+  @media (max-width: 768px) {
+    .home {
+      padding: var(--space-md);
+    }
+
+    .home__intro {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .home__title {
+      font-size: 1.5rem;
+    }
+
+    .home__project-header {
+      flex-direction: column;
+    }
+
+    .home__project-meta {
+      text-align: left;
+      flex-direction: row;
+      gap: var(--space-sm);
+    }
+
+    .home__stages {
+      grid-template-columns: 1fr;
+    }
+
+    .home__minimap-viewport {
+      max-height: 300px;
+    }
+  }
+}

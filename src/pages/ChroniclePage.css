@@ -1,0 +1,296 @@
+@layer pages {
+  .chronicle {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.6fr);
+    gap: var(--space-xl);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg);
+  }
+
+  .chronicle__main {
+    display: grid;
+    gap: var(--space-xl);
+    align-content: start;
+  }
+
+  .chronicle__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* 헤더+필터 */
+  .chronicle__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-card);
+  }
+
+  .chronicle__filters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: end;
+  }
+
+  .chronicle__select {
+    padding: var(--space-xs) var(--space-sm);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+
+  .chronicle__tags {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .chronicle__tag {
+    padding: var(--space-xs) var(--space-sm);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-elevated);
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      border-color: var(--color-accent-primary);
+    }
+
+  }
+
+  .chronicle__tag--active {
+    background: var(--color-accent-primary);
+    color: var(--color-bg-base);
+    border-color: var(--color-accent-primary);
+  }
+
+  /* 페이즈 카드 */
+  .chronicle__phases {
+    & > h2 {
+      margin-bottom: var(--space-md);
+    }
+  }
+
+  .chronicle__phase-grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .chronicle__phase-card {
+    padding: var(--space-lg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-card);
+
+    & > p {
+      color: var(--color-text-secondary);
+      margin-top: var(--space-sm);
+    }
+  }
+
+  .chronicle__phase-detail {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--color-border-subtle);
+    background: var(--color-bg-elevated);
+
+    & strong {
+      display: block;
+      color: var(--color-accent-secondary);
+      font-size: 0.82rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    & p {
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+  }
+
+  .chronicle__outcomes {
+    display: grid;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    padding-left: var(--space-md);
+
+    & li {
+      list-style: disc;
+      color: var(--color-text-primary);
+
+      & p {
+        color: var(--color-text-secondary);
+        margin-top: 2px;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  /* 저널 엔트리 */
+  .chronicle__entries {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .chronicle__entry {
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+
+  .chronicle__entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: var(--space-md);
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    text-align: left;
+    background: var(--color-bg-elevated);
+    border-bottom: 2px solid var(--color-border-subtle);
+
+    & h2 {
+      margin-top: var(--space-xs);
+    }
+
+    & h3 {
+      color: var(--color-text-secondary);
+      font-weight: 400;
+      font-size: 0.9rem;
+      margin-top: var(--space-xs);
+    }
+  }
+
+  .chronicle__badge {
+    flex-shrink: 0;
+    padding: var(--space-xs) var(--space-sm);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-recessed);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+  }
+
+  .chronicle__entry-body {
+    padding: var(--space-lg);
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .chronicle__section {
+    & h3 {
+      margin-bottom: var(--space-sm);
+    }
+
+    & > p {
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+  }
+
+  .chronicle__items {
+    display: grid;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+
+    & li {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--color-border-subtle);
+      background: var(--color-bg-elevated);
+
+      & p {
+        color: var(--color-text-secondary);
+        margin-top: 2px;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  /* 사이드바 */
+  .chronicle__sidebar {
+    align-self: start;
+    position: sticky;
+    top: var(--space-lg);
+  }
+
+  .chronicle__sidebar-panel {
+    padding: var(--space-lg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-card);
+
+    & > h2 {
+      margin-bottom: var(--space-md);
+    }
+  }
+
+  .chronicle__rules {
+    display: grid;
+    gap: var(--space-md);
+
+    & li {
+      & strong {
+        display: block;
+        margin-bottom: 2px;
+      }
+
+      & p {
+        color: var(--color-text-secondary);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  /* 반응형 */
+  @media (max-width: 1200px) {
+    .chronicle {
+      grid-template-columns: 1fr;
+    }
+
+    .chronicle__sidebar {
+      position: static;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .chronicle {
+      padding: var(--space-md);
+    }
+
+    .chronicle__header {
+      flex-direction: column;
+    }
+
+    .chronicle__filters {
+      align-items: start;
+      width: 100%;
+    }
+
+    .chronicle__tags {
+      flex-wrap: wrap;
+    }
+  }
+}
