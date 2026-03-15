@@ -140,7 +140,6 @@ export function ChroniclePage() {
               <div className="chronicle__entry-body">
                 {(categoryFilter === 'all' || categoryFilter === 'research') && (
                   <div className="chronicle__detail">
-                    <h3>{entry.researchTitle}</h3>
                     <p>{entry.researchSummary}</p>
                     <ul className="chronicle__items">
                       {entry.researchItems.map((item) => (
