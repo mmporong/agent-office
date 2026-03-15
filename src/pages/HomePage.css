@@ -90,17 +90,132 @@
     border: none;
     cursor: pointer;
     padding: 0;
+    text-decoration: none;
   }
 
   .home__link-btn:hover {
     text-decoration: underline;
   }
 
+  /* 오피스 개요 */
+  .home__office-overview {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 24px;
+  }
+
+  .home__office-map-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #f1f3f5;
+  }
+
+  .home__office-status {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home__office-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #4e5968;
+  }
+
+  .home__office-stat-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #3182f6;
+  }
+
+  .home__agent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .home__agent-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+    width: 100%;
+  }
+
+  .home__agent-row:hover {
+    background: #f8f9fa;
+  }
+
+  .home__agent-row--selected {
+    background: #f1f3f5;
+  }
+
+  .home__agent-thumb {
+    width: 28px;
+    height: 28px;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+  }
+
+  .home__agent-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #191f28;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .home__agent-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 999px;
+    color: #fff;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+  }
+
+  .home__agent-badge--idle { background: var(--color-status-idle); }
+  .home__agent-badge--building { background: var(--color-status-building); }
+  .home__agent-badge--planning { background: var(--color-status-planning); }
+  .home__agent-badge--researching { background: var(--color-status-researching); }
+  .home__agent-badge--verifying { background: var(--color-status-verifying); }
+  .home__agent-badge--blocked { background: var(--color-status-blocked); }
+  .home__agent-badge--syncing { background: var(--color-status-syncing); }
+
   /* 프로젝트 카드 */
   .home__project-card {
+    display: block;
     padding: 32px;
     background: #f8f9fa;
     border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+  }
+
+  .home__project-card:hover {
+    background: #f1f3f5;
+    text-decoration: none;
+  }
+
+  .home__project-card:hover h3 {
+    text-decoration: underline;
   }
 
   .home__project-top {
@@ -187,7 +302,7 @@
   .home__update-card {
     padding: 24px 0;
     border-bottom: 1px solid #f1f3f5;
-    cursor: default;
+    cursor: pointer;
   }
 
   .home__update-card:hover h3 {
@@ -213,74 +328,6 @@
     line-height: 1.5;
   }
 
-  /* 에이전트 그리드 */
-  .home__agent-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-  }
-
-  .home__agent-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    transition: background 0.15s;
-    animation: card-stagger-in 0.4s ease both;
-  }
-
-  .home__agent-card:hover {
-    background: #f1f3f5;
-  }
-
-  .home__agent-card:nth-child(1) { animation-delay: 0s; }
-  .home__agent-card:nth-child(2) { animation-delay: 0.05s; }
-  .home__agent-card:nth-child(3) { animation-delay: 0.1s; }
-  .home__agent-card:nth-child(4) { animation-delay: 0.15s; }
-  .home__agent-card:nth-child(5) { animation-delay: 0.2s; }
-  .home__agent-card:nth-child(6) { animation-delay: 0.25s; }
-  .home__agent-card:nth-child(7) { animation-delay: 0.3s; }
-
-  .home__agent-avatar {
-    width: 40px;
-    height: 40px;
-    image-rendering: pixelated;
-    flex-shrink: 0;
-  }
-
-  .home__agent-info {
-    display: grid;
-    gap: 2px;
-    min-width: 0;
-  }
-
-  .home__agent-info strong {
-    font-size: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .home__agent-status {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 1px 6px;
-    border-radius: 999px;
-    width: fit-content;
-    color: #fff;
-    letter-spacing: 0.04em;
-  }
-
-  .home__agent-status--idle { background: var(--color-status-idle); }
-  .home__agent-status--building { background: var(--color-status-building); }
-  .home__agent-status--planning { background: var(--color-status-planning); }
-  .home__agent-status--researching { background: var(--color-status-researching); }
-  .home__agent-status--verifying { background: var(--color-status-verifying); }
-  .home__agent-status--blocked { background: var(--color-status-blocked); }
-  .home__agent-status--syncing { background: var(--color-status-syncing); }
-
   /* 반응형 */
   @media (max-width: 768px) {
     .home {
@@ -302,15 +349,15 @@
       margin-top: 40px;
     }
 
+    .home__office-overview {
+      grid-template-columns: 1fr;
+    }
+
     .home__stages {
       grid-template-columns: 1fr;
     }
 
     .home__update-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .home__agent-grid {
       grid-template-columns: 1fr;
     }
 
@@ -332,6 +379,10 @@
 
     .home__stages {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home__office-overview {
+      grid-template-columns: 1fr;
     }
   }
 }

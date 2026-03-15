@@ -16,7 +16,7 @@ const characterSigilByKey: Record<OfficeAgent['characterKey'], string> = {
   spark: 'VLT',
   moon: 'NXT',
   bloom: 'LUX',
-  coral: 'INK',
+  pearl: 'INK',
 }
 
 const characterTitleByKey: Record<OfficeAgent['characterKey'], string> = {
@@ -26,7 +26,7 @@ const characterTitleByKey: Record<OfficeAgent['characterKey'], string> = {
   spark: 'volt builder',
   moon: 'night runner',
   bloom: 'lumen stylist',
-  coral: 'ink weaver',
+  pearl: 'ink weaver',
 }
 
 const spriteIndexByCharacterKey: Record<OfficeAgent['characterKey'], string> = {
@@ -36,7 +36,7 @@ const spriteIndexByCharacterKey: Record<OfficeAgent['characterKey'], string> = {
   spark: '10',
   wave: '13',
   moon: '16',
-  coral: '01',
+  pearl: '02',
 }
 
 type SpriteAsset = { folder: string; fileName: (index: string) => string }

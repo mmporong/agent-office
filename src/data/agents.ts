@@ -104,7 +104,7 @@ export const agents: OfficeAgent[] = [
     lastUpdate: '출시 전 대기',
     priority: 'low',
     energy: 80,
-    characterKey: 'coral',
+    characterKey: 'pearl',
   },
   {
     id: 'devops',
