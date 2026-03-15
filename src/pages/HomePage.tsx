@@ -24,10 +24,10 @@ export function HomePage() {
       {/* Hero */}
       <section className="home__hero">
         <div className="home__hero-text">
-          <p className="home__label">indie game developer</p>
-          <h1>mmporong / LIM Studio</h1>
-          <p className="home__tagline">고양이와 리듬과 코드를 엮는 사람</p>
-          <p className="home__stack">Unity · React · Python · AI</p>
+          <p className="home__label">indie game studio</p>
+          <h1>LIM Studio</h1>
+          <p className="home__tagline">고양이와 리듬과 코드를 엮는 1인 개발 스튜디오</p>
+          <p className="home__stack">Unity · Python · AI Pipeline</p>
         </div>
         <div className="home__hero-mascot">
           <img
@@ -38,7 +38,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 픽셀 사무실 */}
+      {/* 픽셀 사무실 — 풀와이드 */}
       <section className="home__section scroll-reveal">
         <div className="home__section-header">
           <h2>에이전트 오피스</h2>
@@ -46,51 +46,41 @@ export function HomePage() {
             오피스 전체보기 →
           </Link>
         </div>
-        <div className="home__office-overview">
-          <div className="home__office-map-wrap">
-            <OfficeMap
-              agents={officeAgents}
-              selectedAgentId={selectedAgentId}
-              onSelectAgent={setSelectedAgentId}
-            />
+        <div className="home__office-map-wrap">
+          <OfficeMap
+            agents={officeAgents}
+            selectedAgentId={selectedAgentId}
+            onSelectAgent={setSelectedAgentId}
+          />
+        </div>
+        <div className="home__office-bar">
+          <div className="home__office-stats">
+            <span className="home__office-stat">
+              <strong>{officeAgents.length}</strong> 전체 에이전트
+            </span>
+            <span className="home__office-stat">
+              <strong>{activeWorkers}</strong> 현재 작업 중
+            </span>
           </div>
-          <div className="home__office-status">
-            <div className="home__office-stat">
-              <span className="home__office-stat-num">{officeAgents.length}</span>
-              <span>전체 에이전트</span>
-            </div>
-            <div className="home__office-stat">
-              <span className="home__office-stat-num">{activeWorkers}</span>
-              <span>현재 작업 중</span>
-            </div>
-            <div className="home__agent-list">
-              {officeAgents.map((agent) => (
-                <button
-                  key={agent.id}
-                  type="button"
-                  className={`home__agent-row ${agent.id === selectedAgentId ? 'home__agent-row--selected' : ''}`}
-                  onClick={() => setSelectedAgentId(agent.id)}
-                >
-                  <img
-                    src={withBasePath(`catrush-cats/Cat/${
-                      { ember: '01', leaf: '04', bloom: '07', spark: '10', wave: '13', moon: '16', pearl: '02' }[agent.characterKey] ?? '01'
-                    }.png`)}
-                    alt={agent.name}
-                    className="home__agent-thumb"
-                  />
-                  <span className="home__agent-name">{agent.name}</span>
-                  <span className={`home__agent-badge home__agent-badge--${agent.status}`}>
-                    {agent.status === 'idle' ? '대기' :
-                     agent.status === 'building' ? '작업 중' :
-                     agent.status === 'planning' ? '계획 중' :
-                     agent.status === 'researching' ? '조사 중' :
-                     agent.status === 'verifying' ? '검증 중' :
-                     agent.status === 'blocked' ? '막힘' :
-                     agent.status === 'syncing' ? '동기화' : agent.status}
-                  </span>
-                </button>
-              ))}
-            </div>
+          <div className="home__agent-chips">
+            {officeAgents.map((agent) => (
+              <button
+                key={agent.id}
+                type="button"
+                className={`home__agent-chip ${agent.id === selectedAgentId ? 'home__agent-chip--selected' : ''}`}
+                onClick={() => setSelectedAgentId(agent.id)}
+              >
+                <img
+                  src={withBasePath(`catrush-cats/Cat/${
+                    { ember: '01', leaf: '04', bloom: '07', spark: '10', wave: '13', moon: '16', pearl: '02' }[agent.characterKey] ?? '01'
+                  }.png`)}
+                  alt={agent.name}
+                  className="home__agent-chip-img"
+                />
+                <span>{agent.name}</span>
+                <span className={`home__agent-dot home__agent-dot--${agent.status}`} />
+              </button>
+            ))}
           </div>
         </div>
       </section>

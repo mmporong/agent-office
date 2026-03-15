@@ -97,106 +97,92 @@
     text-decoration: underline;
   }
 
-  /* 오피스 개요 */
-  .home__office-overview {
-    display: grid;
-    grid-template-columns: 1fr 260px;
-    gap: 24px;
-  }
-
+  /* 오피스맵 — 풀와이드, 잘림 없음 */
   .home__office-map-wrap {
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid #f1f3f5;
   }
 
-  .home__office-status {
+  .home__office-bar {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .home__office-stats {
+    display: flex;
+    gap: 24px;
   }
 
   .home__office-stat {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 16px;
-    background: #f8f9fa;
-    border-radius: 8px;
     font-size: 14px;
     color: #4e5968;
   }
 
-  .home__office-stat-num {
-    font-size: 24px;
+  .home__office-stat strong {
+    font-size: 20px;
     font-weight: 700;
     color: #3182f6;
+    margin-right: 4px;
   }
 
-  .home__agent-list {
+  .home__agent-chips {
     display: flex;
-    flex-direction: column;
     gap: 4px;
-    flex: 1;
-    overflow-y: auto;
+    flex-wrap: wrap;
   }
 
-  .home__agent-row {
-    display: flex;
+  .home__agent-chip {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    background: transparent;
+    gap: 6px;
+    padding: 4px 10px 4px 4px;
+    border-radius: 999px;
+    border: 1px solid #f1f3f5;
+    background: #fff;
     cursor: pointer;
-    text-align: left;
-    transition: background 0.15s;
-    width: 100%;
+    font-size: 13px;
+    color: #4e5968;
+    transition: background 0.15s, border-color 0.15s;
   }
 
-  .home__agent-row:hover {
+  .home__agent-chip:hover {
     background: #f8f9fa;
   }
 
-  .home__agent-row--selected {
-    background: #f1f3f5;
-  }
-
-  .home__agent-thumb {
-    width: 28px;
-    height: 28px;
-    image-rendering: pixelated;
-    flex-shrink: 0;
-  }
-
-  .home__agent-name {
-    font-size: 13px;
-    font-weight: 600;
+  .home__agent-chip--selected {
+    border-color: #3182f6;
+    background: #f0f6ff;
     color: #191f28;
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .home__agent-badge {
-    font-size: 11px;
     font-weight: 600;
-    padding: 2px 6px;
-    border-radius: 999px;
-    color: #fff;
-    flex-shrink: 0;
-    letter-spacing: 0.04em;
   }
 
-  .home__agent-badge--idle { background: var(--color-status-idle); }
-  .home__agent-badge--building { background: var(--color-status-building); }
-  .home__agent-badge--planning { background: var(--color-status-planning); }
-  .home__agent-badge--researching { background: var(--color-status-researching); }
-  .home__agent-badge--verifying { background: var(--color-status-verifying); }
-  .home__agent-badge--blocked { background: var(--color-status-blocked); }
-  .home__agent-badge--syncing { background: var(--color-status-syncing); }
+  .home__agent-chip-img {
+    width: 22px;
+    height: 22px;
+    image-rendering: pixelated;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .home__agent-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .home__agent-dot--idle { background: var(--color-status-idle); }
+  .home__agent-dot--building { background: var(--color-status-building); }
+  .home__agent-dot--planning { background: var(--color-status-planning); }
+  .home__agent-dot--researching { background: var(--color-status-researching); }
+  .home__agent-dot--verifying { background: var(--color-status-verifying); }
+  .home__agent-dot--blocked { background: var(--color-status-blocked); }
+  .home__agent-dot--syncing { background: var(--color-status-syncing); }
 
   /* 프로젝트 카드 */
   .home__project-card {
@@ -349,8 +335,9 @@
       margin-top: 40px;
     }
 
-    .home__office-overview {
-      grid-template-columns: 1fr;
+    .home__office-bar {
+      flex-direction: column;
+      align-items: start;
     }
 
     .home__stages {
@@ -379,10 +366,6 @@
 
     .home__stages {
       grid-template-columns: repeat(2, 1fr);
-    }
-
-    .home__office-overview {
-      grid-template-columns: 1fr;
     }
   }
 }
