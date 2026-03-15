@@ -99,24 +99,26 @@ export function LogPage() {
         </div>
       </div>
 
-      {/* 카드 그리드 — 카드 + 인라인 상세 */}
+      {/* 카드 리스트 — 1열 아코디언 */}
       <section className="log__section">
-        <div className="log__card-grid">
+        <div className="log__card-list">
           {filtered.map((entry) => {
             const isActive = expandedId === entry.id
             return (
-              <div key={entry.id} className="log__card-wrapper">
+              <div key={entry.id} className={`log__accordion ${isActive ? 'log__accordion--open' : ''}`}>
                 <article
-                  className={`log__card ${isActive ? 'log__card--active' : ''}`}
+                  className="log__card"
                   onClick={() => handleCardClick(entry.id)}
                   role="button"
                   tabIndex={0}
                   aria-expanded={isActive}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(entry.id) }}
                 >
-                  <span className="log__card-tag">리서치</span>
-                  <h3 className="log__card-title">{entry.researchTitle}</h3>
-                  <p className="log__card-desc">{entry.researchSummary}</p>
+                  <div className="log__card-left">
+                    <span className="log__card-tag">리서치</span>
+                    <h3 className="log__card-title">{entry.researchTitle}</h3>
+                    <p className="log__card-desc">{entry.researchSummary}</p>
+                  </div>
                   <div className="log__card-meta">
                     <span>{entry.meetingItems.length}개 회의 노트</span>
                     <span>{entry.date}</span>
@@ -124,7 +126,7 @@ export function LogPage() {
                 </article>
 
                 {isActive && expandedEntry && (
-                  <div className="log__detail-inline" ref={detailRef}>
+                  <div className="log__detail-body" ref={detailRef}>
                     {(categoryFilter === 'all' || categoryFilter === 'research') && (
                       <div className="log__detail">
                         <p>{expandedEntry.researchSummary}</p>

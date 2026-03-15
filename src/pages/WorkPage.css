@@ -39,93 +39,96 @@
     color: #4e5968;
   }
 
-  /* 카드 그리드 */
-  .work__card-grid {
+  /* 사이드바 + 콘텐츠 레이아웃 */
+  .work__layout {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: 240px 1fr;
+    gap: 32px;
     margin-top: 48px;
+    align-items: start;
   }
 
-  /* 카드 래퍼 — 상세 펼침 시 전체 너비 차지 */
-  .work__card-wrapper {
-    display: contents;
-  }
-
-  .work__card-wrapper:has(.work__detail) {
+  .work__sidebar {
     display: flex;
     flex-direction: column;
-    grid-column: 1 / -1;
+    gap: 2px;
+    position: sticky;
+    top: 24px;
   }
 
-  .work__card {
+  .work__nav-item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    text-align: left;
-    padding: 24px;
-    background: #fff;
-    border-radius: 12px;
-    border: 2px solid transparent;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    gap: 2px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    text-align: left;
     font: inherit;
     color: inherit;
+    transition: background 0.15s;
   }
 
-  .work__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  .work__nav-item:hover {
+    background: #f1f3f5;
   }
 
-  .work__card--active {
-    border-color: #3182f6;
+  .work__nav-item--active {
+    background: #e8f3ff;
   }
 
-  .work__card--active:hover {
-    transform: none;
-  }
-
-  .work__card-tag {
-    font-size: 12px;
+  .work__nav-tag {
+    font-size: 11px;
     font-weight: 600;
+    color: #8b95a1;
+  }
+
+  .work__nav-item--active .work__nav-tag {
     color: #3182f6;
   }
 
-  .work__card-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #191f28;
-    margin-top: 8px;
-  }
-
-  .work__card-summary {
+  .work__nav-title {
     font-size: 14px;
-    font-weight: 400;
-    color: #4e5968;
-    margin-top: 8px;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-weight: 500;
+    color: #191f28;
   }
 
-  /* 확장 상세 영역 — 카드 바로 아래 인라인 */
-  .work__detail {
+  /* 콘텐츠 패널 */
+  .work__panel {
     padding: 32px;
     background: #f8f9fa;
-    border-radius: 0 0 12px 12px;
-    border-top: 2px solid #3182f6;
-    margin-top: -2px;
+    border-radius: 12px;
+    min-height: 400px;
   }
 
-  .work__detail > h2 {
+  .work__panel > h2 {
     font-size: 22px;
     font-weight: 700;
     color: #191f28;
     margin-bottom: 24px;
+  }
+
+  /* AI 아키텍처 통합 섹션 */
+  .work__arch-section {
+    padding-top: 32px;
+    margin-top: 32px;
+    border-top: 1px solid #e5e8eb;
+  }
+
+  .work__arch-section:first-child {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: none;
+  }
+
+  .work__arch-section > h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #191f28;
+    margin-bottom: 16px;
   }
 
   /* 섹션 공통 */
@@ -662,12 +665,25 @@
       font-size: 24px;
     }
 
-    .work__card-grid {
+    .work__layout {
       grid-template-columns: 1fr;
       margin-top: 32px;
     }
 
-    .work__detail {
+    .work__sidebar {
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 4px;
+      position: static;
+      padding-bottom: 8px;
+    }
+
+    .work__nav-item {
+      flex-shrink: 0;
+      padding: 8px 12px;
+    }
+
+    .work__panel {
       padding: 24px 16px;
     }
 
@@ -710,8 +726,9 @@
   }
 
   @media (min-width: 769px) and (max-width: 1024px) {
-    .work__card-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .work__layout {
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
     }
 
     .work__kick-grid {
