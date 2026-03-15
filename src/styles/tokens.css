@@ -1,33 +1,38 @@
 @layer tokens {
   :root {
-    /* 배경: 밝은 화이트 톤 */
-    --color-bg-base: #ffffff;
-    --color-bg-surface: #f8f6f3;
-    --color-bg-elevated: #ffffff;
-    --color-bg-recessed: #f0ece7;
+    /* 배경: 따뜻한 다크 */
+    --color-bg-base: #12100e;
+    --color-bg-surface: #1c1814;
+    --color-bg-elevated: #252019;
+    --color-bg-recessed: #0d0b09;
 
-    /* 액센트: Mocha Mousse 계열 */
-    --color-accent-primary: #a47764;
+    /* 글래스 */
+    --color-glass: rgba(37, 32, 25, 0.65);
+    --color-glass-border: rgba(255, 200, 120, 0.12);
+    --color-glass-hover: rgba(45, 38, 28, 0.75);
+
+    /* 액센트: 앰버/골드 */
+    --color-accent-primary: #e8a849;
     --color-accent-secondary: #c4956a;
-    --color-accent-pop: #d4845a;
+    --color-accent-pop: #f59e0b;
 
-    /* 텍스트: 다크 톤 */
-    --color-text-primary: #1a1a1a;
-    --color-text-secondary: #5c5c5c;
-    --color-text-muted: #999999;
+    /* 텍스트: 크림-화이트 */
+    --color-text-primary: #f0ece4;
+    --color-text-secondary: #a89e90;
+    --color-text-muted: #6b6058;
 
-    /* 상태 컬러: 밝은 배경에 맞게 채도 조정 */
-    --color-status-planning: #b8860b;
-    --color-status-researching: #2e8b57;
-    --color-status-building: #7b5ea7;
-    --color-status-verifying: #4682b4;
-    --color-status-blocked: #c0392b;
+    /* 상태 컬러 */
+    --color-status-planning: #d4a017;
+    --color-status-researching: #3cb371;
+    --color-status-building: #9b7ed8;
+    --color-status-verifying: #5a9fd4;
+    --color-status-blocked: #e05a4f;
     --color-status-syncing: #c4956a;
-    --color-status-idle: #999999;
+    --color-status-idle: #7a7068;
 
-    /* 보더: 연한 알파 */
-    --color-border: rgba(0, 0, 0, 0.08);
-    --color-border-subtle: rgba(0, 0, 0, 0.04);
+    /* 보더 */
+    --color-border: rgba(232, 168, 73, 0.15);
+    --color-border-subtle: rgba(232, 168, 73, 0.08);
 
     /* 스페이싱 */
     --space-xs: 4px;
@@ -46,8 +51,14 @@
     --radius-md: 10px;
     --radius-lg: 16px;
 
-    /* 그림자: 부드러운 알파 */
-    --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
-    --shadow-card-sm: 0 1px 4px rgba(0, 0, 0, 0.04);
+    /* 그림자 */
+    --shadow-card: 0 2px 16px rgba(0,0,0,0.4), 0 0 1px rgba(232,168,73,0.1);
+    --shadow-card-sm: 0 1px 6px rgba(0,0,0,0.3);
+    --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.5), 0 0 2px rgba(232,168,73,0.2);
+    --shadow-glow: 0 0 20px rgba(245,158,11,0.15);
+
+    /* 그라데이션 */
+    --gradient-page: linear-gradient(180deg, #1a1510 0%, #12100e 30%, #0f0e12 100%);
+    --gradient-accent: linear-gradient(135deg, #e8a849 0%, #c4956a 100%);
   }
 }

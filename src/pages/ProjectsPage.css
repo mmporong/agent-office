@@ -23,9 +23,11 @@
     align-items: start;
     gap: var(--space-xl);
     padding: var(--space-2xl) var(--space-xl);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-lg);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
   }
 
@@ -63,17 +65,25 @@
     align-items: center;
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: 999px;
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--color-text-secondary);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &:hover {
       border-color: var(--color-accent-primary);
-      box-shadow: var(--shadow-card-sm);
+      box-shadow: var(--shadow-card);
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
+      transition-duration: 0.1s;
     }
   }
 
@@ -85,7 +95,7 @@
     height: 24px;
     border-radius: 50%;
     background: var(--color-accent-primary);
-    color: #ffffff;
+    color: var(--color-bg-base);
     font-size: 0.72rem;
     font-weight: 800;
     flex-shrink: 0;
@@ -113,11 +123,24 @@
 
   .projects__milestone-card {
     padding: var(--space-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
     overflow-wrap: break-word;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+      background: var(--color-glass-hover);
+    }
 
     & p {
       color: var(--color-text-secondary);
@@ -141,7 +164,7 @@
     border-radius: 50%;
     border: 1px solid var(--color-border);
     background: var(--color-accent-primary);
-    color: #ffffff;
+    color: var(--color-bg-base);
     font-weight: 800;
     font-family: var(--font-mono);
   }
@@ -173,11 +196,20 @@
     display: flex;
     gap: var(--space-md);
     padding: var(--space-md);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow-wrap: break-word;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+      background: var(--color-glass-hover);
+    }
 
     & strong {
       display: block;
@@ -193,7 +225,7 @@
 
   .projects__roadmap-item--active {
     border-color: var(--color-accent-pop);
-    box-shadow: 0 0 0 1px var(--color-accent-pop);
+    box-shadow: 0 0 0 1px var(--color-accent-pop), var(--shadow-glow);
   }
 
   .projects__roadmap-index {
@@ -226,10 +258,23 @@
 
   .projects__kick-card {
     padding: var(--space-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+      background: var(--color-glass-hover);
+    }
 
     & p {
       color: var(--color-text-secondary);
@@ -254,11 +299,24 @@
 
   .projects__event-card {
     padding: var(--space-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
     overflow-wrap: break-word;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+      background: var(--color-glass-hover);
+    }
 
     & h3 { margin-top: var(--space-sm); }
 
@@ -307,10 +365,23 @@
 
   .projects__collection-card {
     padding: var(--space-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+      background: var(--color-glass-hover);
+    }
 
     & strong {
       display: block;

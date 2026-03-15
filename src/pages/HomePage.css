@@ -4,6 +4,7 @@
     margin: 0 auto;
     padding: var(--space-xl) var(--space-lg);
     display: grid;
+    grid-template-columns: repeat(12, 1fr);
     gap: var(--space-2xl);
   }
 
@@ -16,21 +17,41 @@
     margin-bottom: var(--space-sm);
   }
 
-  /* 인트로 */
+  /* 인트로 — 전체 폭 + Ambient Glow */
   .home__intro {
+    grid-column: 1 / -1;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-xl);
     padding: var(--space-2xl) var(--space-xl);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-lg);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+
+  .home__intro::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245,158,11,0.08), transparent 70%);
+    pointer-events: none;
   }
 
   .home__title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: var(--space-sm);
   }
 
@@ -55,11 +76,18 @@
     padding: var(--space-xs) var(--space-sm);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &:hover {
       color: var(--color-accent-primary);
       border-color: var(--color-accent-primary);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: var(--shadow-glow);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
+      transition-duration: 0.1s;
     }
   }
 
@@ -72,15 +100,27 @@
     image-rendering: pixelated;
   }
 
-  /* 프로젝트 카드 */
+  /* 프로젝트 카드 — 8칸 */
   .home__project {
+    grid-column: 1 / 9;
     padding: var(--space-xl);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-lg);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
     container-type: inline-size;
     overflow-wrap: break-word;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                background 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      background: var(--color-glass-hover);
+    }
   }
 
   .home__project-header {
@@ -121,18 +161,28 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background: var(--color-bg-surface);
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                border-color 0.2s ease,
+                box-shadow 0.25s ease;
 
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.03);
       border-color: var(--color-accent-primary);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
+      transition-duration: 0.1s;
     }
   }
 
   .home__stage--active {
     border-color: var(--color-accent-pop);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-glow);
   }
 
   .home__stage-index {
@@ -172,8 +222,10 @@
     }
   }
 
-  /* 타임라인 */
+  /* 타임라인 — 4칸 */
   .home__timeline {
+    grid-column: 9 / -1;
+
     & > h2 {
       margin-bottom: var(--space-lg);
     }
@@ -226,11 +278,14 @@
     }
   }
 
-  /* 에이전트 상태 요약 (미니맵 대체) */
+  /* 에이전트 상태 요약 — 전체 폭 */
   .home__agent-summary {
-    border: 1px solid var(--color-border);
+    grid-column: 1 / -1;
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-lg);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
     overflow: hidden;
   }
@@ -251,11 +306,18 @@
     padding: var(--space-xs) var(--space-md);
     border: 1px solid var(--color-border);
     border-radius: 999px;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &:hover {
       border-color: var(--color-accent-primary);
-      background: var(--color-bg-recessed);
+      background: var(--color-bg-elevated);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
+      transition-duration: 0.1s;
     }
   }
 
@@ -274,13 +336,31 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background: var(--color-bg-surface);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+    animation: card-stagger-in 0.4s ease both;
 
     &:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+      background: var(--color-glass-hover);
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(0.99);
     }
   }
+
+  .home__agent-card:nth-child(1) { animation-delay: 0s; }
+  .home__agent-card:nth-child(2) { animation-delay: 0.05s; }
+  .home__agent-card:nth-child(3) { animation-delay: 0.1s; }
+  .home__agent-card:nth-child(4) { animation-delay: 0.15s; }
+  .home__agent-card:nth-child(5) { animation-delay: 0.2s; }
+  .home__agent-card:nth-child(6) { animation-delay: 0.25s; }
+  .home__agent-card:nth-child(7) { animation-delay: 0.3s; }
 
   .home__agent-avatar {
     width: 40px;
@@ -323,6 +403,14 @@
   @media (max-width: 768px) {
     .home {
       padding: var(--space-md);
+      grid-template-columns: 1fr;
+    }
+
+    .home__intro,
+    .home__project,
+    .home__timeline,
+    .home__agent-summary {
+      grid-column: 1 / -1;
     }
 
     .home__intro {

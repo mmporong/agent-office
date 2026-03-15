@@ -3,7 +3,8 @@
     font-family: var(--font-sans);
     line-height: 1.5;
     color: var(--color-text-primary);
-    background: var(--color-bg-base);
+    background: var(--gradient-page);
+    background-attachment: fixed;
     overflow-wrap: break-word;
     word-break: keep-all;
   }

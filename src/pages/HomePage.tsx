@@ -104,7 +104,7 @@ export function HomePage() {
             <article key={agent.id} className="home__agent-card">
               <img
                 src={withBasePath(`catrush-cats/Cat/${
-                  { ember: '01', leaf: '04', bloom: '07', spark: '10', wave: '13', moon: '16', coral: '19' }[agent.characterKey] ?? '01'
+                  { ember: '01', leaf: '04', bloom: '07', spark: '10', wave: '13', moon: '16', coral: '01' }[agent.characterKey] ?? '01'
                 }.png`)}
                 alt={agent.name}
                 className="home__agent-avatar"

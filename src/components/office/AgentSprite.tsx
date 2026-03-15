@@ -36,7 +36,7 @@ const spriteIndexByCharacterKey: Record<OfficeAgent['characterKey'], string> = {
   spark: '10',
   wave: '13',
   moon: '16',
-  coral: '19',
+  coral: '01',
 }
 
 type SpriteAsset = { folder: string; fileName: (index: string) => string }

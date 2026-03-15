@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"npm run deploy 2>&1\",\"timeout\":120000,\"description\":\"Deploy to GitHub Pages\"}",
+  "error": "Exit code 1\nnpm error Missing script: \"deploy\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: C:\\Users\\LIMMM\\AppData\\Local\\npm-cache\\_logs\\2026-03-15T01_53_27_921Z-debug-0.log",
+  "timestamp": "2026-03-15T01:53:28.271Z",
+  "retry_count": 1
+}

@@ -30,9 +30,11 @@
     align-items: start;
     gap: var(--space-md);
     padding: var(--space-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-lg);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
   }
 
@@ -66,21 +68,28 @@
     font-family: var(--font-mono);
     color: var(--color-text-secondary);
     background: var(--color-bg-surface);
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &:hover {
       color: var(--color-accent-primary);
       border-color: var(--color-accent-primary);
-      background: var(--color-bg-recessed);
+      background: rgba(232,168,73,0.1);
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
+      transition-duration: 0.1s;
     }
   }
 
   .chronicle__tag--active {
-    background: var(--color-accent-primary);
-    color: #ffffff;
-    border-color: var(--color-accent-primary);
+    background: var(--gradient-accent);
+    color: var(--color-bg-base);
+    border-color: transparent;
     font-weight: 700;
     transform: scale(1.02);
+    box-shadow: var(--shadow-glow);
   }
 
   /* 페이즈 카드 */
@@ -97,11 +106,24 @@
 
   .chronicle__phase-card {
     padding: var(--space-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
     overflow-wrap: break-word;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+      background: var(--color-glass-hover);
+    }
 
     & > p {
       color: var(--color-text-secondary);
@@ -154,11 +176,22 @@
   }
 
   .chronicle__entry {
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
     overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.25s ease,
+                border-color 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(232,168,73,0.25);
+    }
   }
 
   .chronicle__entry-header {
@@ -174,7 +207,7 @@
     transition: background 0.2s ease;
 
     &:hover {
-      background: var(--color-bg-recessed);
+      background: var(--color-bg-elevated);
     }
 
     & h2 {
@@ -265,9 +298,11 @@
 
   .chronicle__sidebar-panel {
     padding: var(--space-lg);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-glass-border);
     border-radius: var(--radius-md);
-    background: #ffffff;
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-card);
 
     & > h2 {

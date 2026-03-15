@@ -126,13 +126,13 @@ const zoneAnchorById: Record<OfficeZoneId, { left: number; top: number; area: st
 }
 
 const loungeSlotOffsets = [
-  { left: 4, top: 18, behavior: 'rest' },
-  { left: 56, top: 16, behavior: 'roam', variant: 'a' },
-  { left: 112, top: 26, behavior: 'rest' },
-  { left: 164, top: 18, behavior: 'roam', variant: 'b' },
-  { left: 32, top: 74, behavior: 'roam', variant: 'c' },
-  { left: 118, top: 78, behavior: 'rest' },
-  { left: 80, top: 50, behavior: 'roam', variant: 'a' },
+  { left: 0, top: 10, behavior: 'rest' },
+  { left: 88, top: 6, behavior: 'roam', variant: 'a' },
+  { left: 176, top: 14, behavior: 'rest' },
+  { left: 264, top: 8, behavior: 'roam', variant: 'b' },
+  { left: 44, top: 116, behavior: 'roam', variant: 'c' },
+  { left: 132, top: 120, behavior: 'rest' },
+  { left: 220, top: 112, behavior: 'roam', variant: 'a' },
 ] as const
 
 export function OfficeMap({
@@ -191,8 +191,8 @@ export function OfficeMap({
                     const loungeSlot = loungeSlotOffsets[index % loungeSlotOffsets.length]
                     const isLoungeAgent = zone.id === 'lounge' && agent.status === 'idle'
                     const isRoaming = isLoungeAgent && loungeSlot.behavior === 'roam'
-                    const left = isLoungeAgent ? loungeSlot.left : (index % 2) * 42
-                    const top = isLoungeAgent ? loungeSlot.top : Math.floor(index / 2) * 46
+                    const left = isLoungeAgent ? loungeSlot.left : (index % 2) * 88
+                    const top = isLoungeAgent ? loungeSlot.top : Math.floor(index / 2) * 112
 
                     return (
                       <div
