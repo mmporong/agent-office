@@ -118,7 +118,7 @@ const decorativeAssets: Array<ImageAsset | FrameAsset> = [
 const zoneAnchorById: Record<OfficeZoneId, { left: number; top: number; area: string }> = {
   lounge: { left: 48, top: 6, area: 'breakroom' },
   'pm-desk': { left: 5, top: 42, area: 'writing' },
-  'research-lab': { left: 30, top: 28, area: 'researching' },
+  'research-lab': { left: 42, top: 38, area: 'researching' },
   'dev-desk': { left: 5, top: 72, area: 'executing' },
   'qa-zone': { left: 42, top: 72, area: 'checking' },
   'debug-corner': { left: 78, top: 18, area: 'error' },
