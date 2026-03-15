@@ -91,12 +91,13 @@ export function ChroniclePage() {
         </div>
       </section>
 
-      {/* 저널 엔트리 리스트 */}
+      {/* 저널 엔트리 리스트 — scroll-reveal 제거, 항상 보임 */}
       <section className="chronicle__section">
+        <h2>개발 일지</h2>
         {filtered.map((entry) => (
           <article
             key={entry.id}
-            className={`chronicle__entry scroll-reveal ${expandedId === entry.id ? 'chronicle__entry--expanded' : ''}`}
+            className={`chronicle__entry ${expandedId === entry.id ? 'chronicle__entry--expanded' : ''}`}
           >
             <button
               type="button"
@@ -106,7 +107,7 @@ export function ChroniclePage() {
             >
               <div>
                 <time className="chronicle__date">{entry.date}</time>
-                <h2 className="chronicle__entry-title">{entry.researchTitle}</h2>
+                <h3 className="chronicle__entry-title">{entry.researchTitle}</h3>
               </div>
               <div className="chronicle__entry-actions">
                 <span className="chronicle__badge">{entry.meetingItems.length}개 회의 노트</span>
@@ -167,7 +168,7 @@ export function ChroniclePage() {
         ))}
       </section>
 
-      {/* 데이터 보존 원칙 (구 사이드바 → 하단) */}
+      {/* 데이터 보존 원칙 */}
       <section className="chronicle__section chronicle__rules-section scroll-reveal">
         <h2>데이터 보존 원칙</h2>
         <ul className="chronicle__rules">

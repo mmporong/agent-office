@@ -78,7 +78,7 @@
     margin-bottom: 24px;
   }
 
-  /* 페이즈 리스트 */
+  /* 페이즈 리스트 — hover underline 제거 (클릭 불가이므로) */
   .chronicle__phase-list {
     display: grid;
     gap: 0;
@@ -98,10 +98,6 @@
     margin-top: 8px;
     font-size: 14px;
     line-height: 1.6;
-  }
-
-  .chronicle__phase-item:hover h3 {
-    text-decoration: underline;
   }
 
   .chronicle__phase-detail {
@@ -143,7 +139,7 @@
     line-height: 1.5;
   }
 
-  /* 저널 엔트리 */
+  /* 저널 엔트리 — 클릭으로 펼침/접힘 */
   .chronicle__entry {
     border-bottom: 1px solid #f1f3f5;
   }
@@ -159,15 +155,12 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    transition: background 0.15s;
-  }
-
-  .chronicle__entry-header:hover {
-    background: transparent;
+    color: inherit;
+    font: inherit;
   }
 
   .chronicle__entry-header:hover .chronicle__entry-title {
-    text-decoration: underline;
+    color: #3182f6;
   }
 
   .chronicle__date {
@@ -176,10 +169,15 @@
   }
 
   .chronicle__entry-title {
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     color: #191f28;
     margin-top: 4px;
+    transition: color 0.15s;
+  }
+
+  .chronicle__entry--expanded .chronicle__entry-title {
+    color: #3182f6;
   }
 
   .chronicle__entry-actions {
@@ -209,13 +207,19 @@
     transform: rotate(180deg);
   }
 
+  /* 펼쳐진 본문 — 명시적 색상 지정 */
   .chronicle__entry-body {
     padding: 0 0 32px;
     display: grid;
     gap: 24px;
+    color: #191f28;
+    background: #fff;
   }
 
   .chronicle__detail h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #191f28;
     margin-bottom: 8px;
   }
 
@@ -236,6 +240,11 @@
     border-radius: 8px;
     background: #f8f9fa;
     overflow-wrap: break-word;
+    color: #191f28;
+  }
+
+  .chronicle__items li strong {
+    color: #191f28;
   }
 
   .chronicle__items li p {
@@ -245,7 +254,7 @@
     line-height: 1.5;
   }
 
-  /* 데이터 보존 원칙 (구 사이드바) */
+  /* 데이터 보존 원칙 */
   .chronicle__rules-section {
     padding: 48px 0 0;
     border-top: 1px solid #f1f3f5;
@@ -260,6 +269,7 @@
   .chronicle__rules li strong {
     display: block;
     font-size: 14px;
+    color: #191f28;
     margin-bottom: 4px;
   }
 
