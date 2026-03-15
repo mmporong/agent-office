@@ -47,6 +47,17 @@
     margin-top: 48px;
   }
 
+  /* 카드 래퍼 — 상세 펼침 시 전체 너비 차지 */
+  .work__card-wrapper {
+    display: contents;
+  }
+
+  .work__card-wrapper:has(.work__detail) {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1 / -1;
+  }
+
   .work__card {
     display: flex;
     flex-direction: column;
@@ -70,6 +81,10 @@
 
   .work__card--active {
     border-color: #3182f6;
+  }
+
+  .work__card--active:hover {
+    transform: none;
   }
 
   .work__card-tag {
@@ -97,14 +112,16 @@
     overflow: hidden;
   }
 
-  /* 확장 상세 영역 */
+  /* 확장 상세 영역 — 카드 바로 아래 인라인 */
   .work__detail {
-    margin-top: 32px;
-    padding: 40px 0;
-    border-top: 2px solid #e5e8eb;
+    padding: 32px;
+    background: #f8f9fa;
+    border-radius: 0 0 12px 12px;
+    border-top: 2px solid #3182f6;
+    margin-top: -2px;
   }
 
-  .work__detail-body > h2 {
+  .work__detail > h2 {
     font-size: 22px;
     font-weight: 700;
     color: #191f28;
@@ -119,12 +136,6 @@
     margin-bottom: 24px;
   }
 
-  .work__arch-role {
-    color: #8b95a1;
-    font-size: 14px;
-    margin-top: 4px;
-  }
-
   /* 로드맵 */
   .work__roadmap-list {
     display: grid;
@@ -135,7 +146,7 @@
     display: flex;
     gap: 12px;
     padding: 20px 0;
-    border-bottom: 1px solid #f1f3f5;
+    border-bottom: 1px solid #e5e8eb;
     overflow-wrap: break-word;
   }
 
@@ -181,15 +192,11 @@
 
   .work__milestone-item {
     padding: 24px 0;
-    border-bottom: 1px solid #f1f3f5;
+    border-bottom: 1px solid #e5e8eb;
   }
 
   .work__milestone-item:first-child {
     padding-top: 0;
-  }
-
-  .work__milestone-item:hover h3 {
-    text-decoration: underline;
   }
 
   .work__milestone-header {
@@ -229,7 +236,7 @@
   .work__deliverable {
     padding: 4px 10px;
     border-radius: 999px;
-    background: #f1f3f5;
+    background: #fff;
     font-size: 12px;
     color: #4e5968;
   }
@@ -238,17 +245,13 @@
   .work__kick-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 16px;
   }
 
   .work__kick-card {
-    padding: 24px;
-    background: #f8f9fa;
+    padding: 20px;
+    background: #fff;
     border-radius: 12px;
-  }
-
-  .work__kick-card:hover h3 {
-    text-decoration: underline;
   }
 
   .work__kick-card p {
@@ -266,8 +269,8 @@
   }
 
   .work__problem-card {
-    padding: 24px;
-    background: #f8f9fa;
+    padding: 20px;
+    background: #fff;
     border-radius: 12px;
   }
 
@@ -299,9 +302,9 @@
 
   /* 전략 */
   .work__strategy {
-    margin-top: 40px;
+    margin-top: 24px;
     padding: 32px;
-    background: #f8f9fa;
+    background: #fff;
     border-radius: 12px;
   }
 
@@ -349,7 +352,7 @@
     display: flex;
     flex-direction: column;
     padding: 12px 16px;
-    background: #fff;
+    background: #f1f3f5;
     border-radius: 8px;
     min-width: 120px;
   }
@@ -376,7 +379,7 @@
 
   .work__rule {
     padding: 14px 16px;
-    border-bottom: 1px solid #f1f3f5;
+    border-bottom: 1px solid #e5e8eb;
     font-size: 14px;
     color: #191f28;
     font-family: 'Fira Code', 'Consolas', monospace;
@@ -408,7 +411,7 @@
     align-items: center;
     gap: 4px;
     padding: 20px 32px;
-    background: #f8f9fa;
+    background: #fff;
     border-radius: 12px;
     border: 2px solid #e5e8eb;
     width: 100%;
@@ -442,11 +445,7 @@
     font-weight: 600;
   }
 
-  /* 기술 상세 */
-  .work__collapse-body {
-    margin-top: 0;
-  }
-
+  /* 기술 상세 서브 섹션 */
   .work__sub-section {
     margin-top: 32px;
   }
@@ -466,18 +465,14 @@
   .work__event-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 16px;
   }
 
   .work__event-card {
-    padding: 24px;
-    background: #f8f9fa;
+    padding: 20px;
+    background: #fff;
     border-radius: 12px;
     overflow-wrap: break-word;
-  }
-
-  .work__event-card:hover h4 {
-    text-decoration: underline;
   }
 
   .work__event-card h4 {
@@ -507,7 +502,7 @@
     border-radius: 999px;
     font-size: 12px;
     font-weight: 600;
-    background: #f1f3f5;
+    background: #e5e8eb;
     color: #8b95a1;
     letter-spacing: 0.04em;
   }
@@ -516,12 +511,12 @@
   .work__collection-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 16px;
   }
 
   .work__collection-card {
-    padding: 24px;
-    background: #f8f9fa;
+    padding: 20px;
+    background: #fff;
     border-radius: 12px;
     text-align: center;
   }
@@ -552,12 +547,12 @@
   .work__case-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 16px;
   }
 
   .work__case-card {
     padding: 24px;
-    background: #f8f9fa;
+    background: #fff;
     border-radius: 12px;
   }
 
@@ -596,7 +591,7 @@
 
   .work__result-item {
     padding: 20px 0;
-    border-bottom: 1px solid #f1f3f5;
+    border-bottom: 1px solid #e5e8eb;
   }
 
   .work__result-item:first-child {
@@ -619,7 +614,7 @@
   .work__quote {
     margin: 0;
     padding: 24px 32px;
-    background: #f8f9fa;
+    background: #fff;
     border-left: 4px solid #3182f6;
     border-radius: 0 12px 12px 0;
     font-size: 16px;
@@ -637,7 +632,7 @@
 
   .work__insight-item {
     padding: 20px;
-    background: #f8f9fa;
+    background: #fff;
     border-radius: 12px;
   }
 
@@ -673,7 +668,7 @@
     }
 
     .work__detail {
-      padding: 28px 0;
+      padding: 24px 16px;
     }
 
     .work__kick-grid {

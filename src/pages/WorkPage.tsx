@@ -13,8 +13,7 @@ import {
   results,
   tierLayers,
 } from '../data/aiArchitecture'
-import { useScrollReveal } from '../hooks/useScrollReveal'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './WorkPage.css'
 
 const kicks = [
@@ -51,7 +50,7 @@ function SectionDetail({ id }: { id: string }) {
   switch (id) {
     case 'roadmap':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>개발 로드맵</h2>
           <div className="work__roadmap-list">
             {shellStages.map((stage, i) => (
@@ -67,12 +66,12 @@ function SectionDetail({ id }: { id: string }) {
               </div>
             ))}
           </div>
-        </div>
+        </>
       )
 
     case 'sprint':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>스프린트 진행</h2>
           <div className="work__milestone-list">
             {milestones.map((ms, i) => (
@@ -90,12 +89,12 @@ function SectionDetail({ id }: { id: string }) {
               </article>
             ))}
           </div>
-        </div>
+        </>
       )
 
     case 'kicks':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>차별화 킥 5선</h2>
           <div className="work__kick-grid">
             {kicks.map((kick) => (
@@ -105,12 +104,12 @@ function SectionDetail({ id }: { id: string }) {
               </article>
             ))}
           </div>
-        </div>
+        </>
       )
 
     case 'problems':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>문제 정의 — AI 코딩 도구의 Unity 한계</h2>
           <p className="work__section-desc">
             AI 코딩 도구를 Unity 개발에 적용하면서 반복적으로 마주친 5가지 문제.
@@ -125,12 +124,12 @@ function SectionDetail({ id }: { id: string }) {
               </article>
             ))}
           </div>
-        </div>
+        </>
       )
 
     case 'strategies':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>해결 — 4가지 AI 최적화 전략</h2>
           {strategies.map((s) => (
             <div key={s.id} className="work__strategy">
@@ -149,12 +148,12 @@ function SectionDetail({ id }: { id: string }) {
               </div>
             </div>
           ))}
-        </div>
+        </>
       )
 
     case 'antipatterns':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>Anti-Pattern 규칙 10개</h2>
           <p className="work__section-desc">AI hallucination 차단을 위한 "DO NOT" 규칙</p>
           <ul className="work__rules">
@@ -162,12 +161,12 @@ function SectionDetail({ id }: { id: string }) {
               <li key={rule} className="work__rule">{rule}</li>
             ))}
           </ul>
-        </div>
+        </>
       )
 
     case 'tiers':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>Assembly Definition 4-tier 구조</h2>
           <div className="work__tier-diagram">
             {tierLayers.map((layer, i) => (
@@ -183,46 +182,44 @@ function SectionDetail({ id }: { id: string }) {
               </div>
             ))}
           </div>
-        </div>
+        </>
       )
 
     case 'techdetail':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>기술 상세</h2>
-          <div className="work__collapse-body">
-            <div className="work__sub-section">
-              <h3>이벤트 시스템 (Bridge Contracts)</h3>
-              <div className="work__event-grid">
-                {bridgeContracts.map((c) => (
-                  <article key={c.name} className="work__event-card">
-                    <span className="work__event-dir">{c.direction}</span>
-                    <h4>{c.name}</h4>
-                    <code>{c.payload}</code>
-                    <p>{c.purpose}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="work__sub-section">
-              <h3>고양이 수집</h3>
-              <div className="work__collection-grid">
-                {collectionPreview.map((cat) => (
-                  <article key={cat.tier} className="work__collection-card">
-                    <span className="work__collection-tier">{cat.tier}</span>
-                    <strong>{cat.name}</strong>
-                    <p>{cat.mood}</p>
-                  </article>
-                ))}
-              </div>
+          <div className="work__sub-section">
+            <h3>이벤트 시스템 (Bridge Contracts)</h3>
+            <div className="work__event-grid">
+              {bridgeContracts.map((c) => (
+                <article key={c.name} className="work__event-card">
+                  <span className="work__event-dir">{c.direction}</span>
+                  <h4>{c.name}</h4>
+                  <code>{c.payload}</code>
+                  <p>{c.purpose}</p>
+                </article>
+              ))}
             </div>
           </div>
-        </div>
+          <div className="work__sub-section">
+            <h3>고양이 수집</h3>
+            <div className="work__collection-grid">
+              {collectionPreview.map((cat) => (
+                <article key={cat.tier} className="work__collection-card">
+                  <span className="work__collection-tier">{cat.tier}</span>
+                  <strong>{cat.name}</strong>
+                  <p>{cat.mood}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </>
       )
 
     case 'cases':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>실제 적용 — 2개 프로젝트</h2>
           <div className="work__case-grid">
             {caseStudies.map((cs) => (
@@ -237,12 +234,12 @@ function SectionDetail({ id }: { id: string }) {
               </article>
             ))}
           </div>
-        </div>
+        </>
       )
 
     case 'results':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>결과 — 정량적 효과</h2>
           <div className="work__result-list">
             {results.map((r) => (
@@ -252,12 +249,12 @@ function SectionDetail({ id }: { id: string }) {
               </div>
             ))}
           </div>
-        </div>
+        </>
       )
 
     case 'insights':
       return (
-        <div className="work__detail-body">
+        <>
           <h2>핵심 인사이트</h2>
           <blockquote className="work__quote">
             이 작업의 본질은 "좋은 코드를 짜는 것"이 아니라,
@@ -281,7 +278,7 @@ function SectionDetail({ id }: { id: string }) {
               <p>AI가 서비스를 찾을 때 항상 동일한 패턴을 따르게 하는 단일 접근점</p>
             </div>
           </div>
-        </div>
+        </>
       )
 
     default:
@@ -290,15 +287,23 @@ function SectionDetail({ id }: { id: string }) {
 }
 
 export function WorkPage() {
-  const containerRef = useScrollReveal()
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
+  const detailRef = useRef<HTMLDivElement | null>(null)
 
   function handleCardClick(id: string) {
     setExpandedSection((prev) => (prev === id ? null : id))
   }
 
+  useEffect(() => {
+    if (expandedSection && detailRef.current) {
+      requestAnimationFrame(() => {
+        detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      })
+    }
+  }, [expandedSection])
+
   return (
-    <div className="work page-enter" ref={containerRef}>
+    <div className="work page-enter">
       {/* 프로젝트 Hero */}
       <header className="work__hero">
         <h1>{projectSummary.name}</h1>
@@ -312,32 +317,32 @@ export function WorkPage() {
         </div>
       </header>
 
-      {/* 카드 그리드 */}
+      {/* 카드 그리드 — 카드 + 인라인 상세 */}
       <div className="work__card-grid">
         {workSections.map((section) => {
           const isActive = expandedSection === section.id
           return (
-            <button
-              key={section.id}
-              type="button"
-              className={`work__card ${isActive ? 'work__card--active' : ''}`}
-              onClick={() => handleCardClick(section.id)}
-              aria-expanded={isActive}
-            >
-              <span className="work__card-tag">{section.tag}</span>
-              <h3 className="work__card-title">{section.title}</h3>
-              <p className="work__card-summary">{section.summary}</p>
-            </button>
+            <div key={section.id} className="work__card-wrapper">
+              <button
+                type="button"
+                className={`work__card ${isActive ? 'work__card--active' : ''}`}
+                onClick={() => handleCardClick(section.id)}
+                aria-expanded={isActive}
+              >
+                <span className="work__card-tag">{section.tag}</span>
+                <h3 className="work__card-title">{section.title}</h3>
+                <p className="work__card-summary">{section.summary}</p>
+              </button>
+
+              {isActive && (
+                <div className="work__detail" ref={detailRef}>
+                  <SectionDetail id={section.id} />
+                </div>
+              )}
+            </div>
           )
         })}
       </div>
-
-      {/* 확장 상세 영역 */}
-      {expandedSection && (
-        <div className="work__detail">
-          <SectionDetail id={expandedSection} />
-        </div>
-      )}
     </div>
   )
 }

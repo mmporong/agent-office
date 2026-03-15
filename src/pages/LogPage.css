@@ -124,6 +124,17 @@
     gap: 24px;
   }
 
+  /* 카드 래퍼 — 상세 펼침 시 전체 너비 */
+  .log__card-wrapper {
+    display: contents;
+  }
+
+  .log__card-wrapper:has(.log__detail-inline) {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1 / -1;
+  }
+
   .log__card {
     background: #fff;
     border-radius: 12px;
@@ -142,6 +153,10 @@
 
   .log__card--active {
     border-color: #3182f6;
+  }
+
+  .log__card--active:hover {
+    transform: none;
   }
 
   .log__card-tag {
@@ -183,18 +198,15 @@
     color: #8b95a1;
   }
 
-  /* 확장 상세 영역 */
-  .log__expanded-detail {
-    margin-top: 32px;
-    padding-top: 32px;
-    border-top: 1px solid #e5e8eb;
-  }
-
-  .log__entry-body {
+  /* 인라인 상세 영역 — 카드 바로 아래 */
+  .log__detail-inline {
+    padding: 32px;
+    background: #f8f9fa;
+    border-radius: 0 0 12px 12px;
+    border-top: 2px solid #3182f6;
+    margin-top: -2px;
     display: grid;
     gap: 24px;
-    color: #191f28;
-    background: #fff;
   }
 
   .log__detail h3 {
@@ -219,7 +231,7 @@
   .log__items li {
     padding: 12px 16px;
     border-radius: 8px;
-    background: #f8f9fa;
+    background: #fff;
     overflow-wrap: break-word;
     color: #191f28;
   }
@@ -266,6 +278,10 @@
 
     .log__card-grid {
       grid-template-columns: 1fr;
+    }
+
+    .log__detail-inline {
+      padding: 24px 16px;
     }
   }
 }

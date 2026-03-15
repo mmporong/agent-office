@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { chroniclePhases } from '../data/chronicle'
 import { useOffice } from '../contexts/OfficeContext'
-import { useScrollReveal } from '../hooks/useScrollReveal'
 import './LogPage.css'
 
 type CategoryFilter = 'all' | 'research' | 'meeting' | 'decision'
@@ -13,8 +12,6 @@ export function LogPage() {
   const entryParam = searchParams.get('entry')
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all')
   const [expandedId, setExpandedId] = useState<string | null>(entryParam)
-  const containerRef = useScrollReveal()
-  const entryRefs = useRef<Record<string, HTMLElement | null>>({})
   const detailRef = useRef<HTMLDivElement | null>(null)
 
   const uniqueMonths = useMemo(() => {
@@ -39,12 +36,6 @@ export function LogPage() {
   useEffect(() => {
     if (entryParam) {
       setExpandedId(entryParam)
-      requestAnimationFrame(() => {
-        const el = entryRefs.current[entryParam]
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-      })
     }
   }, [entryParam])
 
@@ -61,7 +52,7 @@ export function LogPage() {
   }
 
   return (
-    <div className="log page-enter" ref={containerRef}>
+    <div className="log page-enter">
       {/* 헤더 */}
       <header className="log__header">
         <h1>Log</h1>
@@ -69,7 +60,7 @@ export function LogPage() {
       </header>
 
       {/* 타임라인 스트립 */}
-      <div className="log__timeline-strip scroll-reveal">
+      <div className="log__timeline-strip">
         {chroniclePhases.map((phase, i) => (
           <div key={phase.title} className="log__timeline-item">
             <span className="log__timeline-num">{i + 1}</span>
@@ -108,80 +99,80 @@ export function LogPage() {
         </div>
       </div>
 
-      {/* 카드 그리드 */}
+      {/* 카드 그리드 — 카드 + 인라인 상세 */}
       <section className="log__section">
         <div className="log__card-grid">
-          {filtered.map((entry) => (
-            <article
-              key={entry.id}
-              ref={(el) => { entryRefs.current[entry.id] = el }}
-              className={`log__card ${expandedId === entry.id ? 'log__card--active' : ''}`}
-              onClick={() => handleCardClick(entry.id)}
-              role="button"
-              tabIndex={0}
-              aria-expanded={expandedId === entry.id}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(entry.id) }}
-            >
-              <span className="log__card-tag">리서치</span>
-              <h3 className="log__card-title">{entry.researchTitle}</h3>
-              <p className="log__card-desc">{entry.researchSummary}</p>
-              <div className="log__card-meta">
-                <span>{entry.meetingItems.length}개 회의 노트</span>
-                <span>{entry.date}</span>
+          {filtered.map((entry) => {
+            const isActive = expandedId === entry.id
+            return (
+              <div key={entry.id} className="log__card-wrapper">
+                <article
+                  className={`log__card ${isActive ? 'log__card--active' : ''}`}
+                  onClick={() => handleCardClick(entry.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isActive}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(entry.id) }}
+                >
+                  <span className="log__card-tag">리서치</span>
+                  <h3 className="log__card-title">{entry.researchTitle}</h3>
+                  <p className="log__card-desc">{entry.researchSummary}</p>
+                  <div className="log__card-meta">
+                    <span>{entry.meetingItems.length}개 회의 노트</span>
+                    <span>{entry.date}</span>
+                  </div>
+                </article>
+
+                {isActive && expandedEntry && (
+                  <div className="log__detail-inline" ref={detailRef}>
+                    {(categoryFilter === 'all' || categoryFilter === 'research') && (
+                      <div className="log__detail">
+                        <p>{expandedEntry.researchSummary}</p>
+                        <ul className="log__items">
+                          {expandedEntry.researchItems.map((item) => (
+                            <li key={item.title}>
+                              <strong>{item.title}</strong>
+                              <p>{item.description}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {(categoryFilter === 'all' || categoryFilter === 'meeting') && (
+                      <div className="log__detail">
+                        <h3>{expandedEntry.meetingTitle}</h3>
+                        <p>{expandedEntry.meetingSummary}</p>
+                        <ul className="log__items">
+                          {expandedEntry.meetingItems.map((item) => (
+                            <li key={`${expandedEntry.date}-${item.speaker}`}>
+                              <strong>{item.speaker}</strong>
+                              <p>{item.note}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {(categoryFilter === 'all' || categoryFilter === 'decision') && (
+                      <div className="log__detail">
+                        <h3>회의 결정</h3>
+                        <ul className="log__items">
+                          {expandedEntry.decisions.map((item) => (
+                            <li key={item.title}>
+                              <strong>{item.title}</strong>
+                              <p>{item.description}</p>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
-            </article>
-          ))}
+            )
+          })}
         </div>
-
-        {/* 확장 상세 영역 */}
-        {expandedEntry && (
-          <div className="log__expanded-detail" ref={detailRef}>
-            <div className="log__entry-body">
-              {(categoryFilter === 'all' || categoryFilter === 'research') && (
-                <div className="log__detail">
-                  <p>{expandedEntry.researchSummary}</p>
-                  <ul className="log__items">
-                    {expandedEntry.researchItems.map((item) => (
-                      <li key={item.title}>
-                        <strong>{item.title}</strong>
-                        <p>{item.description}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {(categoryFilter === 'all' || categoryFilter === 'meeting') && (
-                <div className="log__detail">
-                  <h3>{expandedEntry.meetingTitle}</h3>
-                  <p>{expandedEntry.meetingSummary}</p>
-                  <ul className="log__items">
-                    {expandedEntry.meetingItems.map((item) => (
-                      <li key={`${expandedEntry.date}-${item.speaker}`}>
-                        <strong>{item.speaker}</strong>
-                        <p>{item.note}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {(categoryFilter === 'all' || categoryFilter === 'decision') && (
-                <div className="log__detail">
-                  <h3>회의 결정</h3>
-                  <ul className="log__items">
-                    {expandedEntry.decisions.map((item) => (
-                      <li key={item.title}>
-                        <strong>{item.title}</strong>
-                        <p>{item.description}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
       </section>
     </div>
   )
