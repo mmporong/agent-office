@@ -43,6 +43,119 @@ export const journalMemoryRules: JournalItem[] = [
 
 export const seedJournalEntries: JournalEntry[] = [
   {
+    id: '2026-07-03T04:00:00-daily-standup',
+    date: '2026-07-03',
+    researchTitle:
+      '🟢 3일 연속 같은 진단이 반복되는 사이, 시장이 먼저 움직였다 — 리듬게임 1위 Beatstar가 10/31 서버 영구종료를 예고하며 시장 공백이 열린 날: 게임측 근본(NumLink 폰트 붕괴·MeowBeat dspTime)은 오늘도 커밋 0건으로 사용자 세션을 기다리는데, Game Designer가 물어온 외부 뉴스가 회의의 축을 바꿨다 — 누적 6천만 다운로드·첫해 매출 $73M을 기록한 모바일 리듬게임 1위 Beatstar가 2025-10-31 서버를 영구 종료하고, 운영사 Space Ape의 팀은 듀오링고 인수로 해체돼 후속작도 없다. 리듬게임 유저 수천만 명이 갈 곳을 잃는 시장 공백이 MeowBeat 출시 시점과 겹친다. 안쪽에서는 Orchestrator·QA가 이전 액션아이템 3건 전부 미완료를 3중 실측(126행 deltaTime 잔존·폰트 SDF 7종 수정상태·ApplyVolume 부재)으로 확정했고, Developer는 Input System 1.15.0과 Unity 6000.3의 Android safeArea 픽스(UUM-119964)를, Art는 리절트 화면 "단계별 리빌+탭 스킵" 표준을 가져왔다. 자율 칼끝은 deploy-pages build/deploy 잡에 timeout-minutes를 얹으며 7일 연속 전진',
+    researchSummary:
+      '제79회 리서치(금요일·D+40·7/02 다음 날). 7명 전원 보고. **오늘의 구조는 "안은 3일째 같은 진단, 밖은 시장 재편 — 근본 미착수가 반복 확정되는 동안 경쟁 지형이 MeowBeat에 유리하게 열렸다"다.** Orchestrator는 세 레포를 실측했다 — 신규 커밋은 agent-office 844233a(7/2 저널+CI 가시화) 1건뿐, NumLink·MeowBeat는 오늘도 0건이고 미커밋은 NumLink 41파일·MeowBeat 37파일로 늘었다. 이전 액션아이템 3건은 전부 미완료다: NoteSpawner.cs 126행 elapsedTime += Time.deltaTime 잔존(dspTime은 탐지기만 커밋된 상태), NumLink 폰트 SDF .asset 7종 여전히 수정상태, SongManager에 ApplyVolume 메서드 부재. Game Designer는 회의의 축을 바꾼 외부 뉴스를 가져왔다 — 모바일 리듬게임 1위 Beatstar(누적 6천만 다운로드·첫해 매출 $73M·권리자 배분 $16M)가 2025-10-31 서버 영구종료를 예고했고, 운영사 Space Ape 팀은 듀오링고 인수로 해체돼 후속작이 없다. 리듬게임 시장에 수천만 유저 규모의 공백이 열리는 것이며, 한국 퍼즐 유저 이탈요인 1·2위는 지루함 42%·반복성 33%(FB게이밍 1.3만 명 조사)로 콘텐츠 회전이 관건임도 확인했다. Developer는 코드와 웹 양쪽을 봤다 — NumLink Revive 신설(+15/-9)은 진짜 픽스지만 플래그식 부활이라 상태머신 부재 부채가 남고, Input System 1.15.0이 출시돼 Android 회전벡터 센서·리바인딩 억제 API가 추가됐으며(6.0/6.2/6.3 대응), Unity 6000.3 패치에 Android 11+ safeArea/컷아웃 값 오류 픽스(UUM-119964)가 실렸다 — 노치 대응 UI를 쓰는 두 게임 모두 관련. QA는 미해결 3건을 집계했다 — ① NumLink 폰트 SDF 붕괴 미커밋(Maplestory Bold 2048→1·폰트 7종+삭제 4파일 대기) ② MeowBeat dspTime(qa_static exit 2로 NoteSpawner.cs:126 검출 지속) ③ volume 4중 경로 회귀. NumLink는 Tools/unity_validate.py·known_bugs.json 모두 부재로 검증 무방비이고, Feedme known_bugs.json 7패턴 중 실검출 error는 1건(dspTime)이다. Content는 스토어 운영 채널을 가져왔다 — iOS 인앱이벤트(IAE) 활성 시 제품페이지 전환율 평균 +17%, 구글플레이 프로모션 콘텐츠 운영 시 28일 활성유저 +2%·매출 +4%(둘 다 비용 0의 스토어 내 노출면), 유튜브 쇼츠 참여율 5.91%로 숏폼 1위·Z세대 53%가 쇼츠 보고 구매 경험. DevOps는 CI 이상 없음(최근 런 5건 전원 success·Pages 정상 라이브)을 확인하고 zizmor+actionlint 워크플로우 정적 감사를 제안했으며, 회의 중 deploy-pages build/deploy 잡에 timeout-minutes: 10을 자율 추가했다(기본 360분 → 행 걸리면 러너 낭비 봉합·자율 칼끝 7일 연속). Art는 리절트 화면 트렌드를 가져왔다 — 2026 표준은 "단계별 리빌(staged reveal)" 연출이되 스킵 불가 연출은 이탈을 유발하므로 탭 스킵이 필수 정설이고, 네온 시안+바이올렛 그라데이션이 신종 AI 클리셰로 회피 대상이다. 메타: 7/01 "우선순위 역전 발견" → 7/02 "폰트 붕괴 지뢰·겉보기 진행 확정" → 7/03 "3일째 근본 미착수 반복 확정 + Beatstar 공백이라는 시장 기회 발견". 안쪽 진단은 더 이상 새로울 게 없을 만큼 선명하고, 이제 바깥 기회(Beatstar 공백·10월까지 시한)가 그 진단에 마감 압력을 얹는다.',
+    researchItems: [
+      {
+        title:
+          '🎯 Orchestrator — 세 레포 실측: 신규 커밋 agent-office 844233a 1건뿐·NumLink·MeowBeat 오늘도 0건 / 미커밋 NumLink 41파일·MeowBeat 37파일 / 이전 액션아이템 3건 전부 미완료 3중 실측(126행 deltaTime 잔존·폰트 SDF 7종 수정상태·SongManager ApplyVolume 부재)',
+        description:
+          '**🎯 이전 액션 실측(7/03)**: ① MeowBeat dspTime 코어픽스 = **미완·이월 3일째**(NoteSpawner.cs 126행 elapsedTime += Time.deltaTime 잔존·dspTime은 탐지기 921e0cf만 커밋된 상태). ② NumLink 붕괴 폰트 복구 = **미완·이월**(폰트 SDF .asset 7종 여전히 수정상태로 작업트리에 대기). ③ volume 4중 경로 통합 = **미완·이월**(SongManager에 ApplyVolume 메서드 부재 grep 확인). **측정값**: 신규 커밋은 agent-office 844233a(7/2 저널+CI 헬스체크 가시화) 1건뿐이고 NumLink·MeowBeat는 오늘도 0건. 미커밋은 NumLink 41파일·MeowBeat 37파일로 어제(36·37)보다 NumLink 쪽이 5파일 늘었다. MeowBeat HEAD는 feature/song-ownership-migration 브랜치이고 최근 커밋들은 farm 기능(먹이 애니메이션)·QA 툴 정비로, P0 코어와 무관한 작업이 계속 쌓이는 패턴이 유지 중. **오늘 결정 제안**: MeowBeat NoteSpawner.cs 126행 dspTime 앵커링 수정 및 커밋(P0)을 오늘 단일 태스크로 — run_regression.py 검증 포함. (git log/status·grep 실측)',
+      },
+      {
+        title:
+          '🎮 Game Designer — 🔑 시장 공백 발견: 모바일 리듬게임 1위 Beatstar(누적 6천만 DL·첫해 $73M) 2025-10-31 서버 영구종료 예고 / 운영사 Space Ape 팀은 듀오링고 인수로 해체·후속작 없음 → 수천만 유저 규모 공백이 MeowBeat 출시 시점과 겹침 / 한국 퍼즐 이탈요인 지루함 42%·반복성 33%(FB게이밍 1.3만명 조사)',
+        description:
+          '**🎮 🔑 오늘의 발견(Beatstar 공백)**: 모바일 리듬게임 부동의 1위 Beatstar가 2025-10-31 서버를 영구 종료한다(Country Star 동반 종료). 누적 6천만 다운로드·첫해 매출 $73M(권리자 배분 $16M)을 기록한 장르 대표작이고, 운영사 Space Ape의 핵심 팀은 듀오링고 인수로 해체돼 후속작 계획이 없다. 라이선스 음원 기반 비즈니스의 종말이 역설적으로 AI 생성곡 기반(Lyria 파이프라인·라이선스 비용 0) MeowBeat에 구조적 기회 — 갈 곳 잃은 리듬게임 유저를 받아낼 대체재가 시장에 없다. **🎮 퍼즐 이탈요인**: 한국 퍼즐 유저 이탈 1·2위는 지루함 42%·반복성 33%(페이스북 게이밍 1.3만 명 조사) — NumLink는 레벨 다양성·기믹 회전이 리텐션의 관건. **오늘 결정 제안(P2·GDD)**: MeowBeat GDD에 "Beatstar 공백 흡수 전략" 섹션 신설 — Beatstar의 곡 해금 구조·판정 UX를 벤치마크 분석하고 AI 생성곡 기반 차별점 3개(라이선스 무제한 곡 회전·개인화 난이도·운영 종속성 없음)를 정의. 검증 노트: 원문 대조에서 확인 안 된 수치(MoldStud 재도전 7% 등)는 폐기하고 3건 모두 원문 확인 완료. Sources: PocketGamer.biz·Water & Music·Udonis.',
+      },
+      {
+        title:
+          '💻 Developer — Input System 1.15.0 출시(Android 회전벡터 센서·리바인딩 억제 API·6.0/6.2/6.3 대응) / Unity 6000.3 패치에 Android 11+ safeArea/컷아웃 값 오류 픽스(UUM-119964) / NumLink Revive 신설(+15/-9)은 진짜 픽스나 플래그식 부활이라 상태머신 부재 부채',
+        description:
+          '**💻 코드 분석**: NumLink e536009 Revive 신설(+15/-9)과 MeowBeat dspTime 회귀가드(+49줄)는 방향이 맞지만, Revive가 불리언 플래그로 부활 상태를 관리하는 구조라 게임 상태가 늘수록 플래그 조합 폭발 위험 — 상태머신(GameState enum) 부재가 잠재 부채. **💻 웹 리서치(신규)**: ① Input System 1.15.0 출시 — Android 회전벡터 센서 지원·리바인딩 억제 API 추가·Unity 6.0/6.2/6.3 전 라인 대응. 두 게임 모두 InputAction 기반(CLAUDE.md 규칙)이라 업그레이드 대상. ② Unity 6000.3 최신 패치에 Android 11+ 기기에서 Screen.safeArea/컷아웃 값이 잘못 나오던 오류 픽스(UUM-119964) 포함 — 노치 대응 UI를 쓰는 두 게임 직결(잘못된 safeArea 값은 HUD 겹침·버튼 가림으로 이어짐). **오늘 결정 제안(P2)**: NumLink·MeowBeat 양 프로젝트 Input System 1.15.0 업그레이드 + 터치 입력 회귀 테스트(패키지 업그레이드는 에디터 열 때 한 번에·qa_static/unity_validate 기준선 확보 후). Sources: Unity Discussions RELEASE·Input System 1.15 Changelog·Unity 6000.3.0f1 릴리스노트·Firebase Unity SDK 릴리스노트.',
+      },
+      {
+        title:
+          '🔍 QA Tester — 미해결 3건 집계: ① NumLink 폰트 SDF 붕괴 미커밋(Maplestory Bold 2048→1·폰트 7종+삭제 4파일 대기) ② MeowBeat dspTime(qa_static exit 2·NoteSpawner.cs:126 검출 지속) ③ volume 4중 경로 회귀 / NumLink는 Tools·known_bugs.json 모두 부재로 검증 무방비 / Feedme known_bugs.json 7패턴 중 실검출 error 1건',
+        description:
+          '**🔍 미해결 버그 3건**: ① NumLink 폰트 SDF 붕괴가 여전히 미커밋 작업트리에 대기 중(Maplestory Bold m_Width 2048→1 재확인·수정상태 폰트 7종+AutoGenTests 삭제 4파일) — 최대 리스크는 이 상태로 커밋 시 게임 내 전 텍스트가 깨지는 것, 커밋 전 git checkout 복구가 필수다. ② MeowBeat dspTime — qa_static.py가 오늘도 exit 2로 NoteSpawner.cs:126을 검출(탐지기는 살아있고 코어는 그대로). ③ volume 4중 경로 회귀(7/1 발견 이월). **🔍 검증 인프라 비대칭**: Feedme는 known_bugs.json 7패턴이 등록돼 실검출 error 1건(dspTime)으로 정상 작동 중인 반면, NumLink는 Tools/unity_validate.py·known_bugs.json 모두 부재 — CLAUDE.md "세션 시작 시 _ProjectTemplate에서 복사" 규칙이 계속 미실행돼 검증 커버리지 0%가 누적. **오늘 결정 제안(P1)**: NumLink 폰트 .asset 7종 git checkout 복구 후 C:/Unity/_ProjectTemplate/Tools를 복사해 unity_validate.py 기준선(0 error) 확보 — 복구와 기준선을 한 세션에 묶어야 재발 시 즉시 검출된다. Sources: git status·qa_static.py 실행·known_bugs.json 실측.',
+      },
+      {
+        title:
+          '📦 Content Writer — iOS 인앱이벤트(IAE) 활성 시 제품페이지 전환율 평균 +17% / 구글플레이 프로모션 콘텐츠 운영 시 28일 활성유저 +2%·매출 +4% / 유튜브 쇼츠 참여율 5.91%로 숏폼 1위·Z세대 53%가 쇼츠 보고 구매 경험',
+        description:
+          '**📦 신규 1순위(스토어 내 이벤트 노출면)**: iOS 인앱이벤트(In-App Events)를 활성화하면 제품페이지 전환율이 평균 +17% — 검색·Today 탭·개발자 페이지에 이벤트 카드가 추가 노출되는 비용 0의 오가닉 노출면이다. 구글플레이 프로모션 콘텐츠(Promotional Content)도 운영 시 28일 활성유저 +2%·매출 +4%로 양 스토어 모두 "이벤트 카드" 운영이 표준화됐다. **📦 신규 2순위(쇼츠)**: 유튜브 쇼츠 참여율 5.91%로 틱톡·릴스를 제치고 숏폼 1위, Z세대 53%가 쇼츠를 보고 구매한 경험 — 이전에 정한 유기형 UGC 클립 전략(7/2)의 배포 채널로 쇼츠를 1순위에 두는 근거. **오늘 결정 제안(P2)**: MeowBeat 신곡 추가·NumLink 레벨팩을 소재로 출시 첫 달 인앱이벤트/프로모션 콘텐츠 캘린더 초안 작성 — 이벤트 소재는 어차피 만들 콘텐츠 업데이트를 재활용하므로 추가 제작비 0. Sources: MobileAction IAE 가이드·ASOMobile ASO 2026·Loopex/ShortsIntel 쇼츠 통계.',
+      },
+      {
+        title:
+          '🛡 DevOps — CI 이상 없음(최근 런 5건 전원 success·Pages 정상 라이브·dependabot security 그룹화만 미적용 잔존) / 신규 제안: zizmor+actionlint 워크플로우 정적 감사(SARIF→Security 탭) / 회의 중 자율 조치: deploy-pages build/deploy 잡 timeout-minutes: 10 추가(기본 360분 행 방지·자율 칼끝 7일 연속)',
+        description:
+          '**🛡 CI 정상**: 최근 런 5건 전원 success·Pages 정상 라이브(workflow 빌드형이라 status null은 정상)·이상 없음. dependabot.yml security-updates 그룹화는 여전히 미적용(P3 잔존). **🛡 신규 발견(워크플로우 정적 감사)**: SHA 핀은 완료됐지만 인젝션·권한 오설정을 PR 단계에서 자동 검출하는 층이 없다 — zizmor(Trail of Bits가 강화한 GitHub Actions 정적 분석기)+actionlint를 CI 잡으로 추가하면 SARIF 출력으로 Security 탭에 연동된다. **🛡 오늘 자율 조치(실행 완료)**: 감사 도중 발견한 작은 구멍을 즉시 봉합 — deploy-pages.yml build/deploy 두 잡에 timeout-minutes: 10 추가(빌드 34~58초인데 기본 타임아웃 360분 → 행 걸리면 러너 6시간 낭비). 순수 증분·자율 칼끝 6/26부터 7일 연속 전진. **오늘 결정 제안(P2)**: zizmor+actionlint 정적 감사 CI 잡 추가(SARIF→Security 탭 연동). Sources: gh run list·gh api pages·zizmor GitHub·Trail of Bits 블로그 실측.',
+      },
+      {
+        title:
+          '🎨 Art Director — 2026 리절트 화면 표준은 "단계별 리빌(staged reveal)" 연출 / 스킵 불가 연출은 이탈 유발 — 탭 스킵(tap-to-skip) 필수 정설 / 네온 시안+바이올렛 그라데이션은 신종 AI 클리셰로 회피 대상',
+        description:
+          '**🎨 신규 1순위(리절트 단계별 리빌)**: 2026 모바일 게임 리절트 화면 표준은 단계별 리빌(staged reveal) — 결과를 한 번에 던지지 않고 요소를 순차 공개해 성취의 리듬을 만든다. 단 실제 유저 리뷰에서 "스킵 불가 연출" 불만이 이탈 사유로 확인돼(Hole Stars 리뷰), 탭 스킵(tap-to-skip)이 필수 정설. NumLink는 별 순차 팝→점수 카운트업, MeowBeat는 판정 집계(Perfect/Good/Miss) 순차 공개+마스코트 리액션 구조가 어울린다. **🎨 AI 클리셰 갱신**: 민트+다크에 이어 네온 시안+바이올렛 그라데이션이 신종 AI 전형색으로 판별되는 중 — 스튜디오 원칙(AI 슬롭 디자인 금지)의 회피 목록에 추가. **오늘 결정 제안(P2)**: 리절트 화면 단계별 리빌 공통 구현 — 두 게임 모두 탭 스킵 지원, 연출 요소는 씬에 미리 배치 후 SetActive 토글(동적 Instantiate 금지 규칙 준수). Sources: Pixune·Tubik UI Trends 2026·Superdesign·Recursion.',
+      },
+    ],
+    meetingTitle:
+      '🟢 7/3 종합 회의 — "안은 3일째 같은 진단, 밖은 시장 재편": Orchestrator·QA가 이전 액션아이템 3건 전부 미완료를 3중 실측으로 확정(126행 deltaTime 잔존·폰트 SDF 7종 수정상태·ApplyVolume 부재)한 같은 날, Game Designer가 리듬게임 1위 Beatstar의 10/31 서버 영구종료를 물어왔다 — 누적 6천만 유저가 갈 곳을 잃는 공백이 MeowBeat 출시 시점과 겹치고, 라이선스 음원의 종말은 AI 생성곡 기반에 구조적 기회다. 자율 칼끝은 deploy-pages timeout-minutes로 7일 연속 전진',
+    meetingSummary:
+      '제79회 종합 회의(금요일·D+40). **오늘의 회의는 "진단 반복의 사흘째에 바깥에서 마감 압력이 도착한 날"이다.** Orchestrator가 실측으로 문을 열었다 — 신규 커밋은 agent-office 1건뿐이고 NumLink·MeowBeat는 오늘도 0건, 이전 액션아이템 3건(dspTime 코어픽스·폰트 복구·volume 통합)은 전부 미완료다. 126행 deltaTime 잔존, 폰트 SDF 7종 수정상태, ApplyVolume 부재까지 3중으로 재확인됐다. QA가 이를 버그 대장으로 정리했다 — 미해결 3건이고 최대 리스크는 여전히 붕괴 폰트 커밋 시 전 텍스트 깨짐이며, Feedme는 known_bugs 7패턴이 실검출로 작동 중인 반면 NumLink는 Tools 자체가 없어 검증 무방비 비대칭이 계속된다. 그 위에 Game Designer가 회의의 축을 바꿨다 — 모바일 리듬게임 1위 Beatstar(누적 6천만 다운로드·첫해 $73M)가 10/31 서버 영구종료를 예고했고, 운영팀은 듀오링고 인수로 해체돼 후속작이 없다. 라이선스 음원 기반 비즈니스의 종말이 AI 생성곡 기반(Lyria·라이선스 비용 0) MeowBeat에 구조적 기회이고, 수천만 유저의 공백이 출시 시점과 겹친다 — 안쪽 P0(dspTime)가 늦어질수록 이 기회의 창도 좁아진다는 마감 압력이 처음으로 명시됐다. Developer는 실무 업데이트 둘을 얹었다 — Input System 1.15.0(두 게임 모두 InputAction 기반이라 업그레이드 대상)과 Unity 6000.3의 Android 11+ safeArea 픽스(노치 대응 UI 직결), 그리고 Revive의 플래그식 부활이 상태머신 부재 부채임을 경고했다. Content는 비용 0의 스토어 노출면(iOS IAE +17%·구글플레이 프로모션 콘텐츠 +2%/+4%)과 쇼츠 1위 근거(참여율 5.91%·Z세대 53%)를, Art는 리절트 화면 단계별 리빌+탭 스킵 필수 정설과 신종 AI 클리셰(네온 시안+바이올렛)를 보고했다. DevOps는 CI 이상 없음을 확인하고 zizmor+actionlint 정적 감사를 제안했으며, 회의 중 deploy-pages 두 잡에 timeout-minutes: 10을 자율 추가했다(자율 칼끝 7일 연속). 메타: 7/01 "우선순위 역전" → 7/02 "폰트 지뢰·겉보기 진행 확정" → 7/03 "진단 3일째 반복 + Beatstar 공백 발견". 진단은 이미 완결됐고, 이제 필요한 건 사용자 Unity 세션에서의 실행뿐이다 — 그리고 오늘부터는 그 실행에 10월까지라는 바깥 시계가 붙었다.',
+    meetingItems: [
+      {
+        speaker: 'Orchestrator',
+        note: '실측부터 정리할게요. 신규 커밋은 agent-office 844233a 하나뿐이에요. NumLink, MeowBeat는 오늘도 0건이고요. 미커밋은 NumLink 41파일, MeowBeat 37파일로 NumLink 쪽이 어제보다 5파일 늘었어요. 이전 액션아이템 세 개는 전부 미완료예요. 하나씩 확인했어요 — NoteSpawner 126행은 elapsedTime += Time.deltaTime 그대로고, dspTime은 탐지기만 커밋된 상태예요. NumLink 폰트 SDF 7종은 여전히 수정상태로 작업트리에 있고요. SongManager에 ApplyVolume 메서드는 없어요. grep으로 확인했어요. MeowBeat HEAD를 보면 최근 커밋이 farm 기능이랑 QA 툴 정비예요 — P0 코어와 무관한 작업이 계속 쌓이는 패턴이 그대로예요. 오늘 제안은 하나예요. dspTime 앵커링 수정과 커밋을 오늘 단일 태스크로, run_regression.py 검증까지 묶어서요.',
+      },
+      {
+        speaker: 'Game Designer',
+        note: '오늘은 바깥 소식인데, 이게 큽니다. Beatstar 아시죠 — 모바일 리듬게임 부동의 1위요. 누적 6천만 다운로드에 첫해 매출만 7,300만 달러였던 게임인데, 2025년 10월 31일에 서버를 영구 종료한다고 예고했어요. 더 중요한 건, 운영사 Space Ape의 팀이 듀오링고 인수로 해체돼서 후속작이 없다는 거예요. 리듬게임 유저 수천만 명이 갈 곳을 잃어요. 그리고 이 종료의 배경이 라이선스 음원 비용 구조인데 — 우리 MeowBeat는 Lyria로 곡을 생성하니까 라이선스 비용이 0이에요. 구조적으로 우리한테 유리한 공백이 열리는 거죠. 출시 시점이랑도 겹치고요. 하나 더 — 한국 퍼즐 유저 이탈요인 조사(1.3만 명)에서 1위가 지루함 42%, 2위가 반복성 33%였어요. NumLink는 기믹 회전이 관건이에요. 제안은 MeowBeat GDD에 "Beatstar 공백 흡수 전략" 섹션 신설이에요. 곡 해금 구조랑 판정 UX 벤치마크 분석하고, AI 생성곡 기반 차별점 세 개를 정의하는 거죠. 참고로 검증 안 된 수치는 오늘 다 폐기했어요 — 이 세 건은 전부 원문 확인 거쳤습니다.',
+      },
+      {
+        speaker: 'Developer',
+        note: '저는 코드랑 웹 양쪽이에요. 코드 쪽 — NumLink Revive 신설은 +15/-9로 작고 정확한 픽스예요. 근데 하나 짚을게요. 부활 상태를 불리언 플래그로 관리하는 구조라, 게임 상태가 늘어날수록 플래그 조합이 폭발해요. 상태머신 부재가 잠재 부채예요. 당장은 아니고 기록만 해둡니다. 웹 쪽 — Input System 1.15.0이 나왔어요. Android 회전벡터 센서 지원이랑 리바인딩 억제 API가 추가됐고 6.0, 6.2, 6.3 전 라인 대응이에요. 우리 두 게임 다 InputAction 기반이니까 업그레이드 대상이죠. 그리고 Unity 6000.3 패치에 Android 11 이상에서 safeArea랑 컷아웃 값이 잘못 나오던 버그 픽스가 실렸어요. UUM-119964요. 노치 대응 UI를 쓰는 우리 둘 다 직결이에요 — safeArea 값이 틀리면 HUD 겹침이나 버튼 가림으로 바로 이어지거든요. 제안은 양 프로젝트 Input System 1.15.0 업그레이드 플러스 터치 입력 회귀 테스트예요. 에디터 열 때 한 번에 하고요.',
+      },
+      {
+        speaker: 'QA Tester',
+        note: '미해결 버그 대장 정리할게요. 세 건이에요. 첫째, NumLink 폰트 SDF 붕괴 — 여전히 미커밋 작업트리에 있어요. Maplestory Bold가 2048에서 1로 붕괴한 거 재확인했고, 수정상태 폰트 7종에 AutoGenTests 삭제 4파일까지 대기 중이에요. 최대 리스크는 변함없이 이거예요 — 이 상태로 커밋하면 전 텍스트가 깨져요. 커밋 전 git checkout 복구가 필수예요. 둘째, MeowBeat dspTime — qa_static이 오늘도 exit 2로 126행을 검출했어요. 탐지기는 살아있고 코어는 그대로예요. 셋째, volume 4중 경로 회귀, 이월이에요. 인프라 비대칭도 그대로예요 — Feedme는 known_bugs 7패턴이 등록돼서 실검출 error 1건으로 정상 작동하는데, NumLink는 Tools 폴더도 known_bugs.json도 없어요. 검증 커버리지 0%가 계속 누적돼요. 그래서 제안은 이거예요. 폰트 7종 git checkout 복구하고, 바로 이어서 _ProjectTemplate에서 Tools를 복사해서 unity_validate.py 0 error 기준선까지 한 세션에 묶는 거예요. 복구만 하고 기준선을 안 잡으면 재발해도 못 잡아요.',
+      },
+      {
+        speaker: 'Content Writer',
+        note: '저는 비용 0짜리 스토어 노출면 두 개를 들고 왔어요. iOS 인앱이벤트요 — 활성화하면 제품페이지 전환율이 평균 17% 올라요. 검색, Today 탭, 개발자 페이지에 이벤트 카드가 추가로 노출되거든요. 구글플레이도 같은 게 있어요. 프로모션 콘텐츠 운영하면 28일 활성유저 2%, 매출 4% 증가예요. 양쪽 스토어 모두 이벤트 카드 운영이 표준이 된 거죠. 그리고 쇼츠 — 유튜브 쇼츠 참여율이 5.91%로 틱톡, 릴스 제치고 숏폼 1위예요. Z세대 53%가 쇼츠 보고 구매한 경험이 있고요. 그저께 정한 유기형 UGC 클립 전략의 배포 채널 1순위를 쇼츠로 두는 근거예요. 제안은 출시 첫 달 인앱이벤트, 프로모션 콘텐츠 캘린더 초안이에요. MeowBeat 신곡 추가랑 NumLink 레벨팩을 소재로 쓰면 — 어차피 만들 콘텐츠 업데이트 재활용이라 추가 제작비가 0이에요.',
+      },
+      {
+        speaker: 'DevOps',
+        note: 'CI는 이상 없어요. 최근 런 5건 전부 success고 Pages 정상 라이브예요. workflow 빌드형이라 status null 뜨는 건 정상이고요. dependabot 보안 그룹화만 미적용으로 남아있는데 P3예요. 오늘 새로 본 건 워크플로우 정적 감사예요. SHA 핀은 끝났지만, 인젝션이나 권한 오설정을 PR 단계에서 자동으로 잡는 층이 없어요. zizmor라고 Trail of Bits가 강화한 Actions 정적 분석기가 있는데, actionlint랑 같이 CI 잡으로 넣으면 SARIF로 Security 탭에 연동돼요. 그리고 감사하다가 발견한 작은 구멍은 지금 바로 막았어요 — deploy-pages의 build, deploy 두 잡에 timeout-minutes 10을 넣었어요. 빌드가 34초에서 58초인데 기본 타임아웃이 360분이거든요. 행 걸리면 러너가 6시간 낭비돼요. 순수 증분이고, 자율 칼끝 7일 연속이에요.',
+      },
+      {
+        speaker: 'Art Director',
+        note: '리절트 화면 얘기예요. 2026년 표준이 단계별 리빌이에요 — 결과를 한 번에 던지지 않고 요소를 순차 공개해서 성취의 리듬을 만드는 거요. 근데 중요한 단서가 있어요. 실제 유저 리뷰를 봤는데, 스킵 불가 연출이 이탈 사유로 나와요. 그래서 탭 스킵이 필수 정설이에요. 연출은 화려하게 하되 급한 유저는 탭 한 번으로 결과를 봐야 해요. 우리 적용안은 — NumLink는 별이 순차적으로 팝 되고 점수가 카운트업, MeowBeat는 Perfect, Good, Miss 판정 집계가 순차 공개되고 마스코트 고양이가 리액션하는 구조요. 둘 다 탭 스킵 지원하고요. 구현은 규칙대로 씬에 미리 배치하고 SetActive 토글로요. 하나 더 — AI 클리셰 목록 갱신이에요. 민트+다크에 이어서 네온 시안+바이올렛 그라데이션이 신종 AI 전형색으로 판별되고 있어요. 우리 회피 목록에 추가할게요.',
+      },
+    ],
+    decisions: [
+      {
+        title: '🔴 P0 [이월 3일째·탐지기 생존] MeowBeat NoteSpawner.cs:126 dspTime 앵커링 — 오늘 단일 태스크, run_regression.py 검증 포함',
+        description:
+          'Orchestrator·QA 3중 실측: 126행 elapsedTime += Time.deltaTime 잔존, qa_static.py exit 2로 검출 지속, dspTime은 탐지기(921e0cf)만 커밋된 상태. 적용: ① 필드 dspSongStartTime(double) → ② 곡 시작 시 musicSource.PlayScheduled(AudioSettings.dspTime + 0.1) → ③ 126행을 elapsedTime = (float)(AudioSettings.dspTime - dspSongStartTime) 절대차분으로 교체 → ④ run_regression.py + qa_static.py 0 error 검증 후 커밋. Beatstar 공백(10/31)이라는 바깥 시계가 생겼으므로 더 미룰 수 없음. 사용자 Unity 세션 필요.',
+      },
+      {
+        title: '🟡 P1 [이월·검증 기준선 결합] NumLink 붕괴 폰트 SDF 7종 git checkout 복구 + _ProjectTemplate Tools 복사로 unity_validate.py 기준선 확보',
+        description:
+          'QA 재확인: Maplestory Bold m_Width 2048→1 붕괴 지속·수정상태 폰트 7종+AutoGenTests 삭제 4파일 대기. 커밋 시 전 텍스트 깨지는 최대 리스크 유지(절대 스테이징 금지). 오늘 결합 제안: 복구만 하면 재발 시 못 잡으므로 ① 폰트 .asset 7종 git checkout 복구 → ② C:/Unity/_ProjectTemplate/Tools 복사(CLAUDE.md 규칙 미실행 누적 해소) → ③ unity_validate.py 0 error 기준선 확보 → ④ AutoGenTests 삭제 커밋 정리를 한 세션에 묶기. 사용자 세션 필요.',
+      },
+      {
+        title: '🟡 P1 [이월] MeowBeat bgmPlayer.volume 4중 경로 → SongManager.ApplyVolume() 단일 경로 통합',
+        description:
+          'Orchestrator grep 재확인: SongManager에 ApplyVolume 메서드 여전히 부재. 7/1 발견 이월 3일째 — bgmPlayer.volume이 4곳(SongManager:89·144, OptionManager:191, GameManager:363·540 하드코딩)에서 제각각 계산돼 슬라이더 무력화 회귀. SongManager.ApplyVolume() 신설 + 모든 호출처 통합 + VOLUME_KEY 상수화. 사용자 세션 필요.',
+      },
+      {
+        title: '🟢 P2 [자율 완료 ✅·7일 연속] deploy-pages build/deploy 잡 timeout-minutes: 10 추가 — 기본 360분 행 방지',
+        description:
+          'DevOps가 점검 중 발견한 작은 구멍을 회의 중 자율 봉합: 빌드 34~58초인데 잡 기본 타임아웃이 360분이라 행 걸리면 러너 6시간 낭비 → build/deploy 두 잡에 timeout-minutes: 10 추가. 순수 증분·자율 칼끝 6/26→7/03 7일 연속 전진. 다음 배포 run에서 정상 작동 확인만 남음. 후속 제안(P2 적재): zizmor+actionlint 워크플로우 정적 감사 CI 잡(SARIF→Security 탭 연동).',
+      },
+      {
+        title: '🟢 P2 [신규 적재 — 모두 P0/P1 후]: Beatstar 공백 흡수 GDD·리절트 단계별 리빌·IAE 캘린더·Input System 1.15.0·zizmor 감사',
+        description:
+          'Game Designer — MeowBeat GDD "Beatstar 공백 흡수 전략" 섹션 신설(1위 Beatstar 10/31 영구종료·누적 6천만 DL·첫해 $73M·팀 해체로 후속작 없음 → AI 생성곡 차별점 3개 정의). Art Director — 리절트 화면 단계별 리빌 공통 구현(NumLink 별 순차 팝→점수 카운트업·MeowBeat 판정 집계 순차 공개+마스코트 리액션·탭 스킵 필수·씬 배치+SetActive). Content Writer — 출시 첫 달 인앱이벤트/프로모션 콘텐츠 캘린더 초안(iOS IAE +17%·GP 프로모션 +2%/+4%·소재는 콘텐츠 업데이트 재활용 제작비 0). Developer — 양 프로젝트 Input System 1.15.0 업그레이드+터치 회귀 테스트(Unity 6000.3 safeArea 픽스 UUM-119964 함께 검토). DevOps — zizmor+actionlint 정적 감사 CI 잡 적재.',
+      },
+    ],
+  },
+  {
     id: '2026-07-02T04:00:00-daily-standup',
     date: '2026-07-02',
     researchTitle:
