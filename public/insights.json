@@ -1,6 +1,31 @@
 {
-  "lastUpdated": "2026-07-20T00:24:07.960Z",
+  "lastUpdated": "2026-07-27T00:24:55.084Z",
   "weeks": [
+    {
+      "weekOf": "2026-W30",
+      "articles": [
+        {
+          "id": "fef77883a89ac383",
+          "title": "프론트엔드와 백엔드를 한 팀으로 합치면 어떤 일이 일어날까?",
+          "url": "https://medium.com/daangn/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%EC%99%80-%EB%B0%B1%EC%97%94%EB%93%9C%EB%A5%BC-%ED%95%9C-%ED%8C%80%EC%9C%BC%EB%A1%9C-%ED%95%A9%EC%B9%98%EB%A9%B4-%EC%96%B4%EB%96%A4-%EC%9D%BC%EC%9D%B4-%EC%9D%BC%EC%96%B4%EB%82%A0%EA%B9%8C-f8b32edb2eb1?source=rss----4505f82a2dbd---4",
+          "company": "당근 테크",
+          "category": "general",
+          "summary": "프론트엔드와 백엔드를 한 팀으로 합치면 어떤 일이 일어날까?",
+          "publishedAt": "2026-07-23T09:39:17.000Z",
+          "collectedAt": "2026-07-27T00:24:55.084Z"
+        },
+        {
+          "id": "222bfdebbfce6588",
+          "title": "경계가 만든 길, Load Balancer(DSR)",
+          "url": "https://meetup.nhncloud.com/posts/418",
+          "company": "NHN Cloud Meetup",
+          "category": "infra",
+          "summary": "경계가 만든 길, Load Balancer(DSR)",
+          "publishedAt": "2026-07-20T02:12:54.000Z",
+          "collectedAt": "2026-07-27T00:24:55.084Z"
+        }
+      ]
+    },
     {
       "weekOf": "2026-W29",
       "articles": [
@@ -563,71 +588,6 @@
           "summary": "프롬프트 한 줄로 화면이 나오는 시대, ‘당근스러운 화면’을 만드는 법",
           "publishedAt": "2026-04-30T01:36:53.000Z",
           "collectedAt": "2026-05-04T01:58:01.947Z"
-        }
-      ]
-    },
-    {
-      "weekOf": "2026-W17",
-      "articles": [
-        {
-          "id": "49815eb68f3ef91a",
-          "title": "카카오톡 예약하기에서 그려 본 캘린더",
-          "url": "https://tech.kakao.com/posts/820",
-          "company": "카카오테크",
-          "category": "general",
-          "summary": "카카오톡 예약하기에서 그려 본 캘린더",
-          "publishedAt": "2026-04-22T15:00:00.000Z",
-          "collectedAt": "2026-04-27T01:53:36.438Z"
-        },
-        {
-          "id": "aa192f8b9a4b7563",
-          "title": "카나나 스칼라 1회 세미나 현장 스케치",
-          "url": "https://tech.kakao.com/posts/819",
-          "company": "카카오테크",
-          "category": "general",
-          "summary": "카나나 스칼라 1회 세미나 현장 스케치",
-          "publishedAt": "2026-04-21T15:00:00.000Z",
-          "collectedAt": "2026-04-27T01:53:36.438Z"
-        },
-        {
-          "id": "3c5a5ca9fa00f33e",
-          "title": "StarRocks 운영기: Resource Group으로 멀티테넌트 워크로드 격리하기",
-          "url": "https://toss.tech/article/operating-starrocks-1",
-          "company": "토스 테크",
-          "category": "general",
-          "summary": "StarRocks 운영기: Resource Group으로 멀티테넌트 워크로드 격리하기",
-          "publishedAt": "2026-04-23T05:00:00.000Z",
-          "collectedAt": "2026-04-27T01:53:36.438Z"
-        },
-        {
-          "id": "0b099f9361481e96",
-          "title": "토스플레이스 데이터봇 ‘판다(PANDA)’를 소개합니다 : 모든 팀원이 데이터 전문가처럼 일하는 방법",
-          "url": "https://toss.tech/article/da-assistant-panda",
-          "company": "토스 테크",
-          "category": "general",
-          "summary": "토스플레이스 데이터봇 ‘판다(PANDA)’를 소개합니다 : 모든 팀원이 데이터 전문가처럼 일하는 방법",
-          "publishedAt": "2026-04-23T03:28:00.000Z",
-          "collectedAt": "2026-04-27T01:53:36.438Z"
-        },
-        {
-          "id": "27d3cf393fb5a906",
-          "title": "양자컴퓨터 시대에 대비한 양자내성암호 적용, 왜 10년 먼저 서비스에 적용했을까?",
-          "url": "https://toss.tech/article/post-quantum-cryptography",
-          "company": "토스 테크",
-          "category": "general",
-          "summary": "양자컴퓨터 시대에 대비한 양자내성암호 적용, 왜 10년 먼저 서비스에 적용했을까?",
-          "publishedAt": "2026-04-23T03:00:00.000Z",
-          "collectedAt": "2026-04-27T01:53:36.438Z"
-        },
-        {
-          "id": "4fc4b0ed3531bef2",
-          "title": "모두가 데이터를 다루는 AI 시대, 지난 1년간 데이터 팀은 어떻게 달라졌을까?",
-          "url": "https://medium.com/daangn/%EB%AA%A8%EB%91%90%EA%B0%80-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EB%8B%A4%EB%A3%A8%EB%8A%94-ai-%EC%8B%9C%EB%8C%80-%EC%A7%80%EB%82%9C-1%EB%85%84%EA%B0%84-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%8C%80%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%8B%AC%EB%9D%BC%EC%A1%8C%EC%9D%84%EA%B9%8C-67bdb8fd91d4?source=rss----4505f82a2dbd---4",
-          "company": "당근 테크",
-          "category": "general",
-          "summary": "모두가 데이터를 다루는 AI 시대, 지난 1년간 데이터 팀은 어떻게 달라졌을까?",
-          "publishedAt": "2026-04-23T03:10:32.000Z",
-          "collectedAt": "2026-04-27T01:53:36.438Z"
         }
       ]
     }
