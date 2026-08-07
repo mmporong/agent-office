@@ -34,20 +34,24 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit & Push
+        id: push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/insights.json
           git diff --cached --quiet || git commit -m "chore: weekly insights update"
           git push
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
       # GITHUB_TOKEN으로 만든 push는 push 이벤트 워크플로를 트리거하지 않는다(재귀 방지).
-      # 그래서 insights.json이 main에 올라가도 Deploy GitHub Pages가 돌지 않아 라이브 사이트가 낡는다.
-      # workflow_dispatch는 이 재귀 방지 규칙의 명시적 예외라 GITHUB_TOKEN으로도 실행된다.
+      # workflow_dispatch는 그 예외지만, push 직후 dispatch하면 GitHub의 main ref 해석이
+      # 아직 push 이전 SHA를 가리키는 레이스가 있다.
+      # 실측(2026-08-03): ef92911 push(00:24:35Z) → dispatch(00:24:37Z)가 직전 커밋 9df266b를 배포해
+      # 라이브 사이트가 7/27 데이터로 11일간 고착. 그래서 배포할 SHA를 명시로 넘긴다.
       - name: Trigger Pages deploy
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh workflow run deploy-pages.yml --ref main
+        run: gh workflow run deploy-pages.yml --ref main -f sha=${{ steps.push.outputs.sha }}
 
       - name: Telegram notification
         if: always() && env.TELEGRAM_BOT_TOKEN != ''
