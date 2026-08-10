@@ -1,6 +1,61 @@
 {
-  "lastUpdated": "2026-08-03T00:24:34.444Z",
+  "lastUpdated": "2026-08-10T00:10:50.434Z",
   "weeks": [
+    {
+      "weekOf": "2026-W32",
+      "articles": [
+        {
+          "id": "e8e9576cbfe5e024",
+          "title": "개인화된 Airflow 테스트 환경 구축 및 운영 경험",
+          "url": "https://tech.kakao.com/posts/829",
+          "company": "카카오테크",
+          "category": "general",
+          "summary": "개인화된 Airflow 테스트 환경 구축 및 운영 경험",
+          "publishedAt": "2026-08-06T15:00:00.000Z",
+          "collectedAt": "2026-08-10T00:10:50.434Z"
+        },
+        {
+          "id": "ce8f6a41c916873a",
+          "title": "Beyond AI That Speaks Well: Making Kanana-o Speak the Way Users Want",
+          "url": "https://tech.kakao.com/posts/828",
+          "company": "카카오테크",
+          "category": "general",
+          "summary": "Beyond AI That Speaks Well: Making Kanana-o Speak the Way Users Want",
+          "publishedAt": "2026-08-03T15:00:00.000Z",
+          "collectedAt": "2026-08-10T00:10:50.434Z"
+        },
+        {
+          "id": "4c8c5baf61c7e945",
+          "title": "잘 말하는 AI를 넘어, 원하는 대로 말하는 AI로: Kanana-o 음성 생성 고도화 과정",
+          "url": "https://tech.kakao.com/posts/827",
+          "company": "카카오테크",
+          "category": "general",
+          "summary": "잘 말하는 AI를 넘어, 원하는 대로 말하는 AI로: Kanana-o 음성 생성 고도화 과정",
+          "publishedAt": "2026-08-03T15:00:00.000Z",
+          "collectedAt": "2026-08-10T00:10:50.434Z"
+        },
+        {
+          "id": "1aed3551b553f04e",
+          "title": "DS와 MLE가 함께 일하는 법",
+          "url": "https://toss.tech/article/ds-mle-cowork",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "DS와 MLE가 함께 일하는 법",
+          "publishedAt": "2026-08-03T03:25:00.000Z",
+          "collectedAt": "2026-08-10T00:10:50.434Z"
+        },
+        {
+          "id": "6d0b51f2ec0f5077",
+          "title": "실험을 더 편하게 설계할 수 있게: 당근 실험플랫폼 이야기",
+          "url": "https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b?source=rss----4505f82a2dbd---4",
+          "company": "당근 테크",
+          "category": "general",
+          "summary": "실험을 더 편하게 설계할 수 있게: 당근 실험플랫폼 이야기",
+          "publishedAt": "2026-08-04T01:34:28.000Z",
+          "collectedAt": "2026-08-10T00:10:50.434Z"
+        }
+      ]
+    },
     {
       "weekOf": "2026-W31",
       "articles": [
@@ -563,51 +618,6 @@
           "summary": "누구나 찾아볼 수 있는 중고거래 서버 LLM 릴리즈 노트 도입기",
           "publishedAt": "2026-05-14T09:05:19.000Z",
           "collectedAt": "2026-05-18T02:28:33.806Z"
-        }
-      ]
-    },
-    {
-      "weekOf": "2026-W19",
-      "articles": [
-        {
-          "id": "c19b3c77f1507069",
-          "title": "음성 AI 모델을 프로덕션에 올리기까지: Kanana-O 서빙 최적화 여정",
-          "url": "https://tech.kakao.com/posts/821",
-          "company": "카카오테크",
-          "category": "general",
-          "summary": "음성 AI 모델을 프로덕션에 올리기까지: Kanana-O 서빙 최적화 여정",
-          "publishedAt": "2026-05-05T15:00:00.000Z",
-          "collectedAt": "2026-05-11T02:09:58.488Z"
-        },
-        {
-          "id": "52847689941590ef",
-          "title": "How We Protect Karrot’s Internal PyPI Proxy from Supply Chain Attacks",
-          "url": "https://medium.com/daangn/how-we-protect-karrots-internal-pypi-proxy-from-supply-chain-attacks-0cf197205915?source=rss----4505f82a2dbd---4",
-          "company": "당근 테크",
-          "category": "general",
-          "summary": "How We Protect Karrot’s Internal PyPI Proxy from Supply Chain Attacks",
-          "publishedAt": "2026-05-06T12:33:01.000Z",
-          "collectedAt": "2026-05-11T02:09:58.488Z"
-        },
-        {
-          "id": "7500169df4ddcad9",
-          "title": "당근이 파이썬 공급망 공격에 대응하는 방법",
-          "url": "https://medium.com/daangn/%EB%8B%B9%EA%B7%BC%EC%9D%B4-%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B3%B5%EA%B8%89%EB%A7%9D-%EA%B3%B5%EA%B2%A9%EC%97%90-%EB%8C%80%EC%9D%91%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95-e0b4f483b574?source=rss----4505f82a2dbd---4",
-          "company": "당근 테크",
-          "category": "general",
-          "summary": "당근이 파이썬 공급망 공격에 대응하는 방법",
-          "publishedAt": "2026-05-06T12:31:54.000Z",
-          "collectedAt": "2026-05-11T02:09:58.488Z"
-        },
-        {
-          "id": "958b193561df6be4",
-          "title": "인증서 톺아보기 시리즈 3: 제로 트러스트와 mTLS",
-          "url": "https://meetup.nhncloud.com/posts/413",
-          "company": "NHN Cloud Meetup",
-          "category": "infra",
-          "summary": "인증서 톺아보기 시리즈 3: 제로 트러스트와 mTLS",
-          "publishedAt": "2026-05-06T04:15:55.000Z",
-          "collectedAt": "2026-05-11T02:09:58.488Z"
         }
       ]
     }
