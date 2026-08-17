@@ -1,6 +1,71 @@
 {
-  "lastUpdated": "2026-08-10T00:10:50.434Z",
+  "lastUpdated": "2026-08-17T00:40:08.314Z",
   "weeks": [
+    {
+      "weekOf": "2026-W33",
+      "articles": [
+        {
+          "id": "8f0e2a8c9d3961b3",
+          "title": "AI에게 투자정보를 말하게 하기까지",
+          "url": "https://toss.tech/article/tech_talk_talk_1",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "AI에게 투자정보를 말하게 하기까지",
+          "publishedAt": "2026-08-13T01:00:00.000Z",
+          "collectedAt": "2026-08-17T00:40:08.314Z"
+        },
+        {
+          "id": "2a47bd8afbef78c5",
+          "title": "토스의 속도와 품질, 상용 도구로 충분한가 — 토션(Tossion)",
+          "url": "https://toss.tech/article/tossion",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "토스의 속도와 품질, 상용 도구로 충분한가 — 토션(Tossion)",
+          "publishedAt": "2026-08-11T01:00:00.000Z",
+          "collectedAt": "2026-08-17T00:40:08.314Z"
+        },
+        {
+          "id": "098904280b132b16",
+          "title": "모노리포 희망편, 절망의 리포가 희망의 리포로 부활하기까지 걸린 1년",
+          "url": "https://toss.tech/article/52209",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "모노리포 희망편, 절망의 리포가 희망의 리포로 부활하기까지 걸린 1년",
+          "publishedAt": "2026-08-10T02:40:00.000Z",
+          "collectedAt": "2026-08-17T00:40:08.314Z"
+        },
+        {
+          "id": "81034311f332bc2d",
+          "title": "Laying the Rails Beyond WebView: Why Karrot Chose Lynx",
+          "url": "https://medium.com/daangn/laying-the-rails-beyond-webview-why-karrot-chose-lynx-db1aa92af5e4?source=rss----4505f82a2dbd---4",
+          "company": "당근 테크",
+          "category": "general",
+          "summary": "Laying the Rails Beyond WebView: Why Karrot Chose Lynx",
+          "publishedAt": "2026-08-12T09:04:24.000Z",
+          "collectedAt": "2026-08-17T00:40:08.314Z"
+        },
+        {
+          "id": "9428f45e8013a873",
+          "title": "웹뷰 다음의 레일을 깔다: 당근이 Lynx를 선택한 이유",
+          "url": "https://medium.com/daangn/%EC%9B%B9%EB%B7%B0-%EB%8B%A4%EC%9D%8C%EC%9D%98-%EB%A0%88%EC%9D%BC%EC%9D%84-%EA%B9%94%EB%8B%A4-%EB%8B%B9%EA%B7%BC%EC%9D%B4-lynx%EB%A5%BC-%EC%84%A0%ED%83%9D%ED%95%9C-%EC%9D%B4%EC%9C%A0-34dd50abbfb7?source=rss----4505f82a2dbd---4",
+          "company": "당근 테크",
+          "category": "general",
+          "summary": "웹뷰 다음의 레일을 깔다: 당근이 Lynx를 선택한 이유",
+          "publishedAt": "2026-08-12T09:03:40.000Z",
+          "collectedAt": "2026-08-17T00:40:08.314Z"
+        },
+        {
+          "id": "806113b7ec6a062c",
+          "title": "바겐세일은 끝난다",
+          "url": "https://meetup.nhncloud.com/posts/420",
+          "company": "NHN Cloud Meetup",
+          "category": "infra",
+          "summary": "바겐세일은 끝난다",
+          "publishedAt": "2026-08-12T00:45:26.000Z",
+          "collectedAt": "2026-08-17T00:40:08.314Z"
+        }
+      ]
+    },
     {
       "weekOf": "2026-W32",
       "articles": [
@@ -583,41 +648,6 @@
           "summary": "Cross Functional 기술 문제 풀기 위한 역량 성장 Tip",
           "publishedAt": "2026-05-22T01:00:00.000Z",
           "collectedAt": "2026-05-25T02:33:43.775Z"
-        }
-      ]
-    },
-    {
-      "weekOf": "2026-W20",
-      "articles": [
-        {
-          "id": "baec0be2f091530e",
-          "title": "MySQL 3분 vs ClickHouse 0.3초 — 같은 쿼리입니다",
-          "url": "https://meetup.nhncloud.com/posts/414",
-          "company": "NHN Cloud Meetup",
-          "category": "infra",
-          "summary": "MySQL 3분 vs ClickHouse 0.3초 — 같은 쿼리입니다",
-          "publishedAt": "2026-05-11T00:12:36.000Z",
-          "collectedAt": "2026-05-11T02:09:58.488Z"
-        },
-        {
-          "id": "76f1f4d3ae7938ff",
-          "title": "AI 시대, 성과 내는 조직일수록 토스식 TPM이 필요한 이유",
-          "url": "https://toss.tech/article/toss-tpm",
-          "company": "토스 테크",
-          "category": "general",
-          "summary": "AI 시대, 성과 내는 조직일수록 토스식 TPM이 필요한 이유",
-          "publishedAt": "2026-05-14T00:00:00.000Z",
-          "collectedAt": "2026-05-18T02:28:33.806Z"
-        },
-        {
-          "id": "1d810734338642f7",
-          "title": "누구나 찾아볼 수 있는 중고거래 서버 LLM 릴리즈 노트 도입기",
-          "url": "https://medium.com/daangn/%EB%88%84%EA%B5%AC%EB%82%98-%EC%B0%BE%EC%95%84%EB%B3%BC-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A4%91%EA%B3%A0%EA%B1%B0%EB%9E%98-%EC%84%9C%EB%B2%84-llm-%EB%A6%B4%EB%A6%AC%EC%A6%88-%EB%85%B8%ED%8A%B8-%EB%8F%84%EC%9E%85%EA%B8%B0-93afe203d766?source=rss----4505f82a2dbd---4",
-          "company": "당근 테크",
-          "category": "general",
-          "summary": "누구나 찾아볼 수 있는 중고거래 서버 LLM 릴리즈 노트 도입기",
-          "publishedAt": "2026-05-14T09:05:19.000Z",
-          "collectedAt": "2026-05-18T02:28:33.806Z"
         }
       ]
     }
