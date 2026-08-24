@@ -1,6 +1,51 @@
 {
-  "lastUpdated": "2026-08-17T00:40:08.314Z",
+  "lastUpdated": "2026-08-24T00:41:36.310Z",
   "weeks": [
+    {
+      "weekOf": "2026-W34",
+      "articles": [
+        {
+          "id": "9bb8e6b96e74d36e",
+          "title": "LLM 서빙, 띄우는 것과 잘 띄우는 것 사이",
+          "url": "https://toss.tech/article/tech_talk_talk_2",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "LLM 서빙, 띄우는 것과 잘 띄우는 것 사이",
+          "publishedAt": "2026-08-21T01:00:00.000Z",
+          "collectedAt": "2026-08-24T00:41:36.310Z"
+        },
+        {
+          "id": "00c2b0feec2d6779",
+          "title": "전체 데이터를 브라우저에 두는 광고 대시보드 만들기",
+          "url": "https://toss.tech/article/ads_dashboard_fe",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "전체 데이터를 브라우저에 두는 광고 대시보드 만들기",
+          "publishedAt": "2026-08-20T01:00:00.000Z",
+          "collectedAt": "2026-08-24T00:41:36.310Z"
+        },
+        {
+          "id": "d460341a4776cb17",
+          "title": "토스는 어떻게 광고 속에 게임을 넣었을까",
+          "url": "https://toss.tech/article/games-in-ads",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "토스는 어떻게 광고 속에 게임을 넣었을까",
+          "publishedAt": "2026-08-18T01:00:00.000Z",
+          "collectedAt": "2026-08-24T00:41:36.310Z"
+        },
+        {
+          "id": "75d1f9653594bba8",
+          "title": "당근의 인증은 어떻게 달라져 왔을까요?",
+          "url": "https://medium.com/daangn/%EB%8B%B9%EA%B7%BC%EC%9D%98-%EC%9D%B8%EC%A6%9D%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%8B%AC%EB%9D%BC%EC%A0%B8-%EC%99%94%EC%9D%84%EA%B9%8C%EC%9A%94-a50dd4b7b44c?source=rss----4505f82a2dbd---4",
+          "company": "당근 테크",
+          "category": "general",
+          "summary": "당근의 인증은 어떻게 달라져 왔을까요?",
+          "publishedAt": "2026-08-20T02:25:36.000Z",
+          "collectedAt": "2026-08-24T00:41:36.310Z"
+        }
+      ]
+    },
     {
       "weekOf": "2026-W33",
       "articles": [
@@ -623,31 +668,6 @@
           "summary": "당근 200+개 DB 를 옮기는 ELT 플랫폼, DT Platform 을 만든 이야기",
           "publishedAt": "2026-06-04T09:45:23.000Z",
           "collectedAt": "2026-06-08T02:41:48.819Z"
-        }
-      ]
-    },
-    {
-      "weekOf": "2026-W21",
-      "articles": [
-        {
-          "id": "db540de4aa6a1779",
-          "title": "메시징 서버의 스트레스 테스트 노하우와 AI 가 덜어 준 부분",
-          "url": "https://tech.kakao.com/posts/822",
-          "company": "카카오테크",
-          "category": "general",
-          "summary": "메시징 서버의 스트레스 테스트 노하우와 AI 가 덜어 준 부분",
-          "publishedAt": "2026-05-21T15:00:00.000Z",
-          "collectedAt": "2026-05-25T02:33:43.775Z"
-        },
-        {
-          "id": "85aa902a67230abf",
-          "title": "Cross Functional 기술 문제 풀기 위한 역량 성장 Tip",
-          "url": "https://toss.tech/article/cross-functional-tpm-tip",
-          "company": "토스 테크",
-          "category": "general",
-          "summary": "Cross Functional 기술 문제 풀기 위한 역량 성장 Tip",
-          "publishedAt": "2026-05-22T01:00:00.000Z",
-          "collectedAt": "2026-05-25T02:33:43.775Z"
         }
       ]
     }
