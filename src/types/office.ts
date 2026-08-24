@@ -23,7 +23,9 @@ export interface OfficeAgent {
   status: AgentStatus
   zone: OfficeZoneId
   taskSummary: string
+  previousSummary?: string
   lastUpdate: string
+  previousUpdate?: string
   priority: 'low' | 'medium' | 'high'
   energy: number
   characterKey: 'ember' | 'leaf' | 'wave' | 'spark' | 'moon' | 'bloom' | 'pearl'

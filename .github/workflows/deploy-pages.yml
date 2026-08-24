@@ -80,33 +80,50 @@ jobs:
       - name: Health check deployed site
         run: |
           url="${{ steps.deployment.outputs.page_url }}"
+          journal_url="${url%/}/data/operations-journal.json"
           echo "Health-checking deployed site: $url"
+          code="000"
+          journal_code="000"
           for i in 1 2 3 4 5; do
-            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$url" || echo "000")
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$url" || true)
+            code=${code:-000}
             if [ "$code" = "200" ]; then
-              echo "Site is live (HTTP 200) on attempt $i"
-              {
-                echo "### ✅ 배포 헬스체크 통과"
-                echo ""
-                echo "| 항목 | 값 |"
-                echo "| --- | --- |"
-                echo "| 배포 URL | $url |"
-                echo "| 최종 HTTP 상태 | $code |"
-                echo "| 소요 시도 | $i / 5 |"
-              } >> "$GITHUB_STEP_SUMMARY"
-              exit 0
+              # 루트 200만으로는 부족하다. 회의록 원본이 빠진 채 배포돼도 홈은 200을 주고,
+              # 방문자만 빈 저널을 본다. 데이터 파일까지 확인해야 그 사고가 초록불을 통과하지 못한다.
+              # 단 404를 첫 시도에서 바로 실패로 굳히지 않는다 — Pages CDN 전파가 파일별로
+              # 어긋날 수 있어 재시도 루프 안에서 함께 기다린다(8/24 회의 자율 수정).
+              journal_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$journal_url" || true)
+              journal_code=${journal_code:-000}
+              if [ "$journal_code" = "200" ]; then
+                echo "Site is live (HTTP 200) on attempt $i, journal data OK"
+                {
+                  echo "### ✅ 배포 헬스체크 통과"
+                  echo ""
+                  echo "| 항목 | 값 |"
+                  echo "| --- | --- |"
+                  echo "| 배포 URL | $url |"
+                  echo "| 최종 HTTP 상태 | $code |"
+                  echo "| 회의록 데이터 | HTTP $journal_code |"
+                  echo "| 소요 시도 | $i / 5 |"
+                } >> "$GITHUB_STEP_SUMMARY"
+                exit 0
+              fi
+              echo "Attempt $i: root HTTP 200 but journal HTTP $journal_code - retrying in 15s"
+            else
+              echo "Attempt $i: HTTP $code - retrying in 15s (Pages propagation delay)"
             fi
-            echo "Attempt $i: HTTP $code - retrying in 15s (Pages propagation delay)"
             sleep 15
           done
-          echo "Site did not return HTTP 200 after 5 attempts"
+          echo "Health check failed after 5 attempts (root HTTP $code, journal HTTP $journal_code)"
           {
             echo "### ❌ 배포 헬스체크 실패"
             echo ""
             echo "| 항목 | 값 |"
             echo "| --- | --- |"
-            echo "| 배포 URL | $url |"
-            echo "| 최종 HTTP 상태 | $code |"
+            echo "| 배포 URL | $url (HTTP $code) |"
+            echo "| 회의록 URL | $journal_url (HTTP $journal_code) |"
             echo "| 소요 시도 | 5 / 5 (초과) |"
+            echo ""
+            echo "회의록이 404면 \`public/data/\`가 커밋되지 않았을 가능성이 높다. \`git add public/data/\` 확인 필요."
           } >> "$GITHUB_STEP_SUMMARY"
           exit 1
