@@ -68,7 +68,7 @@ export function useAgentSync(): UseAgentSyncResult {
       const res = await fetch(url)
 
       if (!res.ok) {
-        setSyncError(null)
+        setSyncError(`status.json 응답 오류 (HTTP ${res.status})`)
         return
       }
 
@@ -82,8 +82,8 @@ export function useAgentSync(): UseAgentSyncResult {
       setExternalState(data)
       setLastSyncTime(new Date().toLocaleTimeString('ko-KR'))
       setSyncError(null)
-    } catch {
-      setSyncError(null)
+    } catch (err) {
+      setSyncError(`status.json 요청 실패 (${err instanceof Error ? err.message : '네트워크 오류'})`)
     }
   }, [])
 

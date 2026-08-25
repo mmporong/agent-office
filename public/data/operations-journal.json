@@ -1,5 +1,199 @@
 [
   {
+    "id": "2026-08-26T04:00:00-daily-standup",
+    "date": "2026-08-26",
+    "researchTitle": "🔴 어제 미완료 8건이 하루 종일 제자리인 동안, 오늘 파낸 결함은 전부 같은 모양이었다 — 기능이 없는 게 아니라 부르는 곳이 없다: 「define만 켜면 된다」던 NumLink 광고는 ID 8개가 전부 구글 공개 테스트 ID이고 GMA 패키지가 HEAD에 0건이라 처방의 순서 자체가 틀렸으며(QA Q1·critical), MeowBeat 판정 팝업 `ShowHitEffect()`·NumLink 데일리 기록 `RecordDailyClear()`·냥카페 `CafeManager`가 나란히 호출처 0건 데드코드이고, 고양이 세이브는 `LoadCat`이 경로 접두사를 날려 `File.Exists`가 언제나 false다. targetSdk 36 마감 D-5(연기선 11/1), 코드 정지 NumLink 56일·MeowBeat 66일. 오늘은 재부팅 0건으로 사살 없이 커밋을 먼저 안착시켰고, agent-office에는 PR 빌드 게이트와 동기화 오류 무음 픽스를 자율로 넣었다",
+    "researchSummary": "제86회 리서치(수요일·8/25 다음 회의, 하루 만). 7명 전원 보고. **오늘의 구조는 「배선이 없는 기능들」이다.** 어제 미완료로 넘긴 8건은 파일에서도 커밋에서도 변화가 0이었고(Orchestrator 10건 판정표 전량 ❌), 그 정지 상태를 파고들자 여섯 곳에서 똑같은 모양이 나왔다 — 코드는 있는데 부르는 곳이 없다. ① **QA Q1(critical)**: NumLink 광고는 `GameConstants.cs:210-217`의 AppId·Rewarded·Interstitial·Banner가 Android/iOS 8개 전부 구글 공개 데모 퍼블리셔 ID `ca-app-pub-3940256099942544`이고, `com.google.ads.mobile: 11.2.0`은 워킹트리 `Packages/manifest.json:4`에만 있을 뿐 **HEAD에는 0건**이며 `GoogleMobileAdsSettings.asset`도 없어 APPLICATION_ID가 매니페스트에 병합되지 않는다. 즉 8/25가 세운 「define 켜기 → 미준비 시 실패 반환 → isShowing 가드 → IAP 커밋」 4종 세트는 **순서가 틀렸다**. define을 먼저 켜면 클린 체크아웃에서 CS0246, 통과해도 초기화 예외, 그것도 넘겨도 테스트 광고만 나가 매출 0에 정책 위반이다. ② **Art**: MeowBeat `HitEffectController.ShowHitEffect()` 호출처 **0건** — Perfect/Good/Miss 플로팅 텍스트가 게임에 아예 뜨지 않는다. 게다가 유일한 경로 `GameEvents.OnNoteHit`이 `Action<bool>`이고 `RhythmCatController.cs:41`이 `isHit ? Good : Miss`만 보내 `case Perfect`는 어떤 경로로도 실행되지 않는다. 어제 찾은 `Note.cs:34` Random.Range 위에 한 겹이 더 있었다. ③ **Developer D4**: NumLink `RecordDailyClear()`·`OnDailyPuzzleCleared()` 호출처 0건 → `IsClearedToday` 영구 false, 데일리 무한 재플레이, 스트릭 0 고정, 보상 코인 50 미지급. ④ **D6**: `CafeManager` guid를 참조하는 씬·프리팹 0건인데, 배선하는 순간 `CalculateOfflineEarnings()`가 `LastQuitTime`을 갱신하지 않아 팜 재진입마다 같은 오프라인 수익이 재지급된다(데드코드가 지뢰를 안고 있다). ⑤ **D1**: `DatabaseManager.cs:428-429`가 `savePath` 접두사를 날려 `File.Exists`가 항상 false이고, 저장 루트도 안드로이드에서 읽기 전용인 `Application.dataPath`라 고양이·팜 진척도가 모바일에서 원천 불능이다. ⑥ **QA Q2**: UMP DLL 4개를 빌드에 싣고도 `ConsentInformation` 호출 0건 — EEA 사용자에게 동의 폼 없이 광고가 나간다. 바깥에서는 Play targetSdk 36 마감이 **D-5**(연기 신청 시 11/1, 16KB는 별개로 2027-02-01)인데 NumLink 34·MeowBeat 35 그대로다. 반대편 agent-office는 라이브 저널 **200/3,071,191 B**에 8/25 엔트리가 반영돼 로컬 파일과 바이트까지 일치했고, 최근 런 10건 전원 success에 무재부팅 45.1시간이라 오늘은 사살 없이 진행했다. 자율로는 **PR 빌드 게이트 신설**(Dependabot 2건이 체크 0개로 열려 있던 구조를 닫음)과 **동기화 실패 무음 픽스**(D9)를 넣었다.",
+    "researchItems": [
+      {
+        "title": "8/25 액션아이템 10건 판정 — 미완료 8건 전부 진전 0, 파일도 커밋도 안 움직였다",
+        "description": "Orchestrator가 항목별로 파일을 직접 열어 재판정: 활성 시간 `ActiveHoursStart=8/End=2` 미변경 · targetSdk NumLink `ProjectSettings.asset:179`=34 / MeowBeat `:181`=35 · Android define은 `:822` `DOTWEEN`만 · `Assets/GoogleMobileAds` 폴더 부재 · `AdManager.cs:150-157` 무조건 지급 잔존 · `isShowing` grep 0건 · `IAPManager.cs:85` 여전히 워킹트리(3+/2-) · `MobileAdsEventExecutor` 양 프로젝트 0건 · `NoteSpawner.cs:126` deltaTime 잔존·dspTime 0건 · `Note.cs:34` Random.Range 잔존 · 어댑티브 아이콘 `m_Textures: []` **4회째** · `SaveSystem.cs:22` `File.WriteAllText` 단독 · `STORE_LISTING.md` 미생성 · Dependabot #129·#124 OPEN · 「AI 음악」 잔존. **완료 0건.** 정지 일수는 NumLink 56일(HEAD `e536009`, 7/01·미커밋 45파일), MeowBeat 66일(HEAD `921e0cf`, 6/21·미커밋 38파일·ahead 3)로 하루씩 늘었다. SPRINT.md는 88일·141일 미갱신(NumLink의 SPRINT.md는 `docs/`가 아니라 리포 루트에 있다 — 프롬프트 경로 표기 정정 필요)."
+      },
+      {
+        "title": "[최상급·QA Q1] 「define만 켜면 된다」가 틀렸다 — 광고 ID 8개가 전부 구글 공개 테스트 ID이고 GMA 패키지는 HEAD에 0건",
+        "description": "`Assets/02. Scripts/Data/GameConstants.cs:210-217`의 AppId·Rewarded·Interstitial·Banner가 Android/iOS 통틀어 8개 모두 `ca-app-pub-3940256099942544`(구글 공식 데모 퍼블리셔). 여기에 `com.google.ads.mobile: 11.2.0`은 워킹트리 `Packages/manifest.json:4`에만 존재하고 `git show HEAD:Packages/manifest.json`에는 **0건**. `GoogleMobileAdsSettings.asset`도 없어 AdMob APPLICATION_ID가 AndroidManifest에 병합되지 않는다. 결과: define을 먼저 켜면 (a) 클린 체크아웃에서 SDK 미설치로 CS0246, (b) 설치돼 있어도 APPLICATION_ID 누락으로 GMA 초기화 예외, (c) 둘 다 넘겨도 테스트 광고만 노출돼 매출 0 + AdMob 정책 위반. 어제의 4종 세트는 **실 AdMob 단위 ID 발급 → GoogleMobileAdsSettings 생성 → 패키지 커밋**을 앞에 두지 않으면 첫 단계에서 깨진다. 곁가지로 `Assets/Plugins/Android/AndroidManifest.xml`에는 VIBRATE만 있고 INTERNET 권한 선언이 없어 AAR 병합에 의존한다(Q6)."
+      },
+      {
+        "title": "[최상급·Art] MeowBeat 판정 팝업은 위계가 문제가 아니라 호출처가 0건이었다 — Perfect 분기는 도달 불가",
+        "description": "`Assets/Scripts/Note/HitEffectController.cs`의 `ShowHitEffect()`를 부르는 코드가 프로젝트 전체에 **0건**. Perfect/Good/Miss 플로팅 텍스트가 화면에 뜬 적이 없다. 유일한 이벤트 경로 `GameEvents.OnNoteHit`은 시그니처가 `Action<bool>`이고 `RhythmCatController.cs:41`이 `OnNoteHit(isHit ? Good : Miss)`만 보내므로 `case Perfect`는 어떤 경로로도 실행되지 않는다 — `PerfectColor #FFD700`과 `Assets/Sprites/Effect/PERFECT_ .png`(파일명 끝에 공백까지 있다)는 사용처 없는 자산이다. 설계상으로도 세 판정이 `fontSize 36`·`floatDistance 80f`·`fadeDuration 0.5f`로 전부 동일해 **색만 다르다**(색 단독 정보 전달 금지 원칙 위반). 모션은 `MissJudgement.anim` 최장 키프레임 **2.0833초**로 리듬게임 기준(단순 100ms·상세 500ms 상한)의 4배라 120BPM에서 다음 노트 여러 개와 겹친다. 그리고 `Handheld.Vibrate`·Haptic 전역 0건 — 리듬게임에 촉각 피드백이 없는데, 정작 퍼즐인 NumLink는 `Tools/Vibration.cs`를 만들어 `NumberButton.cs:128`에서 실제로 호출한다. **장르 대비 정반대로 붙어 있다.**"
+      },
+      {
+        "title": "[Developer D4] NumLink 데일리 챌린지 — 클리어를 기록하는 함수가 어디에서도 호출되지 않는다",
+        "description": "`data.lastDailyPlayDate`에 쓰는 코드는 `DailyPuzzleProvider.cs:88`과 `DailyPuzzleManager.cs:96` 둘뿐인데, 이를 감싼 `RecordDailyClear()`·`OnDailyPuzzleCleared()`가 Assets 전체에서 **호출처 0건**이다. `DailyChallengeHubPanel.cs:182-184`는 `GameEvents.TriggerLevelSelected(TodaySeed % TotalLevels)`만 부르고 끝나 일반 레벨 클리어 경로로 빠지는데 그 경로에 데일리 훅이 없다. 결과: `IsClearedToday` 영구 false → 오늘의 퍼즐 무한 재플레이, `DailyStreakUI` 0 고정, 3/7/30일 배수 도달 불가, `DailyRewardCoin` 50 지급 자체가 발생하지 않는다. 부수로 `LoadDailyState()`는 `Start()` 1회만 돌고 NumLink `Assets/02. Scripts/` 전체에 `OnApplicationPause`/`OnApplicationFocus` 핸들러가 **0건**이라, 23:55에 들어가 백그라운드로 두고 00:05에 복귀하면 어제 시드가 그대로 남는다."
+      },
+      {
+        "title": "[Developer D6] 냥카페는 데드코드인데, 배선하는 순간 오프라인 수익이 무한 재지급된다",
+        "description": "`Farm/CafeManager.cs`의 guid `3d6044e0ad6460c4f9a804f771c750d8`를 참조하는 씬·프리팹 **0건**, `AddComponent<CafeManager>` **0건** — 오프라인 수익·카페 등급·리듬 보너스가 전부 미동작한다. 문제는 배선 직후다: `Start()`(`:26`)가 `CalculateOfflineEarnings()`로 코인을 지급하면서(`:54-58`) `LastQuitTime`을 갱신하지 않고, 그 값은 `SaveCafeData()`(`:132-136`)에서만 쓰이며 그건 `OnApplicationPause(true)`/`OnApplicationQuit`에서만 호출된다. FarmScene은 `LoadSceneManager.cs:22`로 Additive 반복 로드/언로드되므로(`ButtonController.cs:517` ↔ `FarmManager.cs:279`), 8시간 방치 후 팜 진입 → 나가기 → 재진입을 반복하면 같은 8시간분이 계속 지급된다. `BtnIdleToggle()`(`:509-517`)에는 같은 파일 `:97 BtnPlay`에 있는 `isSceneAdditivelyLoaded` 가드도 없어 `LoadSceneManager.cs:37`의 0.5초 창 안에 연타하면 FarmScene이 중복 로드된다."
+      },
+      {
+        "title": "[Developer D1] MeowBeat 고양이·팜 세이브가 모바일에서 원천 불능 — 경로 2중 결함",
+        "description": "(a) 저장 루트가 `Application.dataPath + /CatSave/`인데 안드로이드에서 이 값은 읽기 전용 APK 경로라 `Directory.CreateDirectory`(`DatabaseManager.cs:400`)에서 예외가 난다. 같은 프로젝트 `PhotoManager.cs:20-21`은 `Application.persistentDataPath`를 올바로 쓰고 있어 내부 규칙이 갈렸다. (b) `LoadCat()`은 `:421-422`에서 `savePath`를 만들어놓고 루프 안 `:428-429`에서 `saveFileName = CatFileName; saveFileName += i;`로 **접두사를 날린다** — 저장은 `:409`에서 절대경로에 쓰는데 로드는 상대경로 `CatData.data0`을 찾으니 `:430 File.Exists`가 항상 false, 첫 루프에서 break. 재현: 고양이 구매/선택 → 백그라운드(`:757 OnApplicationPause` → `SaveCat`) → 재실행 → 구매·선택 전부 초기값. `LoadFarmData`(`:676-686`)는 접두사를 유지해 정상이라 결함이 `LoadCat`에만 있다. 덤으로 `:757`의 `OnApplicationPause(bool pause)`는 인자를 쓰지 않아 **복귀 시에도** 전체 저장이 돌고, `:721 long.Parse(PlayerPrefs.GetString(key))`는 무가드라 pref 하나만 손상돼도 `LoadInteractionData()` 전체가 멈춘다."
+      },
+      {
+        "title": "[Developer D2·D3·D7] 팜과 리듬의 입력이 셋 다 조용히 틀렸다 — 인자 오용·UI 관통·멀티터치 유실",
+        "description": "**D2**: `Farm/CatInteraction.cs:34`이 `Physics2D.Raycast(worldPoint, Vector2.zero, layerMask)`인데 3번째 인자는 `distance`다. `LayerMask → int → float` 암시적 변환이 경고 없이 통과해 레이어 필터가 기본값(전체)이 되고 마스크 비트값이 거리로 들어간다 — 고양이 위에 `CatFood`나 `FarmManager.BoundsCollider`가 겹치면 엉뚱한 콜라이더가 hit로 잡혀 `:40` 태그 검사에서 걸러지고 쓰다듬기가 무반응이 된다(간헐 재현이라 추적이 오래 걸리는 유형). **D3**: `EventSystem.current.IsPointerOverGameObject()` 호출이 `Assets/Scripts/` 전체에 **0건**이고 `FarmFoodManager.cs:32`·`CatInteraction.cs:30`·`CameraControl.cs:22,28`이 `Update()`에서 `Input.GetMouseButtonDown(0)`를 날것으로 읽는다 → UI 버튼을 누르면 그 뒤 좌표에 사료가 놓이고 고양이가 이동을 시작하며(`FarmFoodManager.cs:63-73`) `_foodActive` 잠금이 걸려 실제 급여가 차단된다. 슬라이더를 끌면 카메라도 같이 팬한다. **D7**: `Player/PlayerController.cs:40-47`이 `Input.GetTouch(0)`의 `Began`만 본다 — 왼손 엄지를 올려둔 채 오른손으로 탭하면 0번은 `Stationary`라 막히고 새 터치는 `GetTouch(1)`이라 읽히지 않아 **양손 플레이 입력이 통째로 유실**된다."
+      },
+      {
+        "title": "[Developer D5] NumLink 게임오버 패널 2개가 동시에 구독하고, 구 패널의 코인 차감은 HUD를 갱신하지 않는다",
+        "description": "`UI/GameOverPanel.cs:36`과 `UIToolkit/Controllers/GameOverController.cs:29`가 각자 `GameEvents.OnAllLivesLost`를 구독하고 각자 `Show()`한다. `GameManager.cs:285-296`이 「UIToolkit 우선 / uGUI 폴백」으로 하나만 띄우도록 분기해 놨지만 패널이 이벤트를 직접 물고 있어 그 분기가 무력화된다. 더 나쁜 건 차감 경로다 — uGUI 쪽 `OnUseCoinsClicked`(`:115-116`)는 `data.coin -= CoinCostPerLife; SaveSystem.Save(data);`로 `ResourceManager`를 **우회**해 HUD 표시값과 `TextChangeEvent`가 갱신되지 않는 반면, UIToolkit 쪽(`GameOverController.cs:182`)은 `AddResource(Coin, -CoinCostPerLife)`로 올바르게 처리한다. 재현: 코인 500에서 목숨 소진 → 구 패널로 이어하기(-50) → HUD는 계속 500 → 이후 클리어 보상 +30 → HUD가 480으로 점프. 유저 눈에는 「보상을 받았는데 코인이 줄었다」로 보인다."
+      },
+      {
+        "title": "[QA Q2·Q3·Q5] UMP 동의 0건, manifest 손상 시 「로딩 성공한 곡 0개」, 씬에 남은 테스트 광고 토글 2개",
+        "description": "**Q2(high)**: 두 프로젝트 모두 `ConsentInformation`·`ConsentForm`·`UserMessagingPlatform` 호출 **0건**인데, MeowBeat는 `GoogleMobileAds.Ump.dll` 등 UMP DLL 4개와 `GoogleUmpDependencies.xml`을 빌드에 포함한다. 기기 리전을 EEA로 두면 동의 폼 없이 즉시 광고를 요청한다 — 구글이 CMP를 필수로 요구하는 구간이다. **Q3(high)**: `SongDataLoader.cs:61-64`가 `FromJson` → `isLoaded = true` → `Debug.Log(...songs.Count...)` 순서라, JSON이 잘리면 **isLoaded=true가 먼저 박힌 뒤** 로그에서 NRE로 코루틴이 죽는다. `GameManager.cs:351·530·618`이 전부 IsLoaded를 게이트로 쓰므로 「로딩 성공했는데 곡 0개」로 진입하고, 에러 UI도 재시도도 폴백도 0건이다. **Q5(medium)**: `MainScene.unity`에 `TestButton`(41840)·`TestButton (1)`(17282)이 `AdmobManager.SetTestId`(41912, RuntimeOnly)에 배선돼 있다. `SetTestId`는 `isTestMode`를 토글해 실광고 ID와 테스트 ID를 런타임에 뒤집는다. 지금은 둘 다 `m_IsActive: 0`이라 노출되지 않지만 빌드에는 포함되고 `SetActive(true)` 한 번이면 실사용자에게 열린다."
+      },
+      {
+        "title": "[QA Q4] 테스트가 있는 쪽은 설정이 틀렸고, 설정이 맞는 쪽은 삭제 대기다",
+        "description": "MeowBeat `AutoGenTests.cs`가 건드리는 클래스는 `NoteSpawner`·`RhythmCatController` **2개뿐**(83개 .cs 중 2.4%)이고 점수·판정·세이브·곡 데이터·`SongManager`·`NoteManager`는 전부 테스트 0이다. 더 큰 문제는 `Assets/AutoQATests/`에 **asmdef가 없다**는 것 — 프로젝트 전체 asmdef가 `GoogleMobileAds.Editor.asmdef` 하나뿐인데 `NUnit.Framework`·`UnityEngine.TestTools`를 using하므로 predefined `Assembly-CSharp-Editor`가 이를 참조하지 않아 러너 목록에 안 잡히거나 컴파일이 깨진다. 반대로 NumLink는 삭제 대기(`D` 4파일) 중인 `Assets/Tests/Editor/AutoGenTests.asmdef`에 TestRunner 참조가 제대로 들어 있다. 살아 있는 쪽이 설정 미비, 설정이 맞는 쪽이 삭제 대기라는 뒤집힌 구도다. NumLink에는 QA 스크립트 자체가 0개(`Tools` 폴더 부재)라 7/26에 제안된 템플릿 이식이 아직 미실행이다."
+      },
+      {
+        "title": "[검증 3종] 8/25와 완전 동일 — 그리고 기준선 자체가 오독이었다",
+        "description": "`Tools/qa_static.py` exit **2** / error **1**(TIMING_DSPTIME_UNUSED), `Tools/unity_validate.py` exit 0 / 0 error(6.3s), `Tools/run_regression.py` 2/2 탐지 성공. **정정**: 그동안 저널과 프롬프트가 인용해 온 「qa_static 2 error」는 오독이다. 8/24 원문의 2는 **exit code**이고 실제 error 건수는 8/07·8/18·8/24·8/25·오늘까지 줄곧 **1건**이었다. 오늘 줄어든 게 아니라 처음부터 1건이었다. `known_bugs.json`은 7개 패턴 정의에 오늘 탐지된 미해결 1건. 알려진 버그를 파일에서 재판정한 결과 **닫힘 0 / 부분 1(IAP, 여전히 워킹트리) / 열림 11**로 8/25 이후 움직인 건 0건이다. 아울러 저널 어디에도 「11건」이 번호로 열거된 적이 없어 매핑이 불가능했다는 점을 QA가 정직하게 짚었다 — 다음 회의부터 번호 고정 목록이 필요하다."
+      },
+      {
+        "title": "[Developer·마감] targetSdk 36은 D-5, 연기선은 11/1 — 16KB는 별개로 2027-02-01",
+        "description": "공식 문서 기준 2026-08-31부터 신규 앱·업데이트는 **API 36(Android 16)** 이상이 필수이고, 연기 요청 시 **2026-11-01**까지 유예된다. 기존 앱은 API 35 이상이어야 상위 OS 신규 사용자에게 계속 노출된다(Wear OS·Automotive 35, TV·XR 34). 16KB 페이지 크기는 targetSdk 정책 문서에 언급이 없는 **별개 요구사항**이며 마감은 **2027-02-01**, 네이티브 .so를 쓰는 앱만 해당한다 — 검색에 흔한 「2025-11-01」 주장은 1차 출처와 불일치해 폐기했다. 우리 실측: 두 프로젝트 모두 Unity **6000.3.5f2**(최신 6000.3.22f1 대비 17패치 뒤짐), NumLink targetSdk 34·아키텍처 3(ARMv7+ARM64), MeowBeat 35·아키텍처 2(ARM64). Unity 6000.3.23f1은 **미출시**(최신은 8/14자 6000.3.22f1, 주기 약 2주라 8/27~28 예상)이고, 지난 회의가 안 다룬 **6000.0.82f1이 8/20 출시**됐다."
+      },
+      {
+        "title": "[Game Designer] D7 15%가 MVP 컷라인인데, 그 숫자를 잴 계측이 문서 전체에 0건이다",
+        "description": "`NumLink/docs/GAME_DESIGN.md:338`이 「Phase 1 목표: D7 리텐션 15%+」, `:349`가 「Phase 2: D30 8%+」, `:382`가 「Phase 1이 MVP 컷라인」이라고 못 박았는데, 두 프로젝트 docs 10개 파일을 `analytics|계측|퍼널|funnel|KPI|지표|로깅`으로 grep한 결과 **0건**이다. 유일한 관련 언급은 삭제된 `FirebaseManager` 잔해뿐(`CODE_ANALYSIS.md:24·93`). 더 나쁜 건 목표의 기준선도 틀렸다는 점 — `GAME_DESIGN.md:145`는 현재 구조의 D1을 「40-50%, 캐주얼 퍼즐 평균」이라 적었지만 2026 실측 퍼즐 평균은 **D1 31.85% / D7 12.18% / D30 5.35%**(Mistplay)로, 장르 평균을 **8~18%p 과대평가**한 위에 Phase 목표를 얹었다. `:229`의 「데일리 콘텐츠 도입 시 D7 +10~15%p」도 출처 표기가 없는데 이 한 줄이 데일리 퍼즐을 「필수」로 올린 유일한 근거다. MeowBeat도 `GAME_BRIEF.md:143`이 「MVP 기준 충족 후 출시」라고만 하고 그 기준이 어떤 숫자인지는 어디에도 없다. **코드가 56일 멈춘 상태에서 재개할 때 첫 항목이 기능이 아니라 계측이어야 하는 이유다.**"
+      },
+      {
+        "title": "[Game Designer] 라이브옵스 실측과 우리 캘린더의 간극 — 권장 월 15-25건 대 현재 1건",
+        "description": "잘 설계된 라이브옵스 이벤트는 DAU의 **40-60%**가 참여하고 ARPDAU를 **20-40%** 올리며(세분화 운영 시 +15-30%), 모바일 IAP 매출의 **84%**가 라이브옵스를 도는 게임에서 나온다. 장르별 권장 월간 이벤트는 캐주얼/퍼즐 **15-25건**(중첩 포함), 하이퍼캐주얼 4-6건이고 이상적 길이는 금~일 **72시간**, 경쟁 이벤트 사이 12-24시간 공백이다. 그런데 `GAME_DESIGN.md:336-343`의 Phase 1 라이브옵스 자산은 데일리 퍼즐 **1종**이 전부이고 `Feedme/docs/GAME_BRIEF.md`에는 데일리·이벤트 항목 자체가 없다. 다만 1인 개발에 월 15-25건은 비현실적이므로 Game Designer는 권장치를 그대로 목표로 삼는 대신 **「주말 72시간 이벤트 1건 + 데일리 1건」의 최소 캘린더**로 축소 적용할 것을 제안했다. 참고 경쟁선: 매치3 상위권 D1/D7/D30 = 47/24/13%. 고양이 IP 쪽은 2026-07 Sensor Tower 다운로드 성장 1위가 고양이 캐릭터 물리 퍼즐 `Smash Fest!`였다(월 글로벌 게임 다운로드 37.2억, MoM +2.2%)."
+      },
+      {
+        "title": "[Art] NumLink 팔레트가 C#과 USS로 갈라져 있고, 하필 USS 쪽이 금지 조합이다",
+        "description": "같은 이름의 토큰이 두 곳에서 다른 값을 갖는다 — `sage`는 C#(`ThemeData.cs:15-20`·`PuzzleManager.cs:83-88`)에서 `#6BB06B` 세이지 그린인데 USS(`Resources/UIToolkit/Styles/numlink-variables.uss:51-63`)에서는 `#4ECDC4` **민트/터쿠아즈**다. teal·amber·plum도 값이 드리프트했고 coral만 같다. 보드 셀은 UGUI(`NumberButton.childImage`)로 그려 C# 값이, HUD·레벨선택·정산 패널은 USS 값이 렌더되므로 **한 화면에 두 팔레트가 동시에 뜬다**. 그리고 `#FF6B6B + #4ECDC4`는 coolors 최다 사용 조합으로 사용자 금지 규칙(민트 계열 뻔한 조합·AI슬롭)에 정면으로 걸리며, 둘의 상호 대비는 **1.43:1**이라 나란히 두면 눈이 진동한다. 대비 실측도 나쁘다 — `--text-muted #999999` 2.70:1 FAIL, `--gold #FFD93D` **1.31:1**(골드 텍스트는 사실상 안 보임), 흰 글자 on 코랄 2.78:1 FAIL. 다만 코랄·민트 버튼은 **흰 글자를 다크(#2C2C2C)로 바꾸는 것만으로 5.03:1·7.22:1 PASS**로 넘어간다 — 가장 싼 수정이다. USS 난이도 4색은 정상 시야에서도 Easy vs Normal dE00 10.25로 이미 뭉친다."
+      },
+      {
+        "title": "[Art] 연결 셀 6색이 적록색약에서 3색으로 붕괴한다 — dE00 4.70, 색 외 단서 0개",
+        "description": "Machado 2009 행렬 + CIEDE2000으로 계산(hex → 감마 역변환 → CVD 행렬 → sRGB 복원 → CIELAB → dE00). 기준은 dE00 11 미만 혼동 위험·5 미만 구분 불가. **정상 시야에서도** 코랄 vs 시에나가 13.39로 이미 아슬아슬하고, **D형(deuteranopia, 남성 약 6%)에서는 코랄 vs 세이지 4.70(치명)·틸 vs 플럼 6.18·코랄 vs 시에나 6.43·세이지 vs 시에나 7.01로 6쌍 중 4쌍이 임계값 아래**다. P형은 2쌍, T형은 코랄 vs 시에나 4.27이 치명적이다. 그런데 `PuzzleManager.cs`·`NumberButton.cs`·`NumberManager.cs` 전체에 패턴·아이콘·형태로 구분하는 코드가 **0건** — 색이 유일한 구분축이다(`HidePatternType`은 보드 생성용 은닉 패턴이지 시각 단서가 아니다). 셀 배경 `#F5EDE4` 대비로도 6색 전부 4.5:1 미달이고 최악인 앰버가 **1.80:1**이다. Okabe-Ito 색각 안전 팔레트로 갈면 D형 최소 dE00이 12.52로 2.7배 개선되지만 채도가 높고 차가워 웜 크림 톤과 충돌하므로, Art는 **색은 두고 테두리 패턴 축(실선/이중선/점선/굵은실선/모서리컷/없음)을 얹는 쪽**을 권했다 — 정상 시야 사용자에게 손해가 없고 색약에서 6쌍이 100% 구분된다."
+      },
+      {
+        "title": "[Content Writer] 폐쇄테스트는 12명×14일이 끝이 아니다 — 「참여도 부족」이 공식 반려 사유로 명시돼 있다",
+        "description": "Play Console 공식 문서 기준 반려 사유는 두 가지로 명시된다: **12명 미만 opt-in**, 그리고 **테스트 기간 중 테스터 참여도 부족**. 프로덕션 신청서는 테스터 피드백 요약·수집 방법·**사용 가능한 모든 기능을 썼는지**·프로덕션 예상 행동과의 차이를 서술형으로 요구한다. 14일 시계도 까다롭다 — 14일 미만에서 opt-out한 테스터는 미계산이고 재가입 시 연속 14일을 다시 채워야 한다. 요건 이력은 2023-11 시행 20명 → 2024-12 **12명**으로 하향, 기간 14일은 불변이며 2026년 현재 추가 완화·강화는 없다. 조직(비즈니스) 계정과 2023-11-13 이전 개인 계정은 면제다. MeowBeat는 패키지명 변경으로 신규앱이 되어 이 트랙을 통째로 다시 타야 하므로, **완료 정의를 「12명 모집」이 아니라 「12명 × 전 기능 사용 + 피드백 수집 기록」으로 바꿔야** 14일을 다 채우고 반려당하는 사고를 막는다. 별개로 앱의 **76~80%가 아이콘·영상·피처그래픽을 한 번도 테스트하지 않는다**(AppTweak, 2025-01~12)."
+      },
+      {
+        "title": "[Content Writer·해소] 레벨 수 문서 충돌 60/200/60을 코드로 확정 — 200이 진실, 그런데 100~199는 보드 크기 재탕이다",
+        "description": "`docs/GAME_BRIEF.md`는 60레벨, `README.md`는 200레벨(Easy 0-39/Normal 40-99/Hard 100-159/Master 160-199), `docs/GAME_DESIGN.md`는 60레벨 전제로 갈려 있어 스토어 설명에 레벨 수를 쓰는 순간 허위 기재 위험이 있었다. 회의 중 코드로 확정했다 — `GameConstants.cs:9 TotalLevels = 200`이 진실이고 `ARCHITECTURE.md:130-132`가 「BoardData.json은 720개 보드, `levelIndex`는 0-59 순환 그룹 ID」라고 적고 있다. 그런데 `LevelDataProvider.cs:36-90`을 열어보니 더 큰 게 나왔다: 보드 크기가 5x5·5x6·6x6·6x7·7x7·6x8 **6종뿐**이고 레벨 130-159가 7x7(80-99와 동일), **Master 160-199가 6x8로 100-129와 완전히 같다**. 주석이 이유를 자인한다 — 「8x8/8x9는 BoardData.json 미존재 → 6x8 사용」. 즉 **레벨 100 이후로는 보드 크기 상승이 없고 Master 밴드는 Hard 첫 구간의 재탕**이다. 스토어에 「200레벨」을 쓰는 건 가능하지만 「난이도가 계속 올라간다」는 쓸 수 없다."
+      },
+      {
+        "title": "[Content Writer] 스토어 자산 실측 — NumLink 스크린샷 22장이 전부 갈아엎기 전 화면, MeowBeat는 전무",
+        "description": "`STORE_LISTING.md`는 오늘도 없다(`C:/Unity` 전체 재귀 검색 0건) — 3월부터 6회 반복된 계획이 7일 연속 산출물 0이다. NumLink 피처 그래픽 1024x500 없음, 스토어용 512 아이콘 없음(`Assets/03. Sprites/Icon/ICON.png`는 인게임 UI 스프라이트), 프로모션 영상 없음. `Screenshots/`에 PNG 22장이 있으나 **전부 2026-03-27~04-01 캡처**이고 그 뒤 `feature/uitoolkit` 브랜치에서 HUD·레벨선택을 갈아엎었으므로 현재 빌드와 불일치 — 재촬영이 필요하다. MeowBeat는 아이콘·피처그래픽·스크린샷 디렉터리 자체가 없고 `Assets/Prefabs/Icon/feedIcon_0327.png` 하나가 인게임 아이콘이다. 「AI 음악」 문구는 8/24 재포지셔닝 이후에도 **6개 파일 19곳**에 잔존한다(어제 집계 8곳보다 넓다: `docs/AI_MUSIC_PIPELINE.md` 4·`docs/COMPETITIVE_ANALYSIS.md` 6·`.gemini/GEMINI.md` 1 추가). 이 중 급한 건 `docs/GAME_BRIEF.md:78`의 포지셔닝 한 줄 — 문서 스스로 「다른 세션의 컨텍스트 파악용」이라 밝히고 있어 스토어 설명 초안에 그대로 샐 경로다."
+      },
+      {
+        "title": "[DevOps] 라이브는 건강한데 PR은 무검증이다 — Dependabot 2건이 체크 0개로 열려 있다",
+        "description": "최근 런 10건 **전부 success**(실패 0). 8/25 회의록 커밋 `ab37e98` 배포 42초 완주. 라이브 루트 200(1,246 B), `/data/operations-journal.json` **200 / 3,071,191 B / 118건**이고 로컬 `public/data/` 파일과 **바이트 완전 일치** — 8/18부터의 404가 완전히 종결됐고 배포본과 소스 동기화가 실증됐다. 번들 부채도 해소 상태(`usePersistentJournal.ts`가 런타임 fetch라 JS 번들에서 빠짐, 다만 JSON은 회의 1회당 약 31KB씩 무제한 증가해 3.07MB에 도달). 문제는 반대편이다 — Dependabot **#129**(npm-minor-patch 13개, 8/16·10일 경과)와 **#124**(setup-node 6.4.0→7.0.0, 7/19·38일 경과)가 둘 다 `MERGEABLE`/`CLEAN`인데 **체크 0건**이다. 원인은 명확했다: `deploy-pages.yml` 트리거가 `push: [main]`·`workflow_dispatch`뿐이고 `weekly-insights.yml`은 `schedule`뿐이라 **PR 상태에서 빌드가 한 번도 돌지 않는다**. 13개 패키지 업데이트가 검증 없이 main에 들어가고 배포 실패로만 발견되는 구조였다."
+      },
+      {
+        "title": "[DevOps] 오늘은 사살이 없었다 — 다만 원인이 제거된 게 아니라 이번 달 쿼터를 이미 쓴 것뿐이다",
+        "description": "마지막 부팅 2026-08-24 07:32:23, 가동 **45.1시간**. 1074 이벤트는 8/24분 3건이 마지막이고 8/25·8/26 신규 **0건**이라 어제 회의가 `ab37e98`까지 무사히 커밋됐고 오늘도 사살이 없었다. `RebootRequired` 키도 없다. 그러나 레지스트리는 그대로다 — `ActiveHoursStart=8`, `ActiveHoursEnd=2`로 자동화가 도는 03·04·05시가 전부 재시작 허용 창 안이다. 어제 넣은 프리플라이트 3종은 오늘 03:37에 처음 온전히 동작했다: `PREFLIGHT OK OAuth: 로그인 유지 (max)` / `PREFLIGHT OK 재부팅 대기 없음` / `PREFLIGHT WARN 활성 시간 08:00~02:00 - 자동화 시간대 [3, 4, 5]시가 WU 재시작 창에 노출`. 어제 04:37 실행에서는 `invalid literal for int()`로 조회 자체가 실패했으니 **탐지기는 고쳐졌고 탐지 대상은 그대로**다. 헬스체크의 Last Result 1도 고장이 아니라 설계 신호였다 — 본체가 `sys.exit(1 if errors else 0)`이고 하트비트에 `2026-08-26T03:37:34`가 찍혀 완주했다. 미해결 2건은 Digest·StudyGenerate. **경로 정정**: `automation_healthcheck.py`는 PKM이 아니라 `C:/Users/LIMMM/`에 있고 실행 래퍼는 `.taskrunner/automation_healthcheck.vbs`다. 스케줄러는 StudyPush 31일·GBrain 89일 Disabled, JobResearch 04:03 / Standup 04:27로 오늘은 24분 벌어졌으나 둘 다 StartBoundary 04:00 고정에 RandomDelay만 달라 매일 순서가 바뀐다(내일 예정 간격 10분)."
+      },
+      {
+        "title": "[Art] 폰트 라이선스 결론 — MeowBeat는 즉시 조치, 미사용 2종 13MB는 삭제만으로 리스크가 3분의 1로 준다",
+        "description": "MeowBeat 폰트 3종이 전부 아시아폰트(asiafont.com) **ACC 계열**이다: `1ACCsweet.ttf`(4.0MB, `Assets/Scenes/MainScene.unity`·`Assets/_Recovery/0.unity` **2건 참조**), `ACCfall.ttf`(6.0MB, 참조 0), `ACCsky.ttf`(7.1MB, 참조 0). 공식 안내상 비상업 용도 외에는 라이선스 구매가 필수인데 비상업 기준이 명시돼 있지 않아 분쟁 소지가 있고, 2026-01-01부터는 교육기관도 무료 사용이 불가하다. GoogleMobileAds가 붙은 시점에서 이미 상업적 이용이다. 프로젝트 안에 폰트 라이선스 문서도 없다(`LICENSE`는 GoogleMobileAds 것뿐). **미사용 2종(13MB)은 삭제만 해도 리스크가 3분의 1로 줄고**, `1ACCsweet`는 MainScene에 실제로 걸려 있으므로 구매 또는 무료 상업용 한글 폰트 교체가 필요하다. NumLink는 메이플스토리체(상업용 무료로 알려짐)라 상대적으로 안전하나 **공식 약관 본문을 확보하지 못해 「안전 확정」으로 보고하지 않는다** — 출시 전 게임 임베딩·재배포 조항을 직접 확인하고 라이선스 문서를 리포에 남길 것. 곁가지로 NumLink는 `Assets/Layer Lab`이 2,905개/**240MB**인데 실제 게임 자산 `Assets/03. Sprites`는 729개/40MB로 **미사용 에셋 패키지가 게임 자산의 6배**다."
+      },
+      {
+        "title": "[자율 완료] agent-office에 PR 빌드 게이트 신설 + 동기화 실패 무음 픽스",
+        "description": "**① `.github/workflows/pr-validate.yml` 신설**: `pull_request: [main]` + `workflow_dispatch` 트리거로 `npm ci` → `npx tsc -b` → `npm run build` → **회의록 산출물 검증**(`dist/data/operations-journal.json` 존재·엔트리 1건 이상, 실패 시 `::error::`로 중단)까지 돌린다. 배포는 하지 않아 `deploy-pages.yml`과 역할이 겹치지 않고, `concurrency` 그룹을 PR 번호로 잡아 중복 실행을 자른다. 8/18~8/24 라이브 저널 404가 「빌드 산출물에 JSON이 실렸는지 아무도 안 본 것」에서 나왔으므로 그 확인을 게이트에 박았다. YAML은 `yaml.safe_load` 통과, 검증 스텝 로직은 로컬 dist에 대해 실측(3,071,191 B / 118건). **② `src/hooks/useAgentSync.ts` D9 수정**: `if (!res.ok) { setSyncError(null) }`와 `catch { setSyncError(null) }`가 HTTP 오류와 네트워크 예외를 모두 지워, `status.json`이 404거나 네트워크가 끊겨도 대시보드가 마지막 상태를 그대로 들고 조용히 서 있었다. 각각 HTTP 상태 코드와 예외 메시지를 노출하도록 고쳤다. `status.json`은 라이브 200(1,020 B)으로 실재하므로 404는 진짜 이상 신호가 맞다. 빌드 게이트 tsc 0 / vite 0 / 345.38 kB(gzip 114.97) 통과."
+      }
+    ],
+    "meetingTitle": "2026-08-26 수요일 정기 회의 — 호출처 0건: 만들어둔 기능이 어디에도 연결돼 있지 않은 여섯 곳",
+    "meetingSummary": "어제 미완료 8건이 하루 동안 한 칸도 못 움직였다는 보고로 시작해, 그 정지 상태를 각자 다른 각도에서 파고들었더니 전원이 같은 모양을 들고 돌아온 회의. 광고·판정 팝업·데일리 기록·냥카페·고양이 세이브·UMP 동의가 모두 「코드는 있는데 부르는 곳이 없다」는 한 문장으로 묶였고, 이 때문에 어제 세운 광고 4종 세트의 실행 순서가 틀렸다는 것이 드러나 6종으로 재배열됐다. targetSdk 36 마감이 D-5라 오늘 안에 정해야 할 것은 작업이 아니라 **8/31 제출을 포기하고 11/1 연기를 신청할지**라는 결론에 이르렀다. agent-office 쪽은 PR 빌드 게이트와 동기화 무음 픽스를 회의 중 자율로 닫았다.",
+    "meetingItems": [
+      {
+        "speaker": "Orchestrator",
+        "note": "먼저 나쁜 소식부터 정리하겠습니다. 어제 넘긴 미완료 8건을 항목별로 파일을 열어 다시 봤는데 완료가 0건입니다. targetSdk는 34와 35 그대로, define은 DOTWEEN 하나뿐, GoogleMobileAds 폴더 여전히 없음, AdManager 151-157 그대로, isShowing은 grep 0건, IAPManager는 아직도 워킹트리, dspTime 0건, Random.Range 잔존, 어댑티브 아이콘은 이걸로 네 번째 빈 배열입니다. 정지 일수는 NumLink 56일, MeowBeat 66일로 하루씩 늘었고 SPRINT.md는 88일과 141일입니다. 좋은 소식은 두 가지입니다. 오늘은 재부팅이 0건이라 사살 없이 진행했고, 어제 만든 안전 커밋 절차대로 이 회의록을 이슈와 텔레그램보다 먼저 커밋했습니다. 사소하지만 프롬프트 정정도 필요합니다 — NumLink SPRINT.md는 docs 아래가 아니라 리포 루트에 있습니다."
+      },
+      {
+        "speaker": "QA Tester",
+        "note": "오늘 제 보고의 핵심은 어제 우리가 세운 처방이 틀렸다는 겁니다. 광고를 봉인하려면 define을 켜라고 했는데, GameConstants 210에서 217번 줄을 열어보니 AppId부터 배너까지 Android와 iOS 여덟 개가 전부 ca-app-pub-3940256099942544입니다. 구글이 공개해 둔 데모 퍼블리셔 ID예요. 게다가 GMA 패키지는 워킹트리 manifest.json에만 있고 HEAD에는 0건입니다. GoogleMobileAdsSettings도 없어서 APPLICATION_ID가 매니페스트에 안 실립니다. 이 상태에서 define부터 켜면 클린 체크아웃에선 CS0246이고, 설치돼 있어도 초기화 예외고, 그것도 넘기면 테스트 광고만 나가서 매출은 0인데 정책 위반은 성립합니다. 순서를 뒤집어야 합니다. 실 AdMob 단위 ID 발급과 설정 에셋 생성이 define보다 앞입니다. 그리고 UMP 동의 흐름은 두 프로젝트 다 호출 0건인데 MeowBeat는 UMP DLL 네 개를 빌드에 싣고 있습니다. 마지막으로 기준선 하나 정정하겠습니다. 우리가 계속 인용한 qa_static 2 error는 오독입니다. 2는 exit code고 error는 처음부터 계속 1건이었습니다."
+      },
+      {
+        "speaker": "Developer",
+        "note": "QA가 짚은 그 모양이 제가 판 곳에서도 똑같이 나왔습니다. NumLink 데일리 챌린지는 클리어를 기록하는 RecordDailyClear와 OnDailyPuzzleCleared가 Assets 전체에서 호출처 0건입니다. 허브 패널이 TriggerLevelSelected만 부르고 끝나서 일반 레벨 경로로 빠지는데 그 경로에 데일리 훅이 없어요. 그래서 IsClearedToday는 영원히 false고, 오늘의 퍼즐은 몇 번이든 다시 풀 수 있고, 스트릭은 0에 고정이고, 보상 코인 50은 지급 자체가 일어나지 않습니다. 냥카페도 씬 참조가 0건인 데드코드인데 이건 더 고약합니다. 배선하는 순간 오프라인 수익 계산이 LastQuitTime을 갱신하지 않아서 팜을 나갔다 들어올 때마다 같은 8시간분이 계속 지급됩니다. 데드코드가 지뢰를 안고 있는 겁니다. 그리고 MeowBeat 고양이 세이브는 아예 모바일에서 동작할 수 없습니다. 저장 루트가 dataPath라 안드로이드에선 읽기 전용이고, LoadCat은 savePath를 만들어놓고 루프 안에서 접두사를 날려버려서 File.Exists가 언제나 false입니다. 같은 파일의 LoadFarmData는 멀쩡한데 LoadCat만 그렇습니다. 밖의 시계도 말씀드리면 targetSdk 36 마감은 8월 31일, 연기 신청선은 11월 1일입니다. 16KB는 별개고 2027년 2월입니다."
+      },
+      {
+        "speaker": "Art Director",
+        "note": "저는 MeowBeat 판정 피드백의 시각 위계를 보러 갔다가 볼 게 없다는 걸 알았습니다. HitEffectController의 ShowHitEffect를 부르는 코드가 프로젝트에 0건입니다. Perfect, Good, Miss 플로팅 텍스트가 화면에 뜬 적이 없어요. 그리고 유일한 이벤트가 Action bool이고 RhythmCatController 41번 줄이 Good 아니면 Miss만 보내니까 case Perfect는 어떤 경로로도 실행되지 않습니다. 어제 찾은 Random.Range 위에 한 겹이 더 있었던 겁니다. 설계도 문제인데 세 판정이 폰트 크기, 떠오르는 거리, 페이드 시간이 전부 같고 색만 다릅니다. Miss 애니메이션은 2.08초라 120BPM에서 다음 노트 여러 개와 겹치고요. 햅틱은 0건입니다. 리듬게임에 촉각 피드백이 없는데 정작 퍼즐인 NumLink는 Vibration 클래스를 만들어서 버튼에 실제로 물려놨습니다. 장르 대비 정반대예요. NumLink 쪽은 팔레트가 C#과 USS로 갈라져 있고 하필 USS의 sage가 민트입니다. 코랄에 민트, 우리가 쓰지 말자고 정한 조합입니다. 연결 셀 여섯 색은 적록색약에서 코랄과 세이지의 색차가 4.70까지 떨어져서 사실상 세 색으로 붕괴하는데 색 말고 다른 구분 단서가 코드에 0건입니다. 색을 바꾸기보다 테두리 패턴 축을 하나 얹는 게 톤도 지키고 접근성도 얻습니다."
+      },
+      {
+        "speaker": "Game Designer",
+        "note": "저는 반대 방향에서 같은 결론에 도착했습니다. GAME_DESIGN 338번 줄이 Phase 1 목표를 D7 15퍼센트로 잡고 382번 줄이 그게 MVP 컷라인이라고 못 박았는데, 두 프로젝트 문서 열 개를 계측 관련 단어로 전부 뒤져도 0건입니다. 즉 MVP 성공 여부가 숫자 하나에 걸려 있는데 그 숫자를 잴 도구가 설계에 없습니다. 기준선도 틀렸습니다. 145번 줄이 캐주얼 퍼즐 평균 D1을 40에서 50퍼센트로 적어놨는데 2026년 실측은 31.85퍼센트입니다. 8에서 18퍼센트포인트를 과대평가한 위에 목표를 얹은 겁니다. 그래서 저는 코드를 56일 만에 재개할 때 첫 항목이 기능이 아니라 계측이어야 한다고 봅니다. 라이브옵스 쪽은 참고만 드리면 잘 만든 이벤트가 DAU의 40에서 60퍼센트를 참여시키고 ARPDAU를 20에서 40퍼센트 올립니다. 권장 월간 이벤트가 캐주얼 퍼즐 기준 15에서 25건인데 우리는 데일리 퍼즐 하나뿐이에요. 다만 1인 개발에 그 숫자는 비현실적이니 주말 72시간 이벤트 하나에 데일리 하나, 최소 캘린더로 축소해서 잡는 걸 제안합니다. 그리고 정정 하나 — 이전 회의록의 Beatstar 종료 2026년 10월 31일은 2025년이 맞습니다."
+      },
+      {
+        "speaker": "Content Writer",
+        "note": "폐쇄테스트 요건을 다시 팠는데 우리가 12명과 14일만 보고 있었습니다. 공식 문서에 반려 사유가 두 개 적혀 있는데 하나는 12명 미만이고 다른 하나가 테스트 기간 중 참여도 부족입니다. 프로덕션 신청서는 테스터가 사용 가능한 모든 기능을 썼는지를 서술형으로 물어봅니다. 14일 시계도 까다로워서 중간에 빠진 테스터는 계산에서 빠지고 다시 들어오면 연속 14일을 새로 채워야 합니다. MeowBeat는 패키지명이 바뀌어 이 트랙을 통째로 다시 타야 하니까, 완료 정의를 12명 모집이 아니라 12명이 전 기능을 쓰고 그 피드백을 기록으로 남기는 것까지로 바꿔야 합니다. 14일 다 채우고 반려당하면 그 14일이 통째로 날아갑니다. 자산 쪽은 STORE_LISTING이 오늘도 없어서 7일 연속 0건이고, NumLink 스크린샷 22장은 전부 3월 말 캡처라 UI를 갈아엎은 지금 빌드와 안 맞습니다. AI 음악 문구는 어제 집계 8곳보다 넓은 6파일 19곳입니다. 마지막으로 레벨 수 충돌은 회의 중에 코드로 풀었습니다. 200이 맞는데, 100번 이후로는 보드 크기가 안 커집니다. Master 밴드가 Hard 첫 구간과 완전히 같은 6x8이에요. 주석이 8x8 데이터가 없어서라고 자백해 뒀습니다. 그래서 200레벨은 쓸 수 있어도 난이도가 계속 올라간다는 문구는 못 씁니다."
+      },
+      {
+        "speaker": "DevOps",
+        "note": "인프라는 오늘 좋은 쪽입니다. 최근 런 10건 전부 성공이고, 라이브 저널이 200에 3,071,191바이트로 로컬 파일과 바이트까지 똑같습니다. 8월 18일부터 끌던 404가 완전히 끝났다는 뜻입니다. 재부팅은 8월 24일 이후 0건이고 가동 45시간이라 오늘 회의는 안전합니다. 다만 원인이 사라진 게 아니라 이번 달 재시작 쿼터를 이미 쓴 것뿐이고, 활성 시간은 여전히 8시부터 2시라 03, 04, 05시가 노출 창 안입니다. 어제 넣은 프리플라이트는 오늘 03시 37분에 처음 온전히 돌았습니다. 어제는 활성 시간 조회가 파싱 에러로 실패했었는데 오늘은 값이 정확히 나옵니다. 탐지기는 고쳤고 대상은 그대로라는 얘기입니다. 문제는 반대편입니다. Dependabot PR 두 건이 열려 있는데 체크가 0개예요. 워크플로 트리거가 push와 dispatch뿐이라 PR 상태에서 빌드가 한 번도 안 돕니다. 13개 패키지 업데이트가 검증 없이 main에 들어가고 배포가 깨져야 발견되는 구조였습니다. 그래서 오늘 회의 중에 PR 검증 워크플로를 새로 넣었습니다. 참고로 setup-node 7.0.0의 파괴적 변경은 우리한테 해당 사항이 0건인 걸 실측으로 확인했고, Ubuntu 22.04 러너 폐기도 우리는 ubuntu-latest라 무영향입니다. 경로 하나 정정드리면 automation_healthcheck.py는 PKM이 아니라 홈 디렉터리에 있습니다."
+      },
+      {
+        "speaker": "Orchestrator",
+        "note": "정리하겠습니다. 오늘 일곱 명이 각자 다른 데를 팠는데 여섯 군데에서 같은 게 나왔습니다. 광고, 판정 팝업, 데일리 기록, 냥카페, 고양이 세이브, UMP 동의 — 전부 코드는 있는데 부르는 곳이 없습니다. 이건 우리가 그동안 진행률을 잘못 세고 있었다는 뜻입니다. 파일이 존재하면 만든 걸로 쳤는데 배선이 빠져 있었어요. 그래서 오늘 P0는 두 가지로 잡습니다. 첫째, 어제의 광고 4종 세트를 6종으로 늘리고 순서를 뒤집습니다. 실 AdMob ID 발급과 설정 에셋이 define보다 앞입니다. 둘째, 오늘 안에 정해야 할 게 작업이 아니라 결정입니다. targetSdk 마감이 5일 남았는데 두 프로젝트 다 Unity 에디터 세션이 필요하고 광고 배선까지 얽혀 있습니다. 8월 31일 제출을 현실적으로 볼지, 아니면 11월 1일 연기를 신청할지를 오늘 정해야 그다음 5일의 우선순위가 정해집니다. 이건 제가 결정할 수 없으니 사용자 확인으로 올립니다. agent-office 쪽은 PR 게이트와 동기화 무음 픽스를 회의 중에 닫았고, 자율 칼끝은 어제 승계 커밋에 이어 이틀 연속 전진했습니다."
+      }
+    ],
+    "decisions": [
+      {
+        "title": "[P0·자율 완료 ✅] 회의록을 이슈·배포·텔레그램보다 먼저 커밋 — 안전 커밋 절차 2일째 준수",
+        "description": "8/08·8/18·8/24 세 회의가 전부 커밋 직전에 죽은 뒤 8/25에 순서를 고정했고, 오늘 그 절차를 그대로 두 번째로 이행했다. 빌드 게이트 `npx tsc -b` 0 → `npm run build` 0 → 메인 청크 345.38 kB(gzip 114.97) 확인 후 `public/data/operations-journal.json`·`src/data/agents.ts`를 명시 스테이징해 커밋했다. `.omc/`·`e0.txt`는 이번에도 제외. 오늘은 재부팅 0건(가동 45.1h)이라 사살 위험이 낮았지만 절차는 위험도와 무관하게 적용했다."
+      },
+      {
+        "title": "[P0·자율 완료 ✅] agent-office PR 빌드 게이트 신설 — Dependabot 무검증 병합 구조를 닫았다",
+        "description": "`.github/workflows/pr-validate.yml` 신규: `pull_request: [main]` + `workflow_dispatch`, `npm ci` → `npx tsc -b` → `npm run build` → **회의록 산출물 검증**(`dist/data/operations-journal.json` 존재 + 엔트리 1건 이상, 실패 시 `::error::` 중단) + `GITHUB_STEP_SUMMARY` 표 출력. 배포 스텝은 넣지 않아 `deploy-pages.yml`과 역할이 분리되고, `concurrency`를 PR 번호로 묶어 중복 실행을 자른다. 액션은 기존 워크플로와 동일한 SHA 핀 유지. 검증: `yaml.safe_load` 통과, 산출물 검증 로직을 로컬 dist에 실제로 돌려 3,071,191 B / 118건 확인. **이 게이트가 없었기에 8/18~8/24 라이브 저널 404가 배포 후에야 발견됐다** — 그 확인을 이제 PR 단계에서 한다."
+      },
+      {
+        "title": "[P0·자율 완료 ✅] 동기화 실패 무음 픽스(D9) — 실패가 성공처럼 보이는 계열을 하나 더 닫았다",
+        "description": "`src/hooks/useAgentSync.ts`가 `if (!res.ok) { setSyncError(null); return }`와 `catch { setSyncError(null) }`로 HTTP 오류와 네트워크 예외를 **모두 지우고** 있어, `status.json`이 404거나 네트워크가 끊겨도 대시보드는 오류 없이 마지막 상태를 들고 `lastSyncTime`만 멈춘 채 서 있었다. 각각 HTTP 상태 코드와 예외 메시지를 노출하도록 수정. `status.json`은 라이브 200(1,020 B)으로 실재하므로 404는 진짜 이상 신호가 맞다. 이 결함은 7/26 「런 11건 전원 success 뒤에서 라이브가 3주 낡음」, 8/07 「초록불 다섯 개의 배신」, 오늘 「헬스체크 Last Result 1」과 같은 계열이다."
+      },
+      {
+        "title": "[P0·오늘 결정 필요·사용자] 8/31 제출을 목표로 둘지, 11/1 연기를 신청할지 오늘 정한다",
+        "description": "targetSdk 36 마감이 **D-5**인데 필요한 작업이 Unity 에디터 세션 + 광고 배선 + 빌드 검증까지 얽혀 있고, 오늘 QA Q1로 **실 AdMob 단위 ID 발급**이라는 외부 의존까지 새로 드러났다(발급·심사 시간이 우리 통제 밖이다). 공식 기준으로 연기 요청 시 **2026-11-01**까지 유예되고, 기존 앱은 API 35 이상이면 상위 OS 신규 사용자 노출이 유지된다(MeowBeat 35 = 조건 충족, NumLink 34 = 미달). **이건 작업이 아니라 결정이고, 이게 정해져야 남은 5일의 우선순위가 정해진다.** 연기를 택하면 아래 4·5번을 11월 기준으로 재배치하고 오늘부터는 계측·배선·접근성 쪽에 시간을 쓴다. 제출을 택하면 4번을 오늘 밤 세션으로 올린다."
+      },
+      {
+        "title": "[P0·사용자 세션·순서 재배열] 광고 봉인은 4종이 아니라 6종이고, define은 첫 단계가 아니라 네 번째다",
+        "description": "8/25의 4종 세트는 순서가 틀렸다. 정정된 순서: **① 실 AdMob 앱·단위 ID 발급**(`GameConstants.cs:210-217`의 데모 ID `ca-app-pub-3940256099942544` 8개 교체) → **② `GoogleMobileAdsSettings.asset` 생성**(APPLICATION_ID 매니페스트 병합) → **③ `com.google.ads.mobile: 11.2.0` 커밋**(현재 워킹트리에만, HEAD 0건) → **④ Android define `GOOGLE_MOBILE_ADS` 추가**(현재 `:822` DOTWEEN만) → **⑤ `AdManager.cs:151-157` 미준비 시 실패 반환 + `isShowing` 가드** → **⑥ `AdManager.cs:160`·MeowBeat `AdmobManager.cs:270` 콜백 `MobileAdsEventExecutor.ExecuteInUpdate` 래핑**. 여기에 **⑦ 워킹트리 `IAPManager.cs:85` 커밋**과 **⑧ UMP 동의 흐름 구현**(Q2), **⑨ `MainScene.unity`의 `TestButton` 2개 제거**(Q5), **⑩ NumLink AndroidManifest INTERNET 권한 명시**(Q6)를 같은 세트로 묶는다. ①~③ 없이 ④를 먼저 하면 CS0246 또는 초기화 예외로 빌드가 깨진다. 후속으로 `known_bugs.json`에 `AD_REWARD_UNCONDITIONAL`(error)·`AD_TEST_ID_IN_RELEASE`(error) 추가."
+      },
+      {
+        "title": "[P0·사용자 세션·67일째] MeowBeat 판정 코어 재작성에 「배선」을 포함한다 — dspTime·Random.Range·ShowHitEffect를 한 세션으로",
+        "description": "어제까지는 두 건(`NoteSpawner.cs:126` dspTime 앵커링 + `Note.cs:34` Random.Range 제거)이었는데, 오늘 세 번째가 붙었다 — `HitEffectController.ShowHitEffect()` **호출처 0건**이라 판정 문구를 고쳐도 화면에 뜨지 않는다. 통합 작업: ① `dspSongStartTime` + `PlayScheduled` + 절대차분으로 클럭 교체 ② Perfect ±50 / Good ±100 / Miss 윈도우 도입 ③ `GameEvents.OnNoteHit` 시그니처를 `Action<bool>`에서 판정 enum으로 승격(`RhythmCatController.cs:41`의 2단계 → 3단계) ④ `ShowHitEffect()` 실제 호출 배선 ⑤ 세 판정에 크기·거리 차등(현재 전부 동일, 색만 다름) ⑥ `MissJudgement.anim` 2083ms → 500ms 이하 ⑦ 햅틱 추가(NumLink `Tools/Vibration.cs` 재사용). 완료 조건: `qa_static.py` 0 error + `run_regression.py` dspTime 픽스처 + `docs/REDESIGN.md`에 ms 명시 + **미푸시 3커밋 push**. 폐쇄테스트 데이터가 이 판정 위에 쌓여야 하므로 테스트 시작 전이다."
+      },
+      {
+        "title": "[P1·사용자 세션] 호출처 0건 3종의 처리 방침을 정한다 — 배선하거나 지우거나, 방치는 아니다",
+        "description": "`RecordDailyClear()`/`OnDailyPuzzleCleared()`(D4), `CafeManager`(D6), `RhythmCatController` 씬 배치(기존 이월)가 모두 「만들어뒀는데 연결 안 됨」이다. **데일리는 배선 쪽**이다 — 리텐션 설계의 핵심 자산인데 스트릭이 0에 고정돼 있다(`DailyChallengeHubPanel.cs:182-184`에 클리어 훅 추가 + `OnApplicationFocus`에서 `LoadDailyState()` 재호출로 자정 넘김 처리). **냥카페는 배선 전에 가드가 먼저다** — `CalculateOfflineEarnings()`가 지급 직후 `LastQuitTime`을 갱신하도록 고치지 않으면 팜 재진입마다 무한 재지급된다. `BtnIdleToggle()`(`ButtonController.cs:509-517`)에 `isSceneAdditivelyLoaded` 가드도 함께. 배선할 계획이 없다면 데드코드를 삭제해 진행률 착시를 없앤다."
+      },
+      {
+        "title": "[P1·사용자 세션] MeowBeat 고양이·팜 세이브 경로 2중 결함(D1) — 지금은 모바일에서 진척도가 남지 않는다",
+        "description": "① `DatabaseManager.cs`의 저장 루트를 `Application.dataPath`에서 `Application.persistentDataPath`로 교체(같은 프로젝트 `PhotoManager.cs:20-21`이 이미 올바른 선례). ② `LoadCat()` `:428-429`에서 날아간 `savePath` 접두사 복원(`LoadFarmData` `:676-686`이 정상 선례). ③ `:757 OnApplicationPause(bool pause)`에 `if (pause)` 분기 추가(같은 프로젝트 `CafeManager.cs:146`·`ButtonController.cs:75`가 이미 그렇게 한다). ④ `:721 long.Parse` → `TryParse` 가드. 이 넷을 고치기 전에는 폐쇄테스트를 시작해도 테스터의 고양이 구매·팜 진척이 재실행마다 초기화돼 「참여도」 자체가 쌓이지 않는다 — Content Writer가 짚은 반려 사유와 직결된다."
+      },
+      {
+        "title": "[P1·빌드 불필요] NumLink 계측 스펙과 스토어 리스팅을 문서로 먼저 확정한다",
+        "description": "**① `docs/ANALYTICS_SPEC.md`**: D1/D7/D30, 레벨별 실패율·재시도 수, 힌트 사용률, 데일리 진입·클리어, 광고 시청 완료율, 튜토리얼 이탈 구간을 이벤트 이름·파라미터·발화 지점(파일:줄)까지 정의. `GAME_DESIGN.md:145`의 「캐주얼 퍼즐 평균 D1 40-50%」를 실측 **31.85%**(D7 12.18·D30 5.35)로 교체하고 출처를 남긴다. **② `docs/STORE_LISTING.md`**(3월부터 6회 반복, 7일 연속 0건): 제목 30자·짧은 설명 80자·전체 설명 ko/en·콘텐츠 등급 설문 초안. 확정 사실 — 레벨 수는 **200**(`GameConstants.cs:9`)이 진실이나 **레벨 100 이후 보드 크기 상승이 없고 Master는 Hard 첫 구간의 재탕**(`LevelDataProvider.cs:75-90`)이므로 「난이도가 계속 올라간다」류 문구는 금지. 소구점은 8방향 드래그·보드 확장·즉시 로딩(5초→0.5초)·오프라인 플레이. **③** MeowBeat 「AI 음악」 19곳 중 최소 `docs/GAME_BRIEF.md:78` 포지셔닝 한 줄은 교체(다른 세션이 컨텍스트로 읽는 파일이라 스토어 문구로 샌다)."
+      },
+      {
+        "title": "[P1·사용자 세션] 색 외 단서 축 추가 + USS 민트 폐기 + 흰 글자 → 다크 글자",
+        "description": "① 연결 셀 6종에 **테두리 패턴 축**(실선/이중선/점선/굵은실선/모서리컷/없음)을 추가한다 — 색은 그대로 두므로 정상 시야에 손해가 없고, D형에서 dE00 4.70으로 붕괴하던 6쌍이 100% 구분된다. ② `numlink-variables.uss:51-63`의 `--sage: #4ECDC4`를 C# 실제값 `#6BB06B` 계열로 교정해 팔레트 이중화를 없앤다 — `#FF6B6B + #4ECDC4`는 사용자 금지 규칙(민트 조합·AI슬롭)에 정면 저촉이고 상호 대비 1.43:1이다. ③ **가장 싼 수정**: 코랄·민트 버튼의 흰 글자를 `#2C2C2C`로 바꾸면 2.78:1·1.93:1 FAIL이 5.03:1·7.22:1 PASS가 된다. ④ `--gold #FFD93D`(1.31:1)와 `--text-muted #999999`(2.70:1)는 텍스트 용도에서 제외. ⑤ 셀 배경 `#F5EDE4` 대비 6색 전원 4.5:1 미달(앰버 1.80)은 명도 재배치로 별도 처리. 보드 숫자 13.3sp → 16sp 하한(이월)도 같은 패스에서."
+      },
+      {
+        "title": "[P1] MeowBeat 폰트 라이선스 — 미사용 2종 13MB는 삭제, 1ACCsweet는 교체 또는 구매",
+        "description": "`ACCfall.ttf`(6.0MB)·`ACCsky.ttf`(7.1MB)는 참조 **0건**이라 삭제만으로 아시아폰트 ACC 리스크가 3분의 1로 준다. `1ACCsweet.ttf`(4.0MB)는 `Assets/Scenes/MainScene.unity`·`Assets/_Recovery/0.unity` 2곳에서 실제로 쓰이므로 라이선스 구매 또는 무료 상업용 한글 폰트 교체가 필요하다 — 광고(GoogleMobileAds)가 붙은 시점에서 상업적 이용이 성립하고, 비상업 기준이 명시돼 있지 않아 분쟁 소지가 있다. NumLink 메이플스토리체는 상업용 무료로 알려져 있으나 **공식 약관 본문 미확보라 안전 확정으로 보고하지 않는다** — 출시 전 게임 임베딩·재배포 조항을 직접 확인하고 각 리포에 라이선스 문서를 남긴다. 곁가지: NumLink `Assets/Layer Lab` 240MB(2,905 스프라이트)가 게임 자산 40MB의 6배라 APK 크기·임포트 시간의 주범이며, `Assets/**/.omc/state/`에 .meta 없는 자동화 산출물 8건이 섞여 있어 ignore 대상이다."
+      },
+      {
+        "title": "[P1·자율 후보] Dependabot #124 → #129 순으로 병합",
+        "description": "오늘 PR 게이트를 넣었으므로 다음 회의부터는 두 PR에 체크가 붙는다. 순서는 **#124(setup-node 6.4.0→7.0.0) 먼저** — 유일한 파괴적 변경인 dummy `NODE_AUTH_TOKEN` export 제거가 우리 워크플로에 해당 사항 **0건**임을 실측 확인했고(`registry-url`·`NODE_AUTH_TOKEN` 사용 0건, 옵션은 `node-version: 22`·`cache: npm`뿐), 이게 먼저 들어가야 #129의 검증이 최신 액션 위에서 돈다. 그다음 **#129**(npm-minor-patch 13개). 병합 후 `npm audit` high 6건 중 **react-router GHSA-qwww-vcr4-c8h2**(RSC 모드 CSRF 우회, 취약 7.12.0–7.18.1 / 현재 7.17.0 = **해당**)가 남는지 재확인한다. typescript 6.0.3 → 7.0.2 메이저 갭은 별건으로 분리."
+      },
+      {
+        "title": "[P1] MeowBeat 폐쇄테스트 완료 정의를 「모집」에서 「전 기능 사용 + 피드백 기록」으로 바꾼다",
+        "description": "Play 공식 반려 사유가 「12명 미만 opt-in」과 「테스트 기간 중 **참여도 부족**」 두 가지이고, 프로덕션 신청서는 테스터 피드백 요약·수집 방법·**사용 가능한 모든 기능 사용 여부**·프로덕션 예상 행동과의 차이를 서술형으로 요구한다. 14일 미만에 opt-out한 테스터는 미계산이고 재가입 시 연속 14일을 다시 채워야 한다. 따라서 테스트 **시작 전에** (a) 곡 플레이 외 상점·설정·수집·팜까지 도는 시나리오 체크리스트, (b) 구글폼 등 피드백 수집 채널을 먼저 만든다. **선행 조건**: 위 8번(고양이 세이브 2중 결함)이 안 고쳐지면 테스터의 진척도가 재실행마다 사라져 「전 기능 사용」 자체가 성립하지 않는다. 14일을 다 채우고 반려되면 그 14일을 통째로 다시 쓴다."
+      },
+      {
+        "title": "[P2·적재] 이월 및 신규 대기열",
+        "description": "**신규**: 게임오버 패널 2중 구독 + 구 패널 코인 HUD 미갱신(D5) · `CatInteraction.cs:34` Raycast 인자 오용(D2) · 팜 입력 UI 관통 `IsPointerOverGameObject` 0건(D3) · 리듬 입력 멀티터치 유실(D7) · `SongDataLoader.cs:61-64` isLoaded 선박기(Q3) · MeowBeat `AutoQATests` asmdef 부재(Q4) · NumLink Tools/QA 스크립트 0개 · USS 난이도 4색 뭉침(Easy vs Normal dE00 10.25) · 라이브옵스 최소 캘린더(주말 72h 1건 + 데일리 1건) · NumLink 스크린샷 22장 재촬영 · 어댑티브 아이콘 2종(**5회째 이월**) · `SaveSystem` 원자적 쓰기 + `saveVersion` 분기 · Unity 6000.3.5f2 → 6000.3.22f1(17패치) · 저널 JSON 3.07MB 증가 대책(회의당 31KB) · `e0.txt` 폐기(내용이 8/08 엔트리에 이미 수록됨을 대조 확인 — 삭제 가능) · 프롬프트 경로 정정 2건(NumLink SPRINT.md는 리포 루트, `automation_healthcheck.py`는 `C:/Users/LIMMM/`) · 알려진 버그 번호 고정 목록 작성. **이월**: WU 활성 시간 08~02 → 03~21(사용자 확인) · JobResearch·Standup 동시 발화 분리 · Digest(Ollama)·StudyGenerate FAIL · StudyPush 31일·GBrain 89일 Disabled · `productName: hefeedmee` · UI 스케일 Expand 단일화 · 8/18·8/08 P2 전량."
+      }
+    ]
+  },
+  {
     "id": "2026-08-25T04:00:00-daily-standup",
     "date": "2026-08-25",
     "researchTitle": "🟢 커밋 직전 사살 3연속(8/08·8/18·8/24)의 마지막 범인은 사람이 아니라 Windows Update 계획 재시작(05:00:11·KB5121003·활성 시간 08~02)이었다 — 그래서 오늘은 순서를 뒤집어 리서치보다 승계 커밋을 먼저 했다: 빌드 게이트(tsc 0·vite 0·332.59 KB) → af7c656 push → 배포 success → 라이브 저널 200(3,029,037 B)으로 8/18부터의 404가 종결됐고, 프롬프트에 '안전 커밋 우선'을 박고 헬스체크에 OAuth·재부팅 대기·활성 시간 프리플라이트를 넣어 첫 실행에서 노출 창을 즉시 검출했다. 게임 측은 코드 정지 NumLink 55일·MeowBeat 65일에 targetSdk D-6인데, QA가 '광고 보상은 define이 있어도 미로드면 지급된다'(AdManager:151-157)와 '세이브 손상 시 첫 저장이 원본을 덮어쓴다'(SaveSystem:44-52)를, Game Designer가 'MeowBeat 판정 문구가 Random.Range로 뽑힌다'(Note.cs:34)를 발굴했다",
