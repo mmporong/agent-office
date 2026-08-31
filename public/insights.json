@@ -1,6 +1,51 @@
 {
-  "lastUpdated": "2026-08-24T00:41:36.310Z",
+  "lastUpdated": "2026-08-31T02:22:15.284Z",
   "weeks": [
+    {
+      "weekOf": "2026-W35",
+      "articles": [
+        {
+          "id": "07767841f45d763a",
+          "title": "지역 AI 생태계의 새로운 가능성, 카카오 AI 돛 Summit 26을 개최합니다!",
+          "url": "https://tech.kakao.com/posts/830",
+          "company": "카카오테크",
+          "category": "general",
+          "summary": "지역 AI 생태계의 새로운 가능성, 카카오 AI 돛 Summit 26을 개최합니다!",
+          "publishedAt": "2026-08-26T15:00:00.000Z",
+          "collectedAt": "2026-08-31T02:22:15.284Z"
+        },
+        {
+          "id": "2273f3d9ee7065b5",
+          "title": "1%가 겪은 버그 고쳐야할까요?",
+          "url": "https://toss.tech/article/qa_hotfix",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "1%가 겪은 버그 고쳐야할까요?",
+          "publishedAt": "2026-08-28T08:46:00.000Z",
+          "collectedAt": "2026-08-31T02:22:15.284Z"
+        },
+        {
+          "id": "4befd0cc35f30d4a",
+          "title": "토스증권 추천과 검색은 어떻게 진화하고 있을까?",
+          "url": "https://toss.tech/article/tech_talk_talk_3",
+          "company": "토스 테크",
+          "category": "general",
+          "summary": "토스증권 추천과 검색은 어떻게 진화하고 있을까?",
+          "publishedAt": "2026-08-26T01:00:00.000Z",
+          "collectedAt": "2026-08-31T02:22:15.284Z"
+        },
+        {
+          "id": "aeec1489fd772c2c",
+          "title": "양자 시대를 대비하는 개발자의 암호학 가이드(PQC-ML-KEM)",
+          "url": "https://meetup.nhncloud.com/posts/421",
+          "company": "NHN Cloud Meetup",
+          "category": "infra",
+          "summary": "양자 시대를 대비하는 개발자의 암호학 가이드(PQC-ML-KEM)",
+          "publishedAt": "2026-08-24T03:54:26.000Z",
+          "collectedAt": "2026-08-31T02:22:15.284Z"
+        }
+      ]
+    },
     {
       "weekOf": "2026-W34",
       "articles": [
@@ -643,31 +688,6 @@
           "summary": "운영하지 않는 Kafka, EasyQueue를 소개합니다",
           "publishedAt": "2026-06-11T01:46:39.000Z",
           "collectedAt": "2026-06-15T00:35:36.547Z"
-        }
-      ]
-    },
-    {
-      "weekOf": "2026-W23",
-      "articles": [
-        {
-          "id": "f9153ec8c599292f",
-          "title": "토스팀이 AI 파도를 마주하는 방법: AI Surf Day",
-          "url": "https://toss.tech/article/ai-surf-day",
-          "company": "토스 테크",
-          "category": "general",
-          "summary": "토스팀이 AI 파도를 마주하는 방법: AI Surf Day",
-          "publishedAt": "2026-06-05T01:00:00.000Z",
-          "collectedAt": "2026-06-08T02:41:48.819Z"
-        },
-        {
-          "id": "a5c45c0e9e861f45",
-          "title": "당근 200+개 DB 를 옮기는 ELT 플랫폼, DT Platform 을 만든 이야기",
-          "url": "https://medium.com/daangn/%EB%8B%B9%EA%B7%BC-200-%EA%B0%9C-db-%EB%A5%BC-%EC%98%AE%EA%B8%B0%EB%8A%94-elt-%ED%94%8C%EB%9E%AB%ED%8F%BC-dt-platform-%EC%9D%84-%EB%A7%8C%EB%93%A0-%EC%9D%B4%EC%95%BC%EA%B8%B0-65a499b4967a?source=rss----4505f82a2dbd---4",
-          "company": "당근 테크",
-          "category": "general",
-          "summary": "당근 200+개 DB 를 옮기는 ELT 플랫폼, DT Platform 을 만든 이야기",
-          "publishedAt": "2026-06-04T09:45:23.000Z",
-          "collectedAt": "2026-06-08T02:41:48.819Z"
         }
       ]
     }
