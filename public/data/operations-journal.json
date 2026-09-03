@@ -1,5 +1,127 @@
 [
   {
+    "id": "2026-09-04T04:00:00-daily-standup",
+    "date": "2026-09-04",
+    "researchTitle": "🔴 8일 침묵의 원인은 인증이 아니라 조직 정책이었고(8/28~9/2 6일 「조직이 구독 접근 비활성화」·8/27·9/3 한도), 그 사이 targetSdk 36 마감(8/31)이 연기 신청 흔적 0건인 채로 지나갔다 — 그리고 리포는 어느새 dev-studio로 개명돼 옛 URL이 404다",
+    "researchSummary": "마지막 회의(8/26) 이후 9일 만의 회의. `daily_standup.log` 원문으로 8일 미발화 원인을 확정했다: 8/27 「Fable 5 limit」, 8/28~9/2 6일 연속 「Your organization has disabled Claude subscription access for Claude Code」, 9/3 「session limit · resets 5am」. 헬스체크 프리플라이트는 매일 「OAuth OK」를 찍었으니 로그인 상태 검사로는 조직 정책 차단을 못 잡는다(메모리의 「인증 오류」 표현은 정정). 재부팅 0건(8/24 부팅 이후)·1074 이벤트 0건이라 WU 가설은 배제. 그 침묵 사이 Google Play targetSdk 36 마감(8/31)이 경과했는데 NumLink 34·MeowBeat 35 그대로이고 연기 신청 흔적은 어느 문서에도 없다(연기선 11/1, Play Console 정책 상태 페이지의 확장 폼). 세 리포 코드 커밋은 0건(NumLink 정지 65일·MeowBeat 75일, 8/26 이후 수정 .cs 0건). 8/26 액션 14건 중 완료 0건, QA 번호 고정 12건 전부 잔존(+Note.cs Random.Range·deltaTime). DevOps는 원격이 `mmporong/dev-studio`로 개명돼 `github.io/agent-office/` 404·`/dev-studio/` 200(저널 3,132,146 B)임을 발견. 신규: GMA Unity 11.5.0(9/3)·Unity 6000.3.23f1(8/26)·Unity 7 로드맵(12월 베타) / Play 9/30 개발자 검증 기한·Apple 9월 소셜기능 신고 필수 / Zip 힌트 무료·되감기 방식·소프트런치 정지선 D7 8%·D30 3% / MeowBeat FindObjectOfType 24건·노트 풀링 0건·Debug.Log 129건 / 스프라이트 아틀라스 0개·비압축 텍스처 NumLink 571·MeowBeat 115 / 판정 텍스트 3종 동일 fontSize 36 / 스크린샷 55장 미선별·스토어 문구 초안 0건.",
+    "researchItems": [
+      {
+        "title": "8일 미발화 원인 확정 — 인증 만료가 아니라 「조직이 구독 접근 비활성화」 6일 + 한도 2일",
+        "description": "Orchestrator·DevOps가 `C:/Users/LIMMM/daily_standup.log` 원문을 교차 확인: 8/27 04:17 「You've reached your Fable 5 limit」 exit 1 → 8/28·8/29·8/30·8/31·9/1·9/2 「Your organization has disabled Claude subscription access for Claude Code · Use an Anthropic API key instead」 exit 1 → 9/3 「You've hit your session limit · resets 5am」 exit 1 → 9/4 04:05:43 기동(이번 회의). `claude auth status`는 loggedIn true(claude.ai·firstParty)라 healthcheck의 「PREFLIGHT OK OAuth: 로그인 유지」는 매일 통과했다 — 로그인 검사가 조직 정책 차단을 잡지 못하는 구조. 스케줄러 Enabled·RandomDelay 35m·다음 실행 9/5 04:33. 마지막 부팅 8/24 07:32 이후 재부팅 0건·1074 이벤트 0건이라 WU 가설 배제. ActiveHours 8~2 미변경. 작업 스케줄러 이력 로그가 꺼져 있어 원인 추적이 bat 로그에만 의존한다."
+      },
+      {
+        "title": "targetSdk 36 마감(8/31) 경과 — 연기 신청 흔적 0건, 코드는 34/35 그대로",
+        "description": "`C:/Unity/NumLink/ProjectSettings/ProjectSettings.asset:179`=34, `C:/Unity/Feedme/ProjectSettings/ProjectSettings.asset:181`=35. NumLink·Feedme docs·SPRINT.md·agent-office SPRINT.md에서 `연기|extension|11/1` grep 0건. Google Play 연기 절차(Developer)는 Play Console → Policy status → 경고 상세의 확장 신청 폼으로 비준수 앱에만 알림을 통해 제공되며 11/1까지 유예(support.google.com/googleplay/android-developer/answer/11926878). 8/26 P0 「8/31 제출 대 11/1 연기 결정」은 결정 없이 기한이 지나갔다."
+      },
+      {
+        "title": "8/26 액션 14건 재판정 — 완료 0건, 코드 정지 65일/75일, 8/26 이후 수정 .cs 0건",
+        "description": "NumLink(`feature/ugui-layerlab`) 마지막 커밋 `e536009`(7/01), 미커밋 45(IAPManager.cs·gradle 템플릿 3·AutoGenTests 삭제·폰트). MeowBeat(`feature/song-ownership-migration`, ahead 3) 마지막 `921e0cf`(6/21), 미커밋 38(GMA 프리팹·AndroidManifest·MainScene·GameManager/SongManager/OptionManager). `GameConstants.cs:210-217` 테스트 ID 8건 잔존, `GOOGLE_MOBILE_ADS` 15건은 전부 `AdManager.cs` 안의 #if, `isShowing`·`MobileAdsEventExecutor` 0건. `docs/ANALYTICS_SPEC.md`·`docs/STORE_LISTING.md` 부재. `NoteSpawner.cs:126` deltaTime·`Note.cs:34` Random.Range·`ShowHitEffect(` 호출처 0건 그대로. 어댑티브 아이콘 `m_Textures: []` 6회째(`ProjectSettings.asset:309·314`, mtime 7/01). Dependabot #124·#129 OPEN."
+      },
+      {
+        "title": "리포 개명 — `mmporong/agent-office` → `mmporong/dev-studio`, 옛 라이브 URL 404",
+        "description": "DevOps: origin이 `https://github.com/mmporong/dev-studio.git`, `gh api repos/mmporong/agent-office/pages`가 dev-studio로 리다이렉트. `https://mmporong.github.io/agent-office/` **404**(9,115 B), `https://mmporong.github.io/dev-studio/` **200**(1,246 B), `/dev-studio/data/operations-journal.json` **200 / 3,132,146 B**(Last-Modified 8/31). 8/26 이후 런 10건 전원 success(8/30 Dependabot Updates 4·PR Validate 2 통과), 마지막 배포 8/31 02:22Z(workflow_dispatch·weekly insights). `gh` CLI는 `--repo mmporong/agent-office`를 리다이렉트로 처리하나, 프롬프트·문서·헬스체크 URL이 옛 이름이면 라이브 404를 오탐한다. 로컬 경로 `C:/Users/LIMMM/agent-office`는 그대로."
+      },
+      {
+        "title": "QA 번호 고정 상태표 12+2건 — 수정 0 / 잔존 14, 검증 3종 exit 2·0·0",
+        "description": "Q1 `GameConstants.cs:210-217` 테스트 ID(Feedme `AdmobManager.cs:67-68`은 실ID·테스트ID 공존) · Q2 UMP 0건 · Q3 `SongDataLoader.cs:10,63,69` isLoaded(`GameManager.cs:351/530/618` 의존) · Q4 NumLink `Assets/Tests` 잔여 1(Editor.meta)·AutoGenTests 4파일 git D 미커밋·AutoQATests asmdef 없음 · Q5 `MainScene.unity` TestButton **3건**(이전 2→3) · Q6 `AndroidManifest.xml:16` VIBRATE만 · R1 `AdManager.cs:151-157` · R2 `SaveSystem.cs:45-52` · R3 `NoteSpawner.cs:156-162` · D1 `DatabaseManager.cs:395,421,658,676` dataPath · D4 `DailyPuzzleProvider.cs:73` 호출 0 · D6 `CafeManager.cs:26·34`. 검증: `qa_static.py` exit 2·error 1(TIMING_DSPTIME_UNUSED)·`unity_validate.py` 0·`run_regression.py` 2/2·manifest 곡 10/참조 10/누락 0. 신규: Debug.Log NumLink 166·Feedme 129 스트리핑 래퍼 없음, 빈 catch 0건."
+      },
+      {
+        "title": "Developer — MeowBeat FindObjectOfType 24건·노트 풀링 0건, GMA 11.5.0(9/3)·Unity 6000.3.23f1(8/26)·Unity 7 로드맵",
+        "description": "FindObjectOfType NumLink 4 / MeowBeat **24**(`GameManager.cs:94-121`에 19건 집중), `GameManager.cs:191` `Resources.FindObjectsOfTypeAll<Transform>()` 전수 순회로 「Button 0」 탐색. Resources.Load NumLink 14 / MeowBeat 1. PlayerPrefs MeowBeat Set/Get 62·Save 11. ObjectPool 0건(양쪽) — `NoteSpawner.cs:171` 노트마다 Instantiate, `:100` 종료 시 자식 전부 Destroy. 세이브는 평문 JSON·암호화 없음. NumLink `LevelDataProvider`는 절차 생성이 아니라 사전 제작 `BoardData.json` 참조(런타임 유일해 검증 없음·Editor `BoardDataValidator`만), HintManager는 코인 차감 자체가 없어 경쟁 조건 해당 없음. 웹: GMA Unity **v11.5.0 2026-09-03**(iOS 13.9.0·Android Next-Gen 1.4.0, 파괴적 변경 없음) · Unity **6000.3.23f1 8/26**(D3D12 VRAM 누수·Play Mode 크래시 수정, 24f1 미출시) · Unity 7 12월 얼리 베타·2027 Q1 정식(Unite Seoul 7/20) · agent-office 스택(vite 8.1·react 19.2.7·TS 6.0.3·react-router 7.18)은 최신 메이저, React 19.2.8 패치만 잔여."
+      },
+      {
+        "title": "Game Designer — Zip 힌트는 무료·되감기 방식, 소프트런치 정지선 D7 8%·D30 3%, 캐주얼 세션 P50 3.1~3.5분",
+        "description": "LinkedIn Zip(공식 help a7445030): 매일 1문제(자정 PT)·Hint=첫 실수까지 삭제+다음 정답 1칸 공개·Undo/Clear 별도·스트릭 기록, 9/3 #535회차. Flow Free 데일리는 5x5~13x13·스트릭 길어져도 난이도 상승 없음·힌트는 유료/광고(원문 402, 스니펫 근거). Number Match는 코인 힌트·유료판 무제한. 리워드 광고(Playio 2026-05-18): 완주율 95%+, US eCPM Android $16.49/iOS $19.63. 소프트런치 킬 기준(GGA 2026-08-01 갱신): D1 25% 미만(빌드 3회 후)·D7 8%·D30 3% 미만이면 확장 중단, CPI 3배 지출 시 30% 미만 상승이면 Go. 캐주얼 세션 P50 3.1~3.5분·일 3.8회. GDD 지적: `docs/GAME_DESIGN.md:410` 8.3절이 「힌트 사용(선택)」으로 힌트 유료화를 열어둠. 문서 불일치: GDD `:10-23`은 60레벨 기준이고 200레벨 개정 이력 없음. 폐기: Playio 「2.1회/DAU·옵트인 64%·eCPM $24」(원문 부재), 「리워드 3~5회/DAU」(미계측 권고치), 매치3 세션 8~12분, Zip 요일 난이도 램프, 레벨 실패율 임계값."
+      },
+      {
+        "title": "Content Writer — Play 9/30 개발자 검증 기한, Apple 9월 소셜기능 신고 필수, 스크린샷 55장 미선별·문구 초안 0건",
+        "description": "Play 8/27~9/4 신규 정책 공지 없음(8/26자 3건은 Families·익명 채팅 대상). 다음 기한 **2026-09-30 Play Console Requirements** — 개발자 검증·등록 미완 시 글로벌 삭제 위험(answer/9934569). Apple: 7/9 공지의 「소셜미디어 기능 여부 신고, 2026년 9월부터 제출 필수, 해당 시 13+ 최소 등급」 이달 발효; 8/20~9/4 뉴스는 Rosetta 종료(9/1)·세금가격(8/27)·9/9 이벤트·Sign in with Apple 도메인뿐. 스크린샷 필수는 iPhone 6.5\"/6.9\" 1장·iPad 13\" 1장. ASO(AppTweak 2026-07-13): 상위 게임 33%만 스크린샷 테스트 2회+, 상위 앱 약 90% 아이콘 A/B 미실시, 게임 중간 CPI $4.63; iOS 노출→설치 3.6~3.8%, 첫 스크린샷 넘겨 보는 방문자 17%·5번째 도달 11%(2차 인용). 실측: `STORE_LISTING.md` 없음, NumLink 스크린샷 `Screenshots` 19 + `Assets/Screenshots` 36 = 55장 1080×1920(최신 6/2, new_/v2~v5 접두 혼재·선별본 없음), MeowBeat 스크린샷 폴더 없음, 「AI 음악」 19건 불변, 소비자 대상 문장은 `GAME_BRIEF.md:78` 한 줄뿐. 폐기: 페이지뷰→설치 25%/27.3%(2024)·아이콘 8~12%/스크린샷 10~25%(출처 미확인). SNS 클립·한국 차트는 미조사."
+      },
+      {
+        "title": "Art Director — 스프라이트 아틀라스 0개, 비압축 텍스처 NumLink 571/4,891·MeowBeat 115/268, 판정 텍스트 3종 fontSize 36 동일",
+        "description": "8/26 이후 png/anim/uss/prefab/uxml 수정 0건(양 프로젝트). MeowBeat 폰트 `1ACCsweet.ttf` 3,978KB·`ACCfall.ttf` 5,851KB·`ACCsky.ttf` 6,924KB(16.7MB, 2022-03-29 이후 불변). `.spriteatlas` 0개. `textureCompression: 0` NumLink 571/4,891·MeowBeat 115/268(43%), `maxTextureSize>=4096` 0건. 고양이 감정 클립 0개(Idle·Move·InteractionAnim뿐). `HitEffectController.cs:13` `fontSize = 36` 단일값·`:92` 세 판정 동일 적용, `FloatAndFade`(:126~)는 위치 Lerp+페이드만 scale 없음. 웹: M3 Expressive 모션이 duration 기반→스프링 물리 전환(Compose 21개 컴포넌트, Pixel QPR1 2025-09) · 버튼 팝 「120ms 확대+90ms 정착·소폭 오버슈트」(sunstrikestudios 2026-05-11) · 텍스처: AAB에서 ETC2 기본+ASTC 추가 타깃팅, UI/얇은 글자 ASTC 4x4~5x5·일반 6x6·배경 8x8(dev.to 2026-08-10, Unity 매뉴얼). 폐기: 퍼즐 클리어 Confetti 지속시간·다크모드 게임 UI 사례(미검증), Liquid Glass 미조사."
+      },
+      {
+        "title": "DevOps 부수 — Actions retention 정책(8/27)·keyv 공급망 공격 미해당·로컬 자동화 3종 FAIL",
+        "description": "GitHub changelog 8/27 「Actions retention will cover checks, workflow runs, and statuses」, 8/28~9/4 Actions 항목 없음. Dependabot 닫힌 보안 알림 보존 정책 9/25 시행. npm keyv/cacheable 워밍 공격(Wiz 2026-08-04): 악성 keyv 6.0.0 등 — 본 리포 lockfile keyv 4.5.4·flat-cache 4.0.1·file-entry-cache 8.0.0으로 미해당. schtasks: `PKM_Daily_Digest`·`PKM_StudyGenerate` 0x1, StudyPush 40일·GBrain 98일 Disabled. `e0.txt`·`.omc/` 워킹트리 그대로(미접촉)."
+      }
+    ],
+    "meetingTitle": "9일 만의 회의 — 「매일 실패」는 인증이 아니라 조직 정책이었고, 그 사이 마감이 지났다",
+    "meetingSummary": "일곱 명이 같은 결론에 도달했다: 8/26 이후 바깥(회의)도 안쪽(코드)도 한 줄도 움직이지 않았고, 유일하게 움직인 것은 기한과 리포 이름이었다. 결정은 세 층이다. ① 자율: 회의록 선커밋 유지 + 프롬프트·메모리의 「인증 오류」를 「조직 구독 접근 비활성화」로 정정 + 리포 개명(dev-studio) 반영 + 스탠드업 bat이 조직 정책 문구를 감지하면 실패 통지를 남기도록. ② 사용자 결정: Play Console에서 targetSdk 36 확장 신청(11/1) 여부와 Play 9/30 개발자 검증 상태를 오늘 확인. ③ 사용자 세션: Q1+R1 광고 봉인 세트를 첫 Unity 세션으로 고정하고, MeowBeat 세이브 경로(persistentDataPath)·판정 코어를 그 뒤에 잇는다.",
+    "meetingItems": [
+      {
+        "speaker": "Orchestrator",
+        "note": "9일 만입니다. 먼저 왜 8일을 쉬었는지부터 정리하겠습니다. 로그를 열어 보니 8/27은 주간 한도, 8/28부터 9/2까지 6일은 「조직이 Claude Code 구독 접근을 비활성화했다」는 문구로 매일 15초 만에 종료됐고, 9/3은 세션 한도였습니다. 재부팅은 0건이라 WU는 아닙니다. 헬스체크는 그 6일 내내 OAuth OK를 찍었는데, 로그인은 살아 있었으니 거짓말은 아니지만 쓸모도 없었습니다. 그 사이 8/31 targetSdk 마감이 지나갔고, 연기 신청 흔적은 문서 어디에도 없습니다. 8/26 액션 14건 중 완료는 0건, 코드는 NumLink 65일·MeowBeat 75일째 그대로입니다."
+      },
+      {
+        "speaker": "DevOps",
+        "note": "두 가지를 보탭니다. 첫째, 원격 리포가 mmporong/dev-studio로 개명돼 있었습니다. origin도 이미 바뀌어 있고 GitHub Pages는 /dev-studio/에서 200, /agent-office/는 404입니다. 라이브 저널은 3,132,146바이트로 정상이지만, 프롬프트와 문서가 옛 이름을 쓰면 다음에 누군가 404를 보고 「배포가 죽었다」고 오판합니다. 둘째, 런 10건 전원 success·Dependabot 두 건은 그대로 OPEN. 8/27 이후 GitHub Actions 변경은 retention 정책뿐이고 keyv 공급망 공격은 우리 lockfile 미해당입니다. 제안은 스탠드업 bat에 조직 정책 문구 감지 분기와, 개명 반영입니다."
+      },
+      {
+        "speaker": "QA Tester",
+        "note": "번호 고정 상태표 12건, 수정 0·잔존 12. 여기에 Random.Range와 deltaTime을 더해 14건입니다. 검증 3종은 qa_static exit 2(error 1, dspTime 미사용)·validate 0·regression 2/2로 8/26과 동일하고 manifest 곡 10건 누락 0입니다. 새로 센 것은 Debug.Log 릴리스 잔존 NumLink 166·Feedme 129와 씬의 TestButton이 2에서 3으로 늘어난 점입니다. 가장 심각한 조합은 여전히 Q1+R1 — 테스트 ID 광고에 미준비 시 보상까지 지급되니 출시 즉시 매출 0에 어뷰징 경로가 열립니다. 이 둘을 한 묶음으로 첫 세션에 배정하고 나머지는 번호 순서를 동결하자는 제안입니다."
+      },
+      {
+        "speaker": "Developer",
+        "note": "8/26 이후 수정된 .cs는 양 프로젝트 0건입니다. 새로 정량화한 부채는 MeowBeat FindObjectOfType 24건이 GameManager 한 곳에 19건 몰려 있고, 노트가 오브젝트 풀 없이 곡마다 Instantiate·Destroy를 반복한다는 것입니다. NumLink LevelDataProvider는 절차 생성이 아니라 사전 제작 JSON이라 유일해 검증은 에디터 툴에만 있고, HintManager는 코인 차감이 아예 없어 경쟁 조건은 해당 없음으로 폐기합니다. 외부는 GMA Unity 11.5.0이 어제 나왔고 파괴적 변경 없음, Unity 6000.3.23f1은 8/26 출시, Unity 7은 12월 베타입니다. Play 연기 신청은 Policy status 페이지의 확장 폼으로 11/1까지입니다. 제안은 MeowBeat 세이브 경로를 persistentDataPath로 바꾸고 LoadCat 접두사를 같이 고치는 것을 광고 세트 다음 PR로 잡는 것입니다."
+      },
+      {
+        "speaker": "Game Designer",
+        "note": "경쟁작 힌트를 봤습니다. LinkedIn Zip은 힌트가 무료·무제한이고 「첫 실수까지 되감고 다음 칸 하나 공개」 방식입니다. Flow Free는 힌트를 광고나 유료로 팔지만 데일리 난이도는 스트릭과 무관합니다. 우리 GDD 410행은 힌트 유료화를 열어 두고 있는데, 경로 퍼즐에서 힌트 과금은 이탈 요인이므로 힌트는 무료 되감기로 정의하고 리워드 광고는 생명 충전에만 붙이자는 제안입니다. 게이트 숫자도 하나 확보했습니다: 소프트런치 정지선 D7 8%·D30 3% 미만이면 확장 중단(GGA, 8/1 갱신), 캐주얼 세션 P50 3.1~3.5분. 「리워드 3~5회/DAU」는 미계측 권고치라 벤치마크로 쓰지 않습니다. 그리고 GDD 본문은 아직 60레벨 기준입니다."
+      },
+      {
+        "speaker": "Content Writer",
+        "note": "기한 두 개를 새로 올립니다. Google Play는 9/30까지 개발자 검증·Console 등록을 끝내지 않으면 글로벌 삭제 대상이고, Apple은 이달부터 제출 시 소셜미디어 기능 여부 신고가 필수입니다. 둘 다 코드가 아니라 콘솔 작업이니 targetSdk 확장 신청과 같은 날 묶어 확인하면 됩니다. 준비 상태는 냉정하게 0입니다: STORE_LISTING 없음, 스크린샷은 NumLink 55장이 1080×1920으로 있지만 접두사가 다섯 버전 섞인 채 선별본이 없고 MeowBeat는 폴더 자체가 없으며, 소비자에게 보여줄 문장은 GAME_BRIEF 78행 한 줄뿐인데 그 줄에 「AI 음악」이 들어 있습니다. 그 한 줄을 스토어 태그라인으로 다시 쓰는 것부터 시작하자는 제안입니다."
+      },
+      {
+        "speaker": "Art Director",
+        "note": "에셋은 8/26 이후 0건 변경, 아이콘 빈 배열은 이걸로 여섯 번째입니다. 새로 센 것은 두 프로젝트 스프라이트 아틀라스 0개, 비압축 텍스처 NumLink 571·MeowBeat 115(43%)이고, AAB에서는 ETC2 기본에 ASTC 추가 타깃팅이 권장입니다. 판정 텍스트는 HitEffectController 13행 fontSize 36 하나를 세 판정이 같이 쓰고 스케일 팝이 없습니다. M3 Expressive가 모션을 duration에서 스프링으로 옮긴 흐름과 「120ms 확대+90ms 정착」 근거를 합쳐, Perfect 44/Good 36/Miss 30 차등과 120ms 오버슈트 팝을 제안합니다. 코드 3줄 수준이라 판정 코어 재작성 세션에 끼워 넣으면 됩니다."
+      },
+      {
+        "speaker": "Orchestrator",
+        "note": "정리합니다. 자율로 오늘 하는 것: 회의록 선커밋, 프롬프트와 메모리의 「인증 오류」를 「조직 구독 접근 비활성화」로 정정하고 리포 개명을 반영, 스탠드업 bat 실패 통지 분기. 사용자 결정 P0는 Play Console 세 가지 — targetSdk 36 확장 신청, 9/30 개발자 검증 상태, Apple 소셜기능 신고 — 를 같은 날 확인하는 것. 사용자 세션 P0는 Q1+R1 광고 봉인 6종 세트, 그 다음이 MeowBeat 세이브 경로와 판정 코어(판정 텍스트 차등 포함). 힌트 무료 정책과 태그라인 재작성은 빌드 없이 되는 P1로 둡니다."
+      }
+    ],
+    "decisions": [
+      {
+        "title": "[P0·자율 완료 ✅] 회의록 선커밋 — 9일 만의 회의도 이슈·텔레그램보다 먼저 커밋",
+        "description": "빌드 게이트 `npx tsc -b` 0 → `npm run build` 0(메인 청크 346.42 kB) 확인 후 `public/data/operations-journal.json`·`src/data/agents.ts`를 명시 스테이징해 커밋·push. `.omc/`·`e0.txt`는 제외."
+      },
+      {
+        "title": "[P0·자율] 「인증 오류」 정정 + 리포 개명 반영 + 스탠드업 실패 통지",
+        "description": "메모리·프롬프트의 「2026-08-26부터 인증 오류로 매일 실패」를 「8/28~9/2 조직 구독 접근 비활성화 6일 + 8/27·9/3 한도」로 정정. `daily_standup_prompt.txt`·헬스체크·문서의 라이브 URL을 `github.io/dev-studio/`로 교체(로컬 경로 `C:/Users/LIMMM/agent-office`는 유지). 스탠드업 bat에 「organization has disabled」·「limit」 문구 감지 시 텔레그램 실패 통지 1건 분기 추가 — healthcheck의 OAuth 검사는 이 실패를 잡지 못한다."
+      },
+      {
+        "title": "[P0·사용자 확인·콘솔 작업 3종 같은 날] targetSdk 36 확장 신청 + Play 9/30 개발자 검증 + Apple 소셜기능 신고",
+        "description": "① Play Console → Policy status → 경고 상세의 확장 신청 폼으로 11/1까지 유예 신청(NumLink 34·MeowBeat 35 모두 비준수). 8/31 마감은 이미 지났고 8/26 P0 「제출 대 연기 결정」은 결정 없이 경과. ② 9/30 Play Console Requirements(개발자 검증·등록) 상태 확인 — 미완 시 글로벌 삭제 위험. ③ App Store 제출 시 소셜미디어 기능 여부 신고(9월부터 필수) 답변 준비(양 게임 해당 없음 예상). 코드가 아니라 콘솔 작업이라 Unity 세션과 독립."
+      },
+      {
+        "title": "[P0·사용자 세션·첫 Unity 세션 고정] Q1+R1 광고 봉인 6종 세트",
+        "description": "①실 AdMob 앱·단위 ID 발급(`GameConstants.cs:210-217` 데모 ID 8개 교체) → ②`GoogleMobileAdsSettings.asset` 생성 → ③`com.google.ads.mobile` 커밋(GMA 11.5.0으로 올려도 파괴적 변경 없음) → ④define 추가 → ⑤`AdManager.cs:151-157` 미준비 시 실패 반환 + `isShowing` 가드 → ⑥콜백 `ExecuteInUpdate` 래핑. 같은 세트로 `IAPManager.cs:85` 커밋·UMP·TestButton 3개 제거·INTERNET 권한. 완료 조건: Android 빌드 1회 + QA 상태표 Q1·R1·Q2·Q5·Q6 닫힘."
+      },
+      {
+        "title": "[P1·사용자 세션] MeowBeat 세이브 경로 → `persistentDataPath` + LoadCat 접두사 (광고 세트 다음 PR)",
+        "description": "`DatabaseManager.cs:395,421,658,676` `Application.dataPath` 4곳 교체 + `:428` `LoadCat` savePath 접두사 복원 + `OnApplicationPause` 저장 + `long.TryParse`. 폐쇄테스트 선행 조건(진척도가 안 남으면 「전 기능 사용」 불성립). 미커밋 38파일·ahead 3은 세션 아카이브 시 유실 위험이라 이 PR에서 함께 push."
+      },
+      {
+        "title": "[P1·사용자 세션·75일째] MeowBeat 판정 코어 — dspTime + Random.Range 제거 + ShowHitEffect 배선 + 판정 텍스트 차등",
+        "description": "`NoteSpawner.cs:126` dspTime 앵커링(qa_static TIMING_DSPTIME_UNUSED 해소) + `Note.cs:34` Random.Range 제거 + `OnNoteHit` 판정 enum 승격 + `ShowHitEffect()` 실제 호출 + `HitEffectController.cs:13·92` Perfect 44/Good 36/Miss 30 차등 + 120ms 스케일 오버슈트 팝 + `MissJudgement.anim` 2083→500ms. 완료 조건: `qa_static.py` 0 error + regression 픽스처 + `REDESIGN.md` ms 명시."
+      },
+      {
+        "title": "[P1·빌드 불필요] 힌트 무료 되감기 정책 + 스토어 태그라인 재작성 + GDD 200레벨 개정",
+        "description": "`docs/GAME_DESIGN.md:410` 8.3절 「힌트 사용(선택)」 → 「힌트 무료(첫 실수까지 되감기 + 다음 칸 1개 공개, Zip 방식), 리워드 광고는 생명 충전 전용」으로 교체하고 `:10-23` 60레벨 기준을 200레벨로 개정(단, 「난이도 계속 상승」 문구 금지). `C:/Unity/Feedme/docs/GAME_BRIEF.md:78` 「Like a Dino의 단순함 + 고양이 IP + AI 음악 + 수집 메커니즘」을 스토어용 한 줄(예: 「고양이와 함께 리듬 타는 1탭 리듬게임」)로 재작성 — 이 줄이 두 프로젝트 `STORE_LISTING.md` 출발점. 「AI 음악」 19건 철회를 같은 커밋으로. 소프트런치 정지선(D7 8%·D30 3%)을 `ANALYTICS_SPEC.md` 게이트로 명기."
+      },
+      {
+        "title": "[P1·자율 후보] Dependabot #124 → #129 병합 + Debug.Log 스트리핑 래퍼",
+        "description": "agent-office: 8/30 PR Validate가 두 PR 모두 통과했으므로 #124(setup-node 7) → #129(npm 13건) 순 병합 후 `npm audit` 재확인. Unity: `Debug.Log` NumLink 166·Feedme 129를 `[Conditional(\"UNITY_EDITOR\")]` 래퍼로 감싸거나 `Debug.unityLogger.logEnabled=false` — 릴리스 빌드 로그 비용 제거."
+      },
+      {
+        "title": "[P2·적재] 텍스처 압축·스프라이트 아틀라스 · FindObjectOfType 24건 · 노트 풀링 · 스크린샷 55장 선별 · 어댑티브 아이콘(6회째) · 나머지 이월",
+        "description": "`.spriteatlas` 0개 → UI 아틀라스 1개씩 + `textureCompression: 0` NumLink 571·MeowBeat 115를 ASTC 6x6(UI 4x4~5x5) 프리셋으로 · `GameManager.cs:94-121` FindObjectOfType 19건을 SerializeField 참조로 · `NoteSpawner.cs:171` 오브젝트 풀 · 스크린샷 접두 5버전 정리 후 스토어 8장 선별 + MeowBeat 촬영 · 어댑티브 아이콘 · SaveSystem 원자적 쓰기(R2) · R3·D4·D6·Q3·Q4 · Unity 6000.3.23f1 · WU 활성 시간 08~02→03~21 · JobResearch·Standup 분리 · Digest·StudyGenerate FAIL · StudyPush 40일·GBrain 98일 Disabled · `e0.txt` 폐기 · 작업 스케줄러 이력 로그 활성화 · 저널 3.13MB 증가 대책 · `productName: hefeedmee`"
+      }
+    ]
+  },
+  {
     "id": "2026-08-26T04:00:00-daily-standup",
     "date": "2026-08-26",
     "researchTitle": "🔴 어제 미완료 8건이 하루 종일 제자리인 동안, 오늘 파낸 결함은 전부 같은 모양이었다 — 기능이 없는 게 아니라 부르는 곳이 없다: 「define만 켜면 된다」던 NumLink 광고는 ID 8개가 전부 구글 공개 테스트 ID이고 GMA 패키지가 HEAD에 0건이라 처방의 순서 자체가 틀렸으며(QA Q1·critical), MeowBeat 판정 팝업 `ShowHitEffect()`·NumLink 데일리 기록 `RecordDailyClear()`·냥카페 `CafeManager`가 나란히 호출처 0건 데드코드이고, 고양이 세이브는 `LoadCat`이 경로 접두사를 날려 `File.Exists`가 언제나 false다. targetSdk 36 마감 D-5(연기선 11/1), 코드 정지 NumLink 56일·MeowBeat 66일. 오늘은 재부팅 0건으로 사살 없이 커밋을 먼저 안착시켰고, agent-office에는 PR 빌드 게이트와 동기화 오류 무음 픽스를 자율로 넣었다",
