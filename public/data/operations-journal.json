@@ -1,5 +1,139 @@
 [
   {
+    "id": "2026-09-06T04:00:00-daily-standup",
+    "date": "2026-09-06",
+    "researchTitle": "🟡 어제 자율 P0 3종은 전부 이행됐고 회의도 정시에 열렸다 — 그런데 03:33 헬스체크가 DailyStandup·JobResearch 두 태스크를 「Disabled」 상태에서 발견해 되살렸다(이력상 최초, 비활성화 주체 미확인). 게임 코드는 67일/77일째 0줄이고, 오늘 일곱 명은 「만들어져 있는데 이어지지 않은 경제」를 팠다: 힌트는 광고를 봐도 안 늘고(GameConstants:198 「미사용」), 코인 소비처는 생명 100코인 하나, MeowBeat는 HP 1에서 노트 2개가 같은 프레임에 닿으면 코인이 2배 지급된다(N11)",
+    "researchSummary": "제83회 리서치(일요일·이틀 연속 정시 개최). 7명 전원 보고. ① Orchestrator: 어제 결정 11건 중 이행은 자율 ②(프롬프트 `dev-studio`+`--state all`·`job_research.bat:18` `exit /b %RC%`·JobResearch 06:00 분리) 1건, 사용자 세션 항목 ③~⑪은 파일 무변동. 세 리포 24시간 내 코드 변경 0건(agent-office는 회의 산출물만). NumLink 정지 67일·미커밋 45 / MeowBeat 정지 77일·미커밋 38·ahead 3. SPRINT 표는 ✅37/⬜4·✅39/⬜4로 mtime 5/30·4/7 불변. 어제 회의는 04:52:42 exit 0으로 정상 종료, 오늘 04:15:27 기동(RandomDelay 35분 안). ② DevOps: 배포 정상 — `fd99a68` 런 33913107610 success, 라이브 저널 3,197,298 B = 커밋 blob 바이트 일치(로컬 3,209,425는 autocrlf CRLF 12,127 B 차이). 워크플로 3개 모두 SHA 핀·최소 permissions·concurrency 설정, Node 22. **신규 관찰**: `healthcheck.log` 9/6 03:33:07 「FIXED DailyStandup_ClaudeCode: Disabled -> Enabled」·03:33:09 JobResearch 동일 — 헬스체크 이력 403줄 중 Disabled 복구는 처음. 태스크 등록일은 4/11·4/7 그대로(재등록 아님), 스케줄러 이력 로그 비활성으로 주체 미확인. 헬스체크 exit 1은 `PKM_StudyGenerate` FAIL(0x1) 때문(`automation_healthcheck.py:331`). main 브랜치 보호 404(없음). S4U 로그온은 DPAPI 자격증명 접근 불가 → 현재 InteractiveToken 구성이 OAuth 토큰에 맞는 유일 구성. ③ Game Designer: NumLink 힌트 경제 미구현 — 초기 힌트 1개(`SaveSystem.cs:103`), 증가 경로는 IAP 2곳(`IAPManager.cs:113,118`)뿐이고 광고 콜백 `HintManager.cs:97-110`은 타이머만 리셋, `GameConstants.cs:198` `AdRewardHintCount = 3 // 현재 미사용`. 200레벨 코인 수입 5,400+별 1,000~3,000 = 6,400~8,400인데 소비처는 생명 100코인(`GameOverPanel.cs:18`) 하나. MeowBeat 시작코인 3,000 = 곡값 3,000(`GameConstants.cs:4-6`), 풀콤보 약 1,400코인/곡 → 첫 세션 10분에 기본 4곡+1~2곡. LinkedIn Zip 하루 1문제·5x5~8x8 순환, LinkedIn Games 일간 350만(2026-05). 소트퍼즐 D1/D7/D30 52/27/14(Sensor Tower·AppMagic 2026), 리워드 eCPM Tier1 $18~45. ④ Developer: NumLink 초기화 순서 미보장 참조 14건(8파일) — 순서 지정은 `GameBootstrapper.cs:10` `[DefaultExecutionOrder(-100)]` 1건, `m_ScriptExecutionOrder` 0건, Awake 2·OnEnable 3건이 비결정 순서 의존, 전부 null 체크로 크래시 대신 무음 누락. `ServiceLocator.Get` 호출 0건(Register 3곳만). MeowBeat 오디오 33개 meta 전부 `loadType 0`(Decompress On Load)·Vorbis·`preloadAudioData 1`, Streaming 0건 — 5.67MB BGM도 전량 PCM 해제. `SongDataLoader.cs:89` UWR `streamAudio` 미설정. 웹: Unity 6000.3.24f1 없음(최신 23f1), GMA 9/4 이후 없음, Vite 8.3 베타만. agent-office `npm run build` 1.52s 성공·JS 346KB(gzip 115)·경고 0, lock은 vite 8.0.16(선언 ^8.1.0과 불일치). ⑤ QA: 장부 18건 전량 잔존·수정 0. 신규 3건 — **N9(MED)** `NumberButton.cs:102·113·131` `pointerId` 검사 0건 → 두 번째 손가락이 셀을 지나면 `TryConnect`(`NumberManager.cs:291`) 오염, 떼면 첫 드래그 종료, `OnApplicationPause` 0건. **N10(설계 부재)** MeowBeat 곡 완주 경로 없음 — `NoteSpawner.cs:156-163` `CheckStageClear`→속도 +0.1 같은 곡 재시작, 결과 화면은 HP 0(`StatusManager.cs:41-52`)만. **N11(HIGH)** `StatusManager.cs:25` 가드가 `currentHp < 0`이라 HP 1에서 같은 프레임 노트 2개 → 0·-1 두 번 진입, `SaveScore`·`AddCoin`·`resultDelay` 2회. `BoardData.json` 720보드 무결(빈 0·순열 불일치 0·중복 0), 8x9 60보드 비인접은 미사용 크기라 휴면. 검증 3종 exit 0/0/0(2/2). ⑥ Content Writer: Play AI 선언은 **스토어 리스팅 에셋 체크박스만**(answer/17262077), AI 정책(14094294)은 유저 프롬프트 생성 앱 대상 → 두 게임 앱 콘텐츠 선언 의무 없음. Apple 가이드라인 AI 표기 조항 없음(5.2.1 저작권만). 프리뷰 영상: Play 재생률 약 6%·재생 시 +20%, iOS 게임 +15~25%, Play 80% 실플레이·30초 자동재생, Apple 15~30초·실기기만. 간단설명 80자·자세한 설명 첫 3문장 두 게임분 산출. NumLink README 공개 적합, Feedme 루트 README 부재. ⑦ Art: SpriteAtlas 0개(양쪽), Android ASTC 오버라이드 0/932(전부 -1 자동), NumLink isReadable=1 **217장**(배경 1085×1920 포함), `03. Sprites/Ref/` 1896×4610 참고 이미지 5장이 빌드 자산 안. DOTween 지속시간 상수화 15/17(매직 `NumberButton.cs:250·254`), 값 7종. 트렌드 키워드 **색+기호 이중 인코딩**(AbleGamers·Puyo Alphabet). 아이콘 빈 배열 8회째, 9/5 이후 Assets 변경 0.",
+    "researchItems": [
+      {
+        "title": "어제 자율 P0 3종 전부 이행 — 그리고 두 태스크가 「Disabled」로 발견돼 헬스체크가 되살렸다",
+        "description": "`daily_standup_prompt.txt:12` `dev-studio`+`--state all`(mtime 9/5 04:50:38) · `job_research.bat:18` `exit /b %RC%`(04:50:42) · JobResearch 06:00+PT50M(9/5 06:19 Result 0). 오늘 회의 04:15:27 기동, 어제 04:52:42 exit 0. **신규**: `healthcheck.log` 03:33:07·03:33:09 「Disabled -> Enabled」 FIXED 2건 — 403줄 이력에서 최초. 등록일 4/11·4/7 불변이라 재등록이 아니고 Enabled 플래그만 꺼졌던 것. 주체 미확인(스케줄러 이력 로그 비활성). 헬스체크 자체 exit 1은 `PKM_StudyGenerate` 0x1 때문."
+      },
+      {
+        "title": "게임 코드 67일/77일째 0줄 — 사용자 세션 항목 9건 파일 무변동",
+        "description": "targetSdk `:179`=34·`:181`=35, `GOOGLE_MOBILE_ADS` 0건·`Assets/GoogleMobileAds` 부재, `productName: hefeedmee`·purchasing 5.4.0 미커밋·ahead 3, `dataPath` 6건, 노트 프리팹 `Note(Clone)` 382개, GDD mtime 3/16, asmdef 0개. SPRINT ✅37/⬜4·✅39/⬜4 불변."
+      },
+      {
+        "title": "NumLink 힌트 경제는 미구현이다 — 광고를 봐도 힌트가 늘지 않는다 (Game Designer)",
+        "description": "초기 힌트 1개(`SaveSystem.cs:103`), 증가 경로 IAP 2곳(`IAPManager.cs:113,118`)만. `HintManager.cs:97-110` 광고 콜백은 타이머 리셋만, `GameConstants.cs:198` `AdRewardHintCount = 3 // 현재 미사용`. 200레벨 코인 수입 6,400~8,400 vs 소비처 생명 100코인 1개(`GameOverPanel.cs:18`) → 힌트 정확히 1회, 코인 인플레이션. 제안: `WatchAdForHints`가 실제 +3, 코인→힌트 200코인 교환."
+      },
+      {
+        "title": "MeowBeat HP 1에서 노트 2개가 같은 프레임에 닿으면 코인이 2번 지급된다 (QA N11, HIGH)",
+        "description": "`StatusManager.cs:25` 가드가 `currentHp < 0`(≤ 아님). 인접 레인 동시 노트 → 0·-1 두 번 진입 → `SaveScore()`·`AddCoin()`(:49-50, `DatabaseManager.cs:323-327` coin += 점수)·`resultDelay` 코루틴 2회. `isGameOver`(:8)는 `DecreaseHp`에서 미검사. 수정 3줄."
+      },
+      {
+        "title": "MeowBeat엔 「곡을 끝까지 치면 결과가 뜬다」는 경로가 없다 (QA N10)",
+        "description": "시간 기반 종료 0건(`isPlaying|clip.length`). `NoteSpawner.cs:156-163` `CheckStageClear`→`GameManager.StageClear()`가 속도 +0.1 후 **같은 곡 재시작**. 결과 화면은 HP 0(`StatusManager.cs:41-52`)→`Result.ShowResult()`(:83) 하나. 곡 단위 결과·클리어 개념 자체가 설계에 없음 — 판정 코어(어제 ⑧)와 함께 정의해야 한다."
+      },
+      {
+        "title": "NumLink 두 번째 손가락이 경로를 오염시킨다 (QA N9, MED)",
+        "description": "`NumberButton.cs:102·113·131` `OnPointerDown/Enter/Up()`이 `PointerEventData` 없이 EventTrigger 호출 → `pointerId` 검사 0건(프로젝트 전체 1건, `NumberManager.cs:171` `GetTouch(0)`만). 두 번째 손가락 진입 시 `TryConnect`(`NumberManager.cs:291`) 오염·패널티, 떼면 `EndDrag`. `OnApplicationPause/Focus` 0건 → 백그라운드 전환 시 `isDragging` 유지."
+      },
+      {
+        "title": "MeowBeat 오디오 33개 전부 Decompress On Load — 5.67MB BGM도 PCM 전량 해제 (Developer)",
+        "description": "`*.mp3/.wav.meta` 33개 동일: `loadType 0`·`compressionFormat 1`(Vorbis)·`preloadAudioData 1`·`loadInBackground 0`. Streaming 0건. `StreamingAssets/Songs/*.ogg` 10곡 13MB는 `SongDataLoader.cs:89` UWR 로드인데 `streamAudio` 미설정(기본 false). 권장: 2MB 이상 BGM `loadType 2`, UWR `streamAudio = true`."
+      },
+      {
+        "title": "NumLink 초기화 순서 미보장 참조 14건 — 전부 null 체크로 「조용히 빠짐」 (Developer)",
+        "description": "순서 지정은 `GameBootstrapper.cs:10` `[DefaultExecutionOrder(-100)]` 1건, `m_ScriptExecutionOrder` 0건. Awake 2(`TextVariables.cs:36-38`)·OnEnable 3(`NumberButton.cs:87`·`DailyStreakUI.cs:40-42`)이 비결정 순서 의존. 실패 양상 = 테마 미적용·스트릭 미표시. `ServiceLocator.Get` 호출 0건(Register 3곳만)으로 로케이터 사실상 미사용."
+      },
+      {
+        "title": "텍스처 임포트 전수 — ASTC 0/932, isReadable 217장, 참고 이미지 1896×4610 5장이 빌드 안 (Art)",
+        "description": "SpriteAtlas 양쪽 0개. Android 오버라이드 NumLink 766·MeowBeat 166 전부 format -1. maxTextureSize 2048 기본값 4,822/4,829. `03. Sprites/Ref/레이어 2·4·5·22.png`·`fix_peakpx.jpg.png` 1896×4610 참고용이 Assets 내. isReadable=1 217장(`Background/Bg_1.png` 1085×1920 등) = 메모리 2배. DOTween 지속시간 15/17 상수화(매직 `NumberButton.cs:250·254`), 값 7종→3단계 압축 여지. 아이콘 빈 배열 8회째."
+      },
+      {
+        "title": "AI 생성 콘텐츠 선언은 리스팅 에셋에만 — 인게임 음악은 의무 없음, 프리뷰 영상은 게임에서 +15~25% (Content Writer)",
+        "description": "Play [answer/17262077](https://support.google.com/googleplay/android-developer/answer/17262077) 대상 = 스토어 이미지·영상 에셋 체크박스. [AI 정책 14094294](https://support.google.com/googleplay/android-developer/answer/14094294)는 유저 프롬프트 생성 앱만. Apple 가이드라인 AI 조항 없음(5.2.1만). 프리뷰: Play 재생률 ~6%·+20%, iOS 게임 +15~25%(금융·생산성은 −3~7%). Play 80% 실플레이·YouTube 광고 OFF, Apple 15~30초 실기기. 간단설명 80자 2종·자세한 설명 첫 3문장 2종 산출. Feedme 루트 README 부재."
+      },
+      {
+        "title": "배포·CI 이상 없음 — 라이브 = 커밋 blob 바이트 일치, 브랜치 보호는 없음 (DevOps)",
+        "description": "`fd99a68` 런 33913107610 success(9/4 19:49Z), 라이브 3,197,298 B = `git cat-file -s` 일치(로컬 +12,127 B는 autocrlf). 워크플로 3개 SHA 핀(checkout v7.0.0·setup-node v6.4.0·pages v5/v6)·top `contents: read`·concurrency·Node 22. `branches/main/protection` 404. GitHub changelog 9/4~9/6 Actions·Pages·Dependabot 항목 0. S4U 로그온은 DPAPI 접근 불가([MS 문서](https://learn.microsoft.com/en-us/windows/win32/taskschd/principal-logontype)) → InteractiveToken 유지가 정답. 신규 웹: Unity 6000.3.24f1·GMA 신규 없음, Vite 8.3.0-beta.0(9/2)만."
+      }
+    ],
+    "meetingTitle": "이어지지 않은 경제 — 힌트는 늘지 않고, 코인은 쓸 곳이 없고, 게임오버는 두 번 지급한다",
+    "meetingSummary": "이틀 연속 정시 개최. 자율 P0 3종은 어제 안에 닫혔고 배포·CI는 깨끗하다. 그러나 03:33 헬스체크가 두 태스크를 Disabled에서 되살린 기록이 처음 남았고, 누가 껐는지는 이력 로그가 꺼져 있어 모른다. 게임 쪽은 코드 0줄 상태에서 일곱 명이 경제 배선을 팠다 — NumLink는 힌트 획득 경로가 IAP 외엔 없고 코인 소비처가 하나, MeowBeat는 게임오버 이중 진입으로 코인 2배·곡 완주 결과 화면 부재. 오늘 결정은 「새 기능」이 아니라 「있는 것을 잇는 3~10줄 수정」으로 좁혔고, 사용자 세션 없이는 한 줄도 안 움직인다는 사실은 어제와 같다.",
+    "meetingItems": [
+      {
+        "speaker": "Orchestrator",
+        "note": "어제 11건 중 이행 1건(자율 ②). 나머지 9건은 파일 mtime이 안 움직였고, 세 리포 24시간 코드 변경 0. 정지 67일/77일. 어제 회의는 04:52:42 exit 0 정상 종료, 오늘 04:15:27 기동. 오늘 회의는 사용자 세션 항목을 다시 결정하지 않는다 — 「재결정 금지」로 묶고 새 발견 중 수정 10줄 이하만 P0에 올린다."
+      },
+      {
+        "speaker": "DevOps",
+        "note": "배포·CI 이상 없음, 라이브 바이트 일치. 단 한 가지 — 03:33 헬스체크가 DailyStandup·JobResearch를 Disabled에서 Enabled로 되살렸다. 이력 403줄에서 처음이고 등록일은 그대로라 누군가 Enabled만 끈 것. 어제 04:50 자율 조치(`schtasks /Change`)가 후보지만 이력 로그가 꺼져 있어 확정 못 한다. 헬스체크가 없었으면 오늘 회의는 안 열렸다. 헬스체크 exit 1은 StudyGenerate 실패라 오탐 아님."
+      },
+      {
+        "speaker": "Game Designer",
+        "note": "NumLink 힌트 경제가 미구현이다. 초기 1개, 광고 콜백은 타이머만 리셋, `AdRewardHintCount = 3`은 주석에 「미사용」. 200레벨 수입 6,400~8,400코인의 소비처는 생명 100코인 하나. 광고 봉인(어제 ④)이 열리기 전이라도 `WatchAdForHints`가 실제로 +3을 하게 하고 코인→힌트 200코인 교환을 넣으면 IAP 팩과 충돌 없이 경제가 닫힌다."
+      },
+      {
+        "speaker": "QA Tester",
+        "note": "장부 18건 전량 잔존. 신규 3건 — N11(HIGH) `StatusManager.cs:25` `< 0` 가드로 HP 1 동시 노트 2개면 코인 2배 지급, N9(MED) 두 번째 손가락 경로 오염, N10 곡 완주 결과 경로 부재. 미해결 21건, 최심각은 여전히 광고 보상 무조건 지급. N11은 `<= 0` + `isGameOver` 검사 3줄이라 오늘 P0로 올린다."
+      },
+      {
+        "speaker": "Developer",
+        "note": "MeowBeat 오디오 33개 전부 Decompress On Load — 5.67MB BGM까지 PCM 해제, UWR `streamAudio` 미설정. NumLink 초기화 순서 미보장 14건은 전부 null 체크라 크래시는 없고 테마·스트릭이 조용히 빠지는 유형. Unity·GMA 신규 없음, agent-office 빌드 1.52s 경고 0. 오디오는 `.meta` 값 변경만이라 C# 0줄로 메모리를 줄일 수 있다."
+      },
+      {
+        "speaker": "Art Director",
+        "note": "ASTC 오버라이드 0/932, isReadable 217장, 1896×4610 참고 이미지 5장이 Assets 안에서 빌드에 실린다. DOTween은 15/17 상수화로 양호. 트렌드 키워드는 색+기호 이중 인코딩 — 연결 셀 6색 dE00 4.70 문제(8/26)의 해법으로 배경 패턴 토글 1개 제안. 참고 이미지 5장은 폴더 이동만이라 지금 가능."
+      },
+      {
+        "speaker": "Content Writer",
+        "note": "AI 선언 의무는 리스팅 에셋 체크박스에만 있고 인게임 음악엔 없다 — Lyria 3 곡은 이용약관 사본만 보관하면 된다. 프리뷰 영상은 게임에서 +15~25%라 실기기 캡처 15~30초 1편을 폐쇄테스트 전 항목으로. 간단설명·자세한 설명 초안 첫 3문장 두 게임분은 산출됐고 `STORE_LISTING.md`에 넣으면 된다. Feedme 루트 README는 없다."
+      },
+      {
+        "speaker": "Orchestrator",
+        "note": "정리. 자율 P0는 「Disabled 주체 규명 — 스케줄러 이력 로그 활성화 + 헬스체크 FIXED 시 알림 라인」 1건. 사용자 세션 P0는 어제 ③④⑤ 유지에 N11 3줄을 끼운다. P1은 힌트 경제 배선·오디오 Streaming(.meta)·참고 이미지 이동·N9 pointerId. P2는 프리뷰 영상·STORE_LISTING.md·ASTC 프리셋·브랜치 보호·이월 전부."
+      }
+    ],
+    "decisions": [
+      {
+        "title": "[P0·자율] 태스크 Disabled 주체 규명 장치 — 스케줄러 이력 로그 활성화 + 헬스체크 FIXED 발생 시 알림 라인",
+        "description": "`wevtutil sl Microsoft-Windows-TaskScheduler/Operational /e:true`로 이력 활성화(재발 시 4702·4699 이벤트로 주체 확인). `automation_healthcheck.py`에 FIXED 건수 > 0이면 요약 첫 줄에 「자동복구 N건」을 넣어 텔레그램/로그에서 바로 보이게. 오늘 03:33 FIXED 2건은 관찰 사실, 원인은 미확정(후보: 어제 04:50 `schtasks /Change`)."
+      },
+      {
+        "title": "[P0·사용자 세션·3줄] MeowBeat 게임오버 이중 진입 봉합 (QA N11)",
+        "description": "`StatusManager.cs:25` `currentHp < 0` → `<= 0`, 진입 직후 `isGameOver` 검사·설정, `DecreaseHp`에서 `isGameOver`면 return. 재현: HP 1·인접 레인 동시 노트. 영향: `AddCoin` 2회·`resultDelay` 2회. 어제 ⑦ 세이브 3종 세트와 같은 파일군이라 한 세션에 동봉."
+      },
+      {
+        "title": "[P0·재결정 금지·유지] 어제 ③ targetSdk 36 연장 신청 · ④ 광고 봉인(define·SDK 먼저) · ⑤ MeowBeat 미커밋 승계 · ⑥ 리스팅 승계 결정",
+        "description": "파일 무변동으로 이월. 내용은 #132 그대로, 오늘 재서술하지 않음. 사용자 세션 1회가 열리면 순서는 ⑤(유실 위험) → ③ → N11 → ④."
+      },
+      {
+        "title": "[P1·사용자 세션] NumLink 힌트 경제 배선 — `WatchAdForHints` 실제 +3 + 코인→힌트 200코인 교환",
+        "description": "`HintManager.cs:97-110`에서 `hintCount += GameConstants.AdRewardHintCount`(현재 타이머 리셋만), `GameConstants.cs:198` 주석 「미사용」 제거. 힌트 패널에 「200코인으로 힌트 1개」 버튼(`ResourceManager` 경유). 수입 6,400~8,400 기준 32~42회 = 5레벨당 1힌트, IAP 5/10팩과 비충돌. 광고 봉인 전에는 `#else` 경로로 무료 지급되므로 ④ 이후 활성화."
+      },
+      {
+        "title": "[P1·빌드 불필요·C# 0줄] MeowBeat BGM `.meta` `loadType 2`(Streaming) 전환 + UWR `streamAudio = true`",
+        "description": "2MB 이상 BGM(`Sounds/BGM_IdleBackground.mp3` 5.67MB 등) `loadType: 2`·`preloadAudioData: 0`, 짧은 SFX는 유지. `SongDataLoader.cs:89` `((DownloadHandlerAudioClip)handler).streamAudio = true`. 어제 ⑨(노트 프리팹 클론 1,247개 삭제)와 같은 「에셋만」 세션에 묶는다."
+      },
+      {
+        "title": "[P1·빌드 불필요] NumLink `03. Sprites/Ref/` 1896×4610 참고 이미지 5장 Assets 밖 이동 + isReadable 217장 일괄 해제",
+        "description": "`레이어 2·4·5·22.png`·`fix_peakpx.jpg.png` → `Reference/`(Assets 외부). `isReadable: 1` 217장 중 런타임 `GetPixels`/`Texture2D.ReadPixels` 사용처 grep 후 0건이면 전부 0으로. Android ASTC 6×6 TexturePreset 1개는 P2로."
+      },
+      {
+        "title": "[P1·사용자 세션] NumLink 멀티터치 가드 (QA N9) — `pointerId` 검사 + `OnApplicationPause` 드래그 취소",
+        "description": "`NumberButton.cs:102·113·131`을 `IPointerDownHandler` 등 인터페이스로 바꿔 `eventData.pointerId`를 첫 포인터와 비교. `NumberManager`에 `OnApplicationPause(true)` → `EndDrag(cancel)`. 어제 ⑦·오늘 N11과 별 세션(NumLink)."
+      },
+      {
+        "title": "[P1·설계] MeowBeat 곡 단위 결과·클리어 정의 (QA N10) — 판정 코어(어제 ⑧)와 동시 확정",
+        "description": "현재 `CheckStageClear`는 속도 +0.1 재시작이고 결과는 HP 0만. GDD에 「곡 종료 = 마지막 노트 + 2초 → 결과 화면(점수·판정 분포·코인)」을 명시하고 무한 가속 모드는 별도 토글로. Game Designer 「오늘의 냥곡」(9/5)과 함께 한 문서로."
+      },
+      {
+        "title": "[P2·빌드 불필요] `STORE_LISTING.md` 신설 — 오늘 산출 간단설명 80자·자세한 설명 첫 3문장 + 어제 태그라인 3안 + 프리뷰 영상 항목",
+        "description": "두 게임 `docs/STORE_LISTING.md` 생성. 「AI 음악」 표현 제외 방침 유지. AI 선언은 리스팅 에셋에 AI 생성물을 넣지 않기로 확정(체크박스 대상 없음). 프리뷰 영상 15~30초 실기기 캡처 1편은 폐쇄테스트 전 제작 항목. Feedme 루트 README 신설."
+      },
+      {
+        "title": "[P2·자율 가능] agent-office main 브랜치 보호(PR 필수·`PR Validate` 필수 체크) + Dependabot #124→#129 병합",
+        "description": "`gh api -X PUT repos/mmporong/dev-studio/branches/main/protection`으로 required_status_checks에 PR Validate. 회의 봇의 직접 push는 예외(관리자 bypass) 필요 — 적용 전 push 경로 확인. lock `vite 8.0.16` vs 선언 `^8.1.0` 불일치는 #129 병합으로 해소 여부 확인."
+      },
+      {
+        "title": "[P2·이월] ASTC 6×6 TexturePreset · 색+기호 이중 인코딩 토글 · DOTween 3단계 토큰 · 초기화 순서 `[DefaultExecutionOrder]` 5건 · 테스트 부활 · 아이콘(8회째) · Unity 18패치",
+        "description": "모두 사용자 세션 뒤. 어제 ⑩ GDD 정본화·⑪ 나머지와 함께 적재. 재조사 금지 목록에 오늘 주제(힌트 경제·오디오 loadType·텍스처 전수·초기화 순서·AI 선언·프리뷰 영상·LinkedIn Zip·S4U) 추가."
+      }
+    ]
+  },
+  {
     "id": "2026-09-05T04:00:00-daily-standup",
     "date": "2026-09-05",
     "researchTitle": "🔴 어제 회의는 커밋 4분 뒤 세션 한도로 잘려 이슈가 통째로 사라졌고(#132 부재), 오늘 회의는 그 사실조차 못 볼 뻔했다 — `gh issue list --label`이 개명된 리포에서 빈 배열 + exit 0을 내며 조용히 실패한다. 그리고 targetSdk 36 마감 경과로 두 앱은 지금 업데이트 제출 자체가 막혀 있다",
