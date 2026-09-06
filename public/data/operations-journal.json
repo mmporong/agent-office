@@ -1,5 +1,131 @@
 [
   {
+    "id": "2026-09-07T04:00:00-daily-standup",
+    "date": "2026-09-07",
+    "researchTitle": "🔴 어제 결정 11건 중 파일이 움직인 건 자율 1건(헬스체크 SUMMARY 라인)뿐이고, 자율로 잡았던 스케줄러 이력 로그조차 enabled:false 그대로다 — 그 사이 PKM 동기화가 미추적 job-search 8파일과 origin 커밋 충돌로 04:32에 멈췄고(behind 3), 오늘 일곱 명은 「있는데 죽어 있는 것」을 팠다: NumLink 타이머 UI는 감소 코드가 없는 죽은 표시(N12), 일시정지 버튼은 설정창만 열고 timeScale·입력을 안 막으며(N13), MeowBeat 팜 씬은 한 탭에 스크립트 3개가 동시에 반응하고(N14), 버튼 12/83이 48dp 미달, 폰트 14개 24MB에 라이선스 파일 0건, AutoGenTests 12개는 미추적(??)으로 디스크에만 있다. 코드 정지 68일/78일.",
+    "researchSummary": "제84회 리서치(월요일·사흘 연속 정시 개최). 7명 전원 보고. ① Orchestrator: #133 결정 11건 = 이행 1(`automation_healthcheck.py:330-332` FIXED SUMMARY 라인) / 미이행 10(Operational 로그 enabled:false·N11 `<0` 그대로·targetSdk 34/35·loadType 2 0개·Ref 폴더 존재·STORE_LISTING 없음·브랜치 보호 404·#124/#129 OPEN). 세 리포 24h 코드 변경 0. NumLink 정지 68일·미커밋 45 / MeowBeat 78일·미커밋 38·ahead 3. `pkm-sync.log` 9/7 04:32 「untracked would be overwritten → Aborting」: PKM `behind 3`, 수정 7·미추적 41, 그중 job-search 2026-09-06 8파일이 origin `6cbf67c`·`8afd539`와 충돌. 헬스체크 9/7 03:31 OK 5·FAIL 2(JobResearch·StudyGenerate 0x1)·OBSERVE 2(StudyPush 43일·GBrain_Sync 101일 Disabled). 어제 회의 04:35:11 exit 0. ② DevOps: `880a773` Pages 34초 success, 라이브 저널 200·3,219,490B = blob 일치. 캐시 74MB(0.7%)·워크플로 4개 active·rate limit 5000/5000·리포 7,723KB·저널 122엔트리 일 +20~40KB. 9/6~9/7 GitHub changelog 신규 없음(최근 9/3 Actions 공지). ③ Developer: MeowBeat `GameManager.cs:94-121` FindObjectOfType 21회 연속·`ButtonController.cs:347-402` GameObject.Find 7회, NumLink `PuzzleManager.cs:530,766,775` `LoadAll<Sprite>` 3회 중복(Resources 8.8MB). MeowBeat 미커밋 .cs 4건은 4/23 작업(`titleKo`·언어 전환·미소유 곡 톤다운, +100/-18). Unity IAP 5.4.3(9/3): `checkReleaseDuplicateClasses` Android 빌드 실패·AndroidJavaObject 누수·미페치 상품 구매 누락 수정 — 양 리포 5.4.0. GMA v11.5.0(9/3) 이후 신규 없음, Unity 6000.3.23f1(8/26)이 최신. ④ QA: 장부 21건 유지. N12 LOW — `GameManager.cs:113` 「타이머 기능 제거됨」, `TimerUI.cs:88-96`·`InGameHUDController.cs:318-342` 죽은 UI + ElapsedTime이 realtimeSinceStartup(`:72,204`)이고 OnApplicationPause 0건이라 백그라운드 체류가 클리어 시간에 합산. N13 MED — `InGameHUDController.cs:448` 일시정지 = `Settings.Show()`만, `SettingsController.cs:107` timeScale·IsInputAllowed 미변경, `GameManager.Pause()` 호출처 0. N14 MED — 팜 씬 `CatInteraction.cs:30`·`FarmFoodManager.cs:32`·`CameraControl.cs:22,28`이 같은 프레임 `GetMouseButtonDown(0)`, IsPointerOverGameObject 0건. N15 LOW `MobileTouch.cs:35` 드래그 속도 deltaTime 의존. MeowBeat 리듬 씬 입력은 touch Began만 → 이중 판정 없음. `Feedme/Assets/AutoQATests/Editor/AutoGenTests.cs` [Test] 12개 미추적(??). ⑤ Game Designer: 하이브리드캐주얼 퍼즐 실패오퍼+광고제거 ≈ 월매출 30%(AppMagic), 스트릭 보너스가 D30 핵심 전략 1위 69%(Mistplay), Cytus II 랭크 C70/B80/A90/S95/MM100만 5단계+FC 별도(Arcaea FR/PM 2점 인디케이터). NumLink 실패 = 생명 3 소진뿐(`NumberManager.cs:478-488`), undo 0건, `remainingTime`(`GameManager.cs:53`)·`TimeLimitPerCell 2.5f` 선언만. GDD는 GAME_DESIGN.md 없고 `DESIGN.md:60-64` 타이머 색 3단계가 코드와 불일치. ⑥ Content Writer: Play 사전등록 = 90일 내 출시·보상 1개 평생 고정·동시 2앱, 4~8주 전 시작·72h 내 푸시 권고, 전환율 공개 벤치마크 부재(확인된 사실). Cats&Soup 틱톡 852.1K 팔로워·6.1M 좋아요, Little Kitty Big City 38.2K·562.8K(48h 10만 장 오가닉). 60초 이하 루프·3초 훅·주 3~5회. 로컬: STORE_LISTING.md 두 리포 없음(미이행), 스크린샷 NumLink 103장·Feedme 0장. ⑦ Art: M3 Expressive 48dp 엄격·스프링 모션 기본. MeowBeat 참조 1080×1920 기준 48dp ≈ 126px인데 Button 83개 중 12개가 100~120px(option0~5·IAPButton·IdleButton). NumLink UI Toolkit uxml 6·uss 11 vs Canvas 프리팹 430개 이중화. 폰트 NumLink 10개 7.2MB·MeowBeat 4개 17.1MB(ACCsky 6.9MB), OFL/LICENSE 동봉 0건. FTUE 코어 진입 60초·아하 90초 초과 시 2세션 이탈.",
+    "researchItems": [
+      {
+        "title": "어제 결정 11건 중 이행 1건 — 자율 P0 「스케줄러 이력 로그」도 enabled:false",
+        "description": "이행은 `C:\\Users\\LIMMM\\automation_healthcheck.py:330-332` FIXED SUMMARY 라인 1건(9/7 FIXED 0건이라 미출력, 정상). 미이행 10: `wevtutil gl` enabled:false · `StatusManager.cs:26` `currentHp < 0` 그대로(N11) · targetSdk `:179`=34/`:181`=35 · `loadType: 2` .meta 0개 · `Assets/03. Sprites/Ref/` 존재 · STORE_LISTING.md 두 리포 없음 · 브랜치 보호 404 · #124·#129 OPEN. 세 리포 24h 코드 변경 0. 정지 68일/78일."
+      },
+      {
+        "title": "PKM 동기화 04:32 중단 — 미추적 job-search 8파일이 origin 커밋과 충돌",
+        "description": "`pkm-sync.log` 9/7 04:32 「untracked working tree files would be overwritten → autostash 후 Aborting → 동기화 건너뜀」. PKM `master...origin/master [behind 3]`, 수정 7(SKILL.md 등)·미추적 41. 충돌 파일은 08_Portfolio/job-search 2026-09-06 8종 vs origin `6cbf67c`·`8afd539`(다른 기기에서 같은 날짜 산출물 커밋). 사용자 작업물이라 자율 삭제·덮어쓰기 금지 — 대조 후 사용자 판단. 헬스체크 9/7 FAIL 2(JobResearch·StudyGenerate 0x1)."
+      },
+      {
+        "title": "배포·CI 이상 없음 — 저널 일 +20~40KB, 캐시 0.7%",
+        "description": "`880a773` deploy-pages run 33987372906 34초 success, 라이브 3,219,490B = blob. 워크플로 4개 active, Actions 캐시 2개 74MB, rate limit 5000/5000 잔여, 리포 7,723KB. 저널 blob 추이 3,132,146→3,158,206→3,197,298→3,219,490(연 10MB 미만). JobResearch 9/6 06:13 결과 1(실패)·AutomationHealthCheck 9/7 03:31 결과 1 — Operational 로그가 꺼져 있어 이벤트로 원인 추적 불가."
+      },
+      {
+        "title": "N13 MED — NumLink 일시정지 버튼은 설정창만 연다",
+        "description": "`InGameHUDController.cs:448` → `Settings.Show()`만. `SettingsController.cs:107` Show()에 `Time.timeScale`·`IsInputAllowed` 변경 없음. `GameManager.Pause()/UnPause()`(`:366-384`) 호출처는 `HBLoadScene.cs:25` UnPause 1건뿐. `NumberButton.cs:104,115`는 IsInputAllowed만 검사 → 설정창 뒤 보드 드래그 가능성(PanelRaycaster 참조 0, 씬 설정 미확인). UI 트윈은 SetUpdate(true), 게임플레이 트윈 36건은 없음 — timeScale=0 경로가 없어 현재는 무해."
+      },
+      {
+        "title": "N12 LOW — 타이머 UI는 죽어 있고, 클리어 시간은 백그라운드 체류를 합산한다",
+        "description": "`GameManager.cs:113` 주석 「타이머 기능 제거됨」, `remainingTime`(`:53`) 감소 코드 없음, `isTimerActive`는 `:179,248,503`에서 false만. `TimerUI.cs:88-96`·`InGameHUDController.cs:318-342` 죽은 표시. `ElapsedTime`은 `realtimeSinceStartup`(`:72,204`) 기반 + `02. Scripts` OnApplicationPause/Focus 0건 → 홈 버튼 뒤 복귀 시 `StageClearController.cs:91` 클리어 시간에 체류 시간 합산. Game Designer 교차: `TimeLimitPerCell 2.5f`(`GameConstants.cs:28`) 선언만, `DESIGN.md:60-64` 타이머 색 3단계는 코드와 불일치."
+      },
+      {
+        "title": "N14 MED — MeowBeat 팜 씬은 한 탭에 스크립트 3개가 동시 반응",
+        "description": "`CatInteraction.cs:30`·`FarmFoodManager.cs:32`·`CameraControl.cs:22,28`이 같은 프레임 `Input.GetMouseButtonDown(0)` 처리, 세 GUID 모두 `Assets/Scenes/FarmScene.unity` 배치. `IsPointerOverGameObject` 사용 0건 → 쓰다듬기+먹이 배치+카메라 드래그 동시 발생, UI 버튼 위 탭도 월드로 통과. N15 LOW `MobileTouch.cs:35` 터치 델타×deltaTime(프레임레이트 의존). 리듬 씬 `PlayerController.cs:40-53`은 touch Began+화살표 키만 → 이중 판정 경로 없음. FixedUpdate 0건. `Feedme/Assets/AutoQATests/Editor/AutoGenTests.cs` [Test] 12개가 미추적(??)으로 디스크에만 존재."
+      },
+      {
+        "title": "MeowBeat GameManager FindObjectOfType 21회 연속·GameObject.Find 16회 — 그리고 IAP 5.4.3",
+        "description": "`Assets/Scripts/Manager/GameManager.cs:94-121` 구형 `FindObjectOfType` 21회 연속(MeowBeat 총 26·NumLink 10), `ButtonController.cs:347-402` 매 호출 `GameObject.Find(\"ItemUI\")` 7회(총 16·NumLink 4). NumLink `PuzzleManager.cs:530,766,775` `Resources.LoadAll<Sprite>(\"Sprites/Images\")` 3회 중복, `Assets/Resources` 8.8MB(Sounds 4.5·Sprites 4.1). MeowBeat 미커밋 .cs 4건(SongData·GameManager·SongManager·OptionManager, mtime 4/23, +100/-18)은 `titleKo`·OnLanguageChanged·미소유 곡 회색 톤다운. Unity IAP 5.4.3(2026-09-03): Android `:launcher:checkReleaseDuplicateClasses` 빌드 실패·`AndroidJavaObject` 누수·acknowledge된 PendingOrder DuplicateTransaction·미페치 상품 구매 누락 수정 — 양 리포 5.4.0. GMA v11.5.0(9/3) 이후 없음, Unity 6000.3.23f1(8/26)·6000.0.83f1(9/2)."
+      },
+      {
+        "title": "실패오퍼+광고제거 = 월매출 30%, 스트릭이 D30 1위 — NumLink 실패는 생명 3 소진뿐",
+        "description": "AppMagic H1 2026: 하이브리드캐주얼 퍼즐 실패오퍼+광고제거 ≈ 월매출 30%, IAP 59%:광고 41%. Mistplay: 데일리 스트릭 보너스가 D30 리텐션 핵심 전략 1위 69%(이벤트 52%). Wordle 2024년 53억 플레이·CORER 한 문제로 560만 스트릭 종료. NumLink 실패 = 잘못된 연결→`LoseLife()`→생명 0 `SetGameOver()`(`NumberManager.cs:478-488`·`GameManager.cs:478-492`, 생명 3 `GameConstants.cs:10`), Undo/Rollback 0건 — 실패오퍼(되돌리기 1회)를 팔 자리가 없다. 리듬: Cytus II 랭크 C70만/B80만/A90만/S95만/MM100만 5단계 + FC 별도, Arcaea FR(보라)/PM(파랑) 2점 인디케이터 → N10 결과 화면 설계의 참조 기준."
+      },
+      {
+        "title": "Play 사전등록 = 보상 1개 평생 고정·90일 내 출시 — 고양이 게임 틱톡은 852.1K",
+        "description": "Play Console: 사전등록 후 90일 내 출시 필수, 보상 1개·편집/삭제 불가, 동시 2앱, 200MB 초과 시 Wi-Fi 자동설치(2026 신규 변경 확인 안 됨). Playio 2026-07-01: 4~8주 전 시작·캠페인 72h 내 푸시가 D1 전환 극대화·보상은 독점 스킨. 사전등록→설치 전환율 공개 벤치마크는 MAF·BusinessofApps·Adjust 어디에도 없음(부재 자체가 사실). Cats&Soup 공식 틱톡 852.1K 팔로워·6.1M 좋아요(39M DL), Little Kitty Big City 38.2K·562.8K·48h 10만 장 무광고. Cloutboost 2025-12: 60초 이하 루프·3초 훅·wholesome/cute·주 3~5회·인디 예산 $500~2,000. 로컬: STORE_LISTING.md 두 리포 없음(어제 P2 미이행), 스크린샷 NumLink 103장(Screenshots 27+Assets/Screenshots 76)·Feedme 0장, docs 각 5개."
+      },
+      {
+        "title": "MeowBeat 버튼 12/83 48dp 미달 · 폰트 24MB 라이선스 0건 · NumLink UI 이중화",
+        "description": "M3 Expressive(2025-05, Android 16) 터치 타깃 48dp 엄격·스프링 물리 모션 기본. MeowBeat 참조 1080×1920 → xxhdpi 가정 48dp ≈ 126px인데 `MainScene.unity:16606` option1 100×100(≈38dp)·`:32522` option0·`:2140` IAPButton 120×120(≈46dp)·`Prefabs/UI/IdleButton.prefab:89` 120×120 — Button 83개 중 135px 미만 12개(option0~5 6·120px 6). 폰트 NumLink .ttf 10개 7.2MB(Maplestory 2.7·Cafe24Ssurround 3.75·TMP 예제 6), MeowBeat 4개 17.1MB(ACCsky 6.9·ACCfall 5.9·1ACCsweet 4.0), OFL/LICENSE 동봉 0(발견된 LICENSE 4건은 전부 타 패키지). NumLink `Resources/UIToolkit/` uxml 6·uss 11(테마 3) vs Canvas 프리팹 430/756(자체 `04. Prefabs/UI` 8). FTUE: 코어 진입 60초 내·아하 90초 초과 시 2세션 이탈, 퍼즐 D1 31.85/D7 12.18/D30 5.35. 미커밋 에셋 변경 NumLink 1·MeowBeat 6(기존)."
+      }
+    ],
+    "meetingTitle": "있는데 죽어 있는 것 — 타이머는 표시만, 일시정지는 창만, 결정은 문서만",
+    "meetingSummary": "사흘 연속 정시 개최. 세 가지 결론. ① 어제 11건 중 자율 항목조차 1건만 이행됐다 — 스케줄러 이력 로그는 서브에이전트 읽기 전용 범위라 손대지 못했고, 오늘 메인이 직접 시도한다. ② PKM 동기화가 미추적 job-search 8파일과 origin 충돌로 멈췄는데 이건 사용자 작업물이라 자율 정리 금지 — 대조표만 만들어 사용자 판단으로 넘긴다. ③ 오늘의 발굴은 「호출처 0건」(8/26)의 사촌인 「있는데 죽어 있는 것」: 죽은 타이머 UI(N12), 안 멈추는 일시정지(N13), 세 겹 반응하는 팜 탭(N14), 미추적 테스트 12개, 라이선스 없는 폰트 24MB, 48dp 미달 버튼 12개. 새 결정은 3건만 추가하고 나머지는 재결정 없이 이월한다.",
+    "meetingItems": [
+      {
+        "speaker": "Orchestrator",
+        "note": "어제 11건 중 파일이 움직인 건 헬스체크 SUMMARY 라인 1건이다. 자율로 잡은 스케줄러 이력 로그도 enabled:false 그대로 — 서브에이전트가 읽기 전용이라 못 켰다. 오늘은 메인이 직접 `wevtutil sl /e:true`를 시도하고, 관리자 권한이 필요하면 블로커로 기록한다. PKM은 04:32 pull이 job-search 2026-09-06 8파일 충돌로 중단됐고 behind 3 — 사용자 작업물이니 삭제·덮어쓰기 없이 대조표만 남긴다. 정지 68일/78일, 24h 변경 0."
+      },
+      {
+        "speaker": "DevOps",
+        "note": "배포는 깨끗하다: 880a773 34초 success, 라이브 3,219,490B 일치, 워크플로 4개 active, 캐시 0.7%, rate limit 미사용. 저널은 일 20~40KB라 연 10MB 미만이니 분할은 아직 불필요. 문제는 헬스체크·JobResearch 결과코드 1인데 Operational 로그가 꺼져 있어 원인을 못 본다 — 어제 P0가 오늘도 P0다. 9/6~9/7 GitHub changelog 신규 없음."
+      },
+      {
+        "speaker": "QA Tester",
+        "note": "장부 21건 유지. 신규 4건: N13 MED 일시정지 버튼이 Settings.Show()만 호출해 timeScale·입력을 안 막는다(GameManager.Pause 호출처 0). N12 LOW 타이머 UI는 감소 코드가 없는 죽은 표시고, ElapsedTime이 realtimeSinceStartup이라 홈 버튼 뒤 복귀하면 클리어 시간에 체류가 합산된다. N14 MED 팜 씬 한 탭에 CatInteraction·FarmFoodManager·CameraControl이 동시 반응, IsPointerOverGameObject 0건. N15 LOW MobileTouch 드래그 deltaTime 의존. 리듬 씬 입력은 touch Began만이라 이중 판정은 없다. Feedme AutoGenTests 12개는 미추적으로 디스크에만 있다 — 커밋하면 테스트 0→12."
+      },
+      {
+        "speaker": "Game Designer",
+        "note": "실패오퍼+광고제거가 하이브리드캐주얼 퍼즐 월매출 30%인데 NumLink 실패는 생명 3 소진뿐이고 undo가 0건이라 팔 자리가 없다. 스트릭 보너스는 D30 전략 1위(69%)인데 RecordDailyClear 호출처 0으로 스트릭이 안 쌓인다(8/26 장부). 타이머는 QA가 죽은 UI라고 확정했으니 GDD에서 삭제하거나 데일리 전용으로 격리해야 하고, DESIGN.md:60-64 타이머 색 3단계는 지금 거짓이다. 결과 화면은 Cytus II 5단계 랭크+FC 별도 표기가 N10의 참조 기준."
+      },
+      {
+        "speaker": "Developer",
+        "note": "MeowBeat GameManager.cs:94-121 FindObjectOfType 21회 연속과 ButtonController GameObject.Find 7회는 씬 로드·매 호출 비용이지만 코드 정지 78일이라 지금 손댈 우선순위는 아니다. 중요한 건 두 가지: Unity IAP 5.4.3(9/3)이 Android checkReleaseDuplicateClasses 빌드 실패를 고쳤다 — 양 리포 5.4.0이고 MeowBeat의 5.4.0 자체가 미커밋이니 ⑤ 승계 때 5.4.3으로 올리는 게 한 번에 끝난다. 그리고 MeowBeat 미커밋 .cs 4건은 4/23 titleKo·언어 전환 작업이라 ⑤와 같은 커밋으로 묶을 수 있다."
+      },
+      {
+        "speaker": "Art Director",
+        "note": "M3 Expressive는 48dp를 엄격히 본다. MeowBeat 1080p 기준 126px인데 option0~5·IAPButton·IdleButton 12개가 100~120px(38~46dp)이다 — 씬·프리팹 sizeDelta만 고치면 되니 C# 0줄. 폰트 14개 24MB에 라이선스 파일이 하나도 없다 — ACCsky·ACCfall·1ACCsweet는 상용 여부부터 확인해야 스토어에 낼 수 있다. NumLink는 UI Toolkit 17파일과 Canvas 프리팹 430개가 공존하는 이중 체계다. FTUE는 60초 내 첫 탭 진입을 기준으로 명문화하자."
+      },
+      {
+        "speaker": "Content Writer",
+        "note": "Play 사전등록은 보상 1개를 평생 못 바꾸고 90일 내 출시해야 하니, 출시일이 없는 지금 시작하면 안 된다 — 대신 보상(고양이 스킨 1종)만 미리 확정해 둔다. 전환율 벤치마크는 공개 자료에 없다는 게 확인된 사실이라 수치를 만들지 않는다. Cats&Soup 틱톡 852.1K가 보여주듯 고양이+짧은 루프는 오가닉이 되고, MeowBeat 포맷은 「비트에 탭하는 60초 루프+3초 미스 리액션 훅」. STORE_LISTING.md는 어제도 오늘도 없고 Feedme 스크린샷은 0장이다."
+      },
+      {
+        "speaker": "Orchestrator",
+        "note": "결정: P0 자율은 스케줄러 이력 로그 활성화를 메인이 직접 시도(권한 실패 시 블로커 명시). P0 사용자는 PKM job-search 8파일 대조 후 pull 복구 — 자율 정리 금지. P0 재결정 금지: ⑤→③→N11→④ 순서 유지, ⑤에 4/23 .cs 4건·IAP 5.4.3·AutoGenTests 미추적 추가를 묶는다. P1 신규 3건만: N13 일시정지 실제 정지, N14 팜 씬 입력 라우터, N12+타이머 GDD 정리(undo 1회 실패오퍼 설계 포함). P2: 48dp 버튼 12건, 폰트 라이선스 확인, 사전등록 보상 단일 확정+STORE_LISTING.md. 나머지는 재결정 없이 이월."
+      }
+    ],
+    "decisions": [
+      {
+        "title": "[P0·자율] 스케줄러 Operational 로그 활성화 — 메인 에이전트가 직접 `wevtutil sl … /e:true` 실행",
+        "description": "어제 P0가 서브에이전트 읽기 전용 범위 때문에 미이행. 오늘 회의 커밋 직후 메인이 실행하고 `wevtutil gl`로 enabled:true 확인. 관리자 권한 거부 시 「사용자 관리자 PowerShell에서 1줄 실행」 블로커로 이슈·텔레그램에 명시. 되돌리기는 `/e:false`."
+      },
+      {
+        "title": "[P0·사용자 판단] PKM 동기화 복구 — job-search 2026-09-06 미추적 8파일을 origin `6cbf67c`·`8afd539` 버전과 대조 후 정리",
+        "description": "04:32 pull이 「untracked would be overwritten」로 중단, behind 3·수정 7·미추적 41. 다른 기기가 같은 날짜 산출물을 커밋한 상태라 로컬 8파일은 사용자 작업물 — 자율 삭제·덮어쓰기 금지. 사용자가 diff를 보고 로컬 보존/원격 채택을 정하면 `git stash -u` 또는 이름 변경 후 `git pull --ff-only origin master`. 이게 풀려야 스킬 동기화·헬스체크 FAIL 2건도 정상 판독 가능."
+      },
+      {
+        "title": "[P0·재결정 금지·유지] ⑤ MeowBeat 미커밋 승계 → ③ targetSdk 36 연장 신청 → N11 게임오버 이중 진입 → ④ 광고 봉인(define·SDK 먼저)",
+        "description": "순서 불변. ⑤에 오늘 발견 3건을 같은 세션으로 묶는다: 4/23 미커밋 .cs 4건(`titleKo`·언어 전환·미소유 곡 톤다운 +100/-18) 커밋 여부 확정 · `com.unity.purchasing` 5.4.0→5.4.3(Android checkReleaseDuplicateClasses 빌드 실패 수정, 9/3) · `Assets/AutoQATests/Editor/AutoGenTests.cs` [Test] 12개 미추적 → 추가 커밋(테스트 0→12). N11은 `StatusManager.cs:26` `< 0`→`<= 0` + `isGameOver` 가드 3줄."
+      },
+      {
+        "title": "[P1·사용자 세션] N13 NumLink 일시정지 실제 정지 — `SettingsController.Show()`에서 `GameManager.Pause()` 호출 + 닫을 때 UnPause",
+        "description": "`InGameHUDController.cs:448`이 `Settings.Show()`만 호출, `GameManager.Pause()/UnPause()`(`:366-384`) 호출처는 `HBLoadScene.cs:25` 1건. Show/Hide에 Pause/UnPause를 연결하고 `IsInputAllowed=false`로 `NumberButton.cs:104,115` 경로를 막는다. 게임플레이 DOTween 36건은 SetUpdate 없음이라 timeScale=0에 함께 멈춤(의도), UI 트윈은 이미 SetUpdate(true). 실기기에서 설정창 뒤 보드 드래그 가능 여부(PanelRaycaster) 런타임 확인 포함."
+      },
+      {
+        "title": "[P1·사용자 세션] N14 MeowBeat 팜 씬 입력 단일 라우터 — `IsPointerOverGameObject` 게이트 + 탭/드래그 분기 1곳",
+        "description": "`CatInteraction.cs:30`·`FarmFoodManager.cs:32`·`CameraControl.cs:22,28`이 같은 프레임 `GetMouseButtonDown(0)`을 각자 처리. 한 곳(FarmInputRouter)에서 UI 위 탭 차단 → 레이캐스트 히트가 고양이면 쓰다듬기, 아니면 먹이 배치, 이동 임계값 초과 시 카메라 드래그로 분기. N15 `MobileTouch.cs:35` deltaTime 곱 제거는 같은 세션."
+      },
+      {
+        "title": "[P1·설계·GDD] N12 타이머 죽은 UI 정리 + 실패오퍼 「되돌리기 1회」 설계 — DESIGN.md 정본화(⑩)와 한 문서",
+        "description": "`GameManager.cs:113` 「타이머 기능 제거됨」인데 `TimerUI.cs:88-96`·`InGameHUDController.cs:318-342`·`GameConstants.cs:28` `TimeLimitPerCell`·`DESIGN.md:60-64` 타이머 색 3단계가 남아 있다. 결정: 타이머는 삭제 또는 데일리 전용 격리 중 택일을 GDD에 적고 죽은 UI 제거. 실패오퍼+광고제거가 월매출 30%(AppMagic)인데 undo 0건 → 생명 소진 직전 「마지막 연결 되돌리기 1회」(광고/코인)를 힌트 경제 배선(어제 P1)과 같은 경제 문서에 설계. ElapsedTime 백그라운드 합산은 `OnApplicationPause`에서 정지 처리(N9 드래그 취소와 같은 훅)."
+      },
+      {
+        "title": "[P2·C# 0줄] MeowBeat 48dp 미달 버튼 12건 히트영역 ≥126px — option0~5·IAPButton·IdleButton",
+        "description": "`MainScene.unity:16606,32522`(100×100 ≈38dp)·`:2140`(120×120 ≈46dp)·`Prefabs/UI/IdleButton.prefab:89`. 시각 크기는 유지하고 RectTransform sizeDelta 또는 투명 히트 패딩만 확장. 참조 1080×1920·xxhdpi 가정(근사). 어제 ⑨ 클론 삭제·오디오 Streaming과 같은 「에셋만」 세션."
+      },
+      {
+        "title": "[P2·출시 전 필수] 폰트 14개 24MB 라이선스 확인 — ACCsky·ACCfall·1ACCsweet·Maplestory·Cafe24Ssurround 출처·상용 가능 여부 문서화",
+        "description": "OFL/LICENSE 동봉 0건(발견된 LICENSE 4건은 RPG Icon Pack·EDM4U·GMA용). Maplestory·Cafe24는 공개 라이선스로 알려져 있으나 파일로 동봉해야 하고, ACC 3종(17.1MB)은 출처 미확인. TMP 예제 폰트 6개는 빌드 제외. 결과를 `docs/FONT_LICENSES.md`(두 리포)에 기록 — 스토어 제출 전 게이트."
+      },
+      {
+        "title": "[P2·문서] 사전등록 보상 단일 확정(MeowBeat 고양이 스킨 1종) + `docs/STORE_LISTING.md` 신설(이틀째 이월) + 틱톡 포맷 고정",
+        "description": "Play 사전등록은 보상 1개 평생 고정·90일 내 출시라 출시일 확정 전 개시 금지 — 보상만 미리 확정. 틱톡 포맷 「고양이가 비트에 탭하는 60초 이하 루프 + 3초 미스 리액션 훅」, 주 3~5회. STORE_LISTING.md에 어제 문안·태그라인·AI 미사용 확정·Feedme 스크린샷 0장 계획 포함. 전환율 수치는 공개 자료 부재라 적지 않는다."
+      },
+      {
+        "title": "[P2·이월·재결정 없음] 어제 ①~⑪ 잔여 — 힌트 경제·오디오 Streaming·Ref 이동·N9·N10 결과 화면(Cytus II 5단계+FC 참조)·브랜치 보호·#124/#129·ASTC·DOTween 토큰·DefaultExecutionOrder·아이콘(9회째)·Unity 패치",
+        "description": "파일 변경 0이라 판정 불변. N10 결과 화면은 오늘 Game Designer 참조(Cytus II C70/B80/A90/S95/MM100만 + FC 별도, Arcaea FR/PM 인디케이터)를 설계 입력으로 추가. FTUE 「60초 내 첫 탭 진입」은 ⑩ GDD 정본화에 한 줄 추가. MeowBeat FindObjectOfType 21회·GameObject.Find 16회·NumLink LoadAll 3회 중복은 기술 부채 장부에만 등재(코드 정지 중 착수 안 함)."
+      }
+    ]
+  },
+  {
     "id": "2026-09-06T04:00:00-daily-standup",
     "date": "2026-09-06",
     "researchTitle": "🟡 어제 자율 P0 3종은 전부 이행됐고 회의도 정시에 열렸다 — 그런데 03:33 헬스체크가 DailyStandup·JobResearch 두 태스크를 「Disabled」 상태에서 발견해 되살렸다(이력상 최초, 비활성화 주체 미확인). 게임 코드는 67일/77일째 0줄이고, 오늘 일곱 명은 「만들어져 있는데 이어지지 않은 경제」를 팠다: 힌트는 광고를 봐도 안 늘고(GameConstants:198 「미사용」), 코인 소비처는 생명 100코인 하나, MeowBeat는 HP 1에서 노트 2개가 같은 프레임에 닿으면 코인이 2배 지급된다(N11)",
